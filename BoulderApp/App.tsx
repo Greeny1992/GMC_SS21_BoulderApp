@@ -1,13 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import AddBoulder from "./src/components/screens/addBoulder";
+import Login from './src/components/screens/login';
+import Main from "./src/components/screens/main";
+
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(false)
+  const loggedInHandler = (loggedIn: boolean) => {
+      setLoggedIn(loggedIn);
+  }
+
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Hallo Theresa, Denis, Flo, Günther und Georg. Das wird ein mega Projekt =D </Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      
+        {loggedIn ? (
+          <Stack.Navigator initialRouteName="HomeScreen">
+            <Stack.Screen name="HomeScreen" component={Main} />
+            <Stack.Screen name="AddBoulderScreen" component={AddBoulder} />
+          </Stack.Navigator>
+        ) : (
+          <View style={styles.container}>
+          <Login loggedInHandler={loggedInHandler}></Login>
+          </View>
+        )}
+    </NavigationContainer>
   );
 }
 
