@@ -19,15 +19,15 @@ export default function App() {
         <NavigationContainer>
 
             {loggedIn ? (
-                <Stack.Navigator initialRouteName="AddBoulderScreen">
+                <Stack.Navigator initialRouteName="HomeScreen">
                     <Stack.Screen name="HomeScreen" component={Main}/>
                     <Stack.Screen name="ListScreen" component={List}/>
                     <Stack.Screen name="AddBoulderScreen" component={AddBoulder}/>
                 </Stack.Navigator>
             ) : (
                 <View style={styles.container}>
-                    {/*<Login loggedInHandler={loggedInHandler}></Login>*/}
-                    <AddBoulder/>
+                    <Login loggedInHandler={loggedInHandler}></Login>
+                    {/*<AddBoulder/>*/}
                 </View>
             )}
         </NavigationContainer>

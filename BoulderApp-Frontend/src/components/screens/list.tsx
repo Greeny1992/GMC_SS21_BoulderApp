@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {AntDesign} from "@expo/vector-icons";
 
 export default function List({navigation}: any) {
     const handlePress = () => {
@@ -14,7 +15,10 @@ export default function List({navigation}: any) {
             </TouchableOpacity>
             <Text>I will soon become a list</Text>
             <TouchableOpacity style={styles.addButton} onPress={handlePress}>
-                <Text style={styles.buttonText}>Add</Text>
+                <Text style={styles.buttonText}>
+                    <AntDesign name="plus" size={20} color="#ffffff" />
+                    Add
+                </Text>
             </TouchableOpacity>
         </View>
     )
