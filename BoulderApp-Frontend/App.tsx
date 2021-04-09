@@ -5,7 +5,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import AddBoulder from "./src/components/screens/addBoulder";
 import Login from './src/components/screens/login';
 import Main from "./src/components/screens/main";
-import List from "./src/components/screens/list";
+import BoulderListContainer from "./src/components/screens/boulderListContainer";
 
 
 export default function App() {
@@ -20,8 +20,8 @@ export default function App() {
 
             {loggedIn ? (
                 <Stack.Navigator initialRouteName="HomeScreen">
-                    <Stack.Screen name="HomeScreen" component={Main}/>
-                    <Stack.Screen name="ListScreen" component={List}/>
+                    <Stack.Screen name="Boulder Crack" component={Main}/>
+                    <Stack.Screen name="ListScreen" component={BoulderListContainer}/>
                     <Stack.Screen name="AddBoulderScreen" component={AddBoulder}/>
                 </Stack.Navigator>
             ) : (

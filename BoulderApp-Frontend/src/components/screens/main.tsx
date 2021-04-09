@@ -1,14 +1,13 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import List from "./list";
+import BoulderListContainer from "./boulderListContainer";
 
 
 export default function Main({navigation}: any) {
 
     return (
         <View style={styles.inputView}>
-            <Text style={styles.text}>Boulder</Text>
-            <List navigation={navigation}/>
+            <BoulderListContainer navigation={navigation}/>
         </View>
     )
 }
