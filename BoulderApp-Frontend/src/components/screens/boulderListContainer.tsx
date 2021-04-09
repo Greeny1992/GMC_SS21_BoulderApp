@@ -1,7 +1,8 @@
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View,Button} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import BoulderList from "../widgets/boulderList";
+import Navbar from "../widgets/navbar";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
@@ -40,7 +41,9 @@ export default function BoulderListContainer({navigation}: any) {
                 <AddButton/>
                 <FilterButton/>
             </View>
-            <BoulderList />
+            <Navbar/>
+            <Text>INSIDE BOULDER LIST CONTAINER</Text>
+            <BoulderList/>
             
         </View>
     )
@@ -49,37 +52,25 @@ export default function BoulderListContainer({navigation}: any) {
 const styles = StyleSheet.create({
     inputView: {
         margin: 20,
-        fontFamily: 'sans-serif-medium'
+        fontFamily: 'sans-serif-medium',
     },
 
     text: {
         marginBottom: 20,
         fontFamily: 'sans-serif-medium',
-        fontSize: 24
+        fontSize: 24,
     },
-    filterButton: {
-        bottom: 10,
-        right: 0
-    },
-    addButton: {
-        right: 0
-    },
+
     btn: {
         width: '80%',
         alignItems: 'center',
         justifyContent: 'center',
-        // position: 'absolute',
-        // right: 0,
-        // marginTop: 40,
-  
-        // fontFamily: 'sans-serif-medium'
         borderRadius: 25,
         height: 50,
         backgroundColor: "#FF1493",
     },
     buttonText: {
         color: '#ffffff',
-        // fontFamily: 'sans-serif-medium'
     },
     container: {
         flex: 1,
@@ -89,6 +80,6 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     }
 });
