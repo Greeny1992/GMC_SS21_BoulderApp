@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AddBoulder from "./src/components/screens/addBoulder";
 import Login from './src/components/screens/login';
 import Main from "./src/components/screens/main";
+import BoulderListContainer from "./src/components/screens/boulderListContainer";
 
 
 export default function App() {
@@ -27,7 +28,8 @@ export default function App() {
                     <Button title="Logout" onPress={loggedInHandler} color="red"/>
                   </div>
                 )
-            }}/>
+                      }} />
+            <Stack.Screen name="ListScreen" component={BoulderListContainer} />
             <Stack.Screen name="AddBoulderScreen" component={AddBoulder} />
           </Stack.Navigator>
         ) : (
@@ -40,10 +42,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

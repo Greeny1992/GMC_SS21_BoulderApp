@@ -1,16 +1,39 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import BoulderListContainer from "./boulderListContainer";
 
-export default function Main({ navigation }: any) {
+
+export default function Main({navigation}: any) {
+
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-        title="Add a new Boulder"
-        onPress={() => navigation.navigate('AddBoulderScreen', {
-            passingParams: 'Testparameters',
-        })}
-      />
-      </View>
+        <View style={styles.inputView}>
+            <BoulderListContainer navigation={navigation}/>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    inputView: {
+        margin: 20,
+        fontFamily: 'sans-serif-medium'
+    },
+
+    text: {
+        marginBottom: 20,
+        fontFamily: 'sans-serif-medium',
+        fontSize: 24
+    },
+    button: {
+        width: "80%",
+        borderRadius: 25,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#d77079",
+        fontFamily: 'sans-serif-medium'
+    }
+});
+
+
+
