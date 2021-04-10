@@ -37,7 +37,9 @@ export default function BoulderListContainer({navigation}: any) {
                 <AddButton/>
                 <FilterButton/>
             </View>
-            <BoulderList/> 
+            <View style={styles.bouldList}>
+                <BoulderList/> 
+            </View>
         </View>
     )
 }
@@ -60,7 +62,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 25,
         height: 50,
-        backgroundColor: "#FF1493",
+        backgroundColor: "#147aff",
+    },
+    bouldList:{
+        marginTop: 30,
     },
     buttonText: {
         color: '#ffffff',

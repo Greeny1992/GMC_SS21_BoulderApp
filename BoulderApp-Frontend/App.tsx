@@ -24,9 +24,9 @@ export default function App() {
             <Stack.Screen name="HomeScreen" component={Main} 
               options= {{
                 headerRight: () => (
-                  <div style={{marginRight: 5}}>
+                  <View style={{marginRight: 5}}>
                     <Button title="Logout" onPress={loggedInHandler} color="red"/>
-                  </div>
+                  </View>
                 )
                       }} />
             <Stack.Screen name="ListScreen" component={BoulderListContainer} />

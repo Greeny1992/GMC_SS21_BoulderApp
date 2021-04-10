@@ -33,7 +33,7 @@ const BoulderList = () => {
   };
 
   const renderItem = ({ item }: { item: IBoulder }) => {
-    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const backgroundColor = item.id === selectedId ? "#147aff" : "#c0e6ff";
 
     return (
       <BoulderListItem
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: "#f9c2ff",
+    backgroundColor: "#c0e6ff",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
