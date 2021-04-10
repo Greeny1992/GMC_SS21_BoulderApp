@@ -10,10 +10,8 @@ import {
 export default function Login({ loggedInHandler }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const onPress = () => {
-    setLoggedIn(true);
-    loggedInHandler(loggedIn);
+    loggedInHandler();
   };
   return (
     <React.Fragment>
@@ -22,7 +20,7 @@ export default function Login({ loggedInHandler }: any) {
           style={styles.TextInput}
           placeholder="Email."
           placeholderTextColor="#003f5c"
-          onChangeText={(email) => setEmail(email)}
+          onChangeText={(email: string) => setEmail(email)}
         />
       </View>
 
@@ -32,7 +30,7 @@ export default function Login({ loggedInHandler }: any) {
           placeholder="Password."
           placeholderTextColor="#003f5c"
           secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={(password: string) => setPassword(password)}
         />
       </View>
       <TouchableOpacity>
@@ -47,7 +45,7 @@ export default function Login({ loggedInHandler }: any) {
 
 const styles = StyleSheet.create({
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "#c0e6ff",
     borderRadius: 30,
     width: "70%",
     height: 45,
@@ -72,6 +70,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#FF1493",
+    backgroundColor: "#147aff",
   },
 });
