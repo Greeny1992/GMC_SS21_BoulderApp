@@ -10,6 +10,7 @@ export default function BoulderListContainer({navigation}: any) {
             passingParams: 'Testparameters',
         })
     }
+  
     const AddButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
@@ -38,7 +39,7 @@ export default function BoulderListContainer({navigation}: any) {
                 <FilterButton/>
             </View>
             <View style={styles.bouldList}>
-                <BoulderList/> 
+                <BoulderList navigation={navigation}/> 
             </View>
         </View>
     )

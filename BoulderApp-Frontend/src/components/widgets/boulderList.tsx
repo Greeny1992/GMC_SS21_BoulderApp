@@ -11,9 +11,16 @@ import {
 } from "react-native";
 import BOULDER_DATA, { IBoulder } from "../../entities/Boulder";
 
-const BoulderList = () => {
+const BoulderList = ({navigation}: {navigation:any}) => {
   const [boulder_data, setBoulder_data] = useState(BOULDER_DATA);
   const [selectedId, setSelectedId] = useState("");
+
+  const handlePress = (id:string) => {
+    setSelectedId(id);
+    navigation.navigate('DetailBoulderScreen', {
+        boulderID:id,
+    })
+}
 
   const BoulderListItem = ({
     item,
@@ -38,7 +45,7 @@ const BoulderList = () => {
     return (
       <BoulderListItem
         item={item}
-        onPress={() => setSelectedId(item.id)}
+        onPress={() => handlePress(item.id)}
         style={{ backgroundColor }}
       />
     );
