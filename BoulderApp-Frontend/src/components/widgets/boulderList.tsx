@@ -46,8 +46,7 @@ const BoulderList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>INSIDE BOULDER LIST</Text>
-      <Text>Länge: {boulder_data.length}</Text>
+  
       <FlatList
         data={boulder_data}
         renderItem={renderItem}
@@ -60,7 +59,7 @@ const BoulderList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {

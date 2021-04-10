@@ -20,8 +20,7 @@ export default function BoulderListContainer({navigation}: any) {
                     </Text>
                 </TouchableOpacity>
             </View>
-        )
-        
+        ) 
     }
     const FilterButton = ()=>{
         return (
@@ -31,20 +30,14 @@ export default function BoulderListContainer({navigation}: any) {
                 </TouchableOpacity>
             </View>
         )
-        
-    }
-   
-      
+    } 
     return (
         <View style={styles.inputView}>
             <View style={styles.container}>
                 <AddButton/>
                 <FilterButton/>
             </View>
-            <Navbar/>
-            <Text>INSIDE BOULDER LIST CONTAINER</Text>
-            <BoulderList/>
-            
+            <BoulderList/> 
         </View>
     )
 }
