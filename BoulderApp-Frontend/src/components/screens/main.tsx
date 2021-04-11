@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import BoulderListContainer from "./boulderListContainer";
-
+import styles from '../../styles/main';
 
 export default function Main({navigation}: any) {
 
@@ -12,28 +12,7 @@ export default function Main({navigation}: any) {
     )
 }
 
-const styles = StyleSheet.create({
-    inputView: {
-        margin: 20,
-        fontFamily: 'sans-serif-medium'
-    },
 
-    text: {
-        marginBottom: 20,
-        fontFamily: 'sans-serif-medium',
-        fontSize: 24
-    },
-    button: {
-        width: "80%",
-        borderRadius: 25,
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#d77079",
-        fontFamily: 'sans-serif-medium'
-    }
-});
 
 
 

@@ -1,18 +1,33 @@
 import React, {useState} from "react";
 import {
+  Alert,
     StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
+import styles from '../../styles/login';
+import BButton from "../widgets/button";
+import BText from "../widgets/text";
 
 export default function Login({ loggedInHandler }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const onPress = () => {
+  const loginHandler = () => {
     loggedInHandler();
   };
+
+  const createTwoButtonAlert = () =>
+  Alert.alert(
+    "Passwort vergessen",
+    "HAHA, du solltest dir besser dein Passwort merken! ;)",
+    [
+      { text: "OK", onPress: () => console.log("OK Pressed") },
+      { text: "test", onPress: () => console.log("Test")}
+    ]
+  );
+
   return (
     <React.Fragment>
       <View style={styles.inputView}>
@@ -33,43 +48,13 @@ export default function Login({ loggedInHandler }: any) {
           onChangeText={(password: string) => setPassword(password)}
         />
       </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.loginBtn} onPress={onPress}>
-        <Text>LOGIN</Text>
-      </TouchableOpacity>
+      <BButton onPress={createTwoButtonAlert}>
+        <BText>Forgot Password?</BText>
+      </BButton>
+      <BButton onPress={loginHandler}>
+        <BText>LOGIN</BText>
+      </BButton>
     </React.Fragment>
   );
 }
 
-const styles = StyleSheet.create({
-  inputView: {
-    backgroundColor: "#c0e6ff",
-    borderRadius: 30,
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-  },
-  forgot_button: {
-    height: 30,
-    marginBottom: 30,
-  },
-  loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#147aff",
-  },
-});

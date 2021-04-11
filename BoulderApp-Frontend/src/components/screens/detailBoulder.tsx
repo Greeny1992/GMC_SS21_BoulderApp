@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {View,StyleSheet} from 'react-native';
+import {View,StyleSheet, TouchableOpacity} from 'react-native';
 import {Text,Button} from 'react-native-elements';
 import BOULDER_DATA, { IBoulder } from '../../entities/Boulder';
 import ButtonStyles from '../../styles/button';
+import styles from '../../styles/detailBoulder';
+import { AntDesign } from '@expo/vector-icons';
+import BText from "../widgets/text";
 
 export default function DetailBoulder({route, navigation}: any) {
     const { boulderID } = route.params;
@@ -19,32 +22,13 @@ export default function DetailBoulder({route, navigation}: any) {
     const [boulder, setBoulder] = useState(getBoulderDetails(boulderID));
     console.log(boulder?.id ?? "empty")
     console.log(boulder?.title?? "empty")
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            flexDirection: 'row',
-        },
-        header: {
-            width: '80%',
-        },
-        buttonContainer: {
-            width: '20%',
-            marginTop:10,
-        },
-        button:{
-            color: 'white',
-            border: 'none',
-        }
-
-    }
-    )
     return ( 
         boulder === undefined
         ?
             <>
-                <Text h1>
+                <BText>
                     No details found!
-                </Text>
+                </BText>
             </>
         :
             <>
@@ -52,9 +36,9 @@ export default function DetailBoulder({route, navigation}: any) {
                     style={styles.container}>
                     <View
                         style={styles.header}>
-                        <Text h1 >
+                        <BText>
                             Boulder: {boulder.title}
-                        </Text>
+                        </BText>
                         
                     </View>
                     <View
@@ -71,6 +55,9 @@ export default function DetailBoulder({route, navigation}: any) {
                         type="outline"
                         onPress={() =>handlePress(boulder.id)}
                         />
+                    <TouchableOpacity style={[ButtonStyles.btn]}  onPress={()=>handlePress(boulder.id)}>
+                        <AntDesign name="edit" size={20} color="#ffffff" />
+                    </TouchableOpacity>
                     </View>
                 </View>
             </>
