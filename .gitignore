@@ -52,5 +52,5 @@ npm-debug.log
 .env
 .DS_Store
 
-.vs/
+.vs
 .expo/
