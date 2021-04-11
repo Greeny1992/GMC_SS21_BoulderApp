@@ -4,6 +4,9 @@ import {AntDesign} from "@expo/vector-icons";
 import BoulderList from "../widgets/boulderList";
 import Navbar from "../widgets/navbar";
 import ButtonStyles from "../../styles/button";
+import styles from '../../styles/boulderListContainer';
+import BText from "../widgets/text";
+import BButton from "../widgets/button";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
@@ -15,21 +18,21 @@ export default function BoulderListContainer({navigation}: any) {
     const AddButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={[styles.btn]}  onPress={handlePress}>
-                    <Text style={ButtonStyles.buttonText}>
+                <BButton style={[ButtonStyles.btn]}  onPress={handlePress}>
+                    <BText style={styles.buttonText}>
                         <AntDesign name="plus" size={20} color="#ffffff" />
                         Add
-                    </Text>
-                </TouchableOpacity>
+                    </BText>
+                </BButton>
             </View>
         ) 
     }
     const FilterButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
-                <TouchableOpacity  style={[ButtonStyles.btn]} >
-                    <Text style={styles.buttonText}>Filter</Text>
-                </TouchableOpacity>
+                <BButton onPress={() => {}}>
+                    <BText style={styles.buttonText}>Filter</BText>
+                </BButton>
             </View>
         )
     } 
@@ -45,41 +48,3 @@ export default function BoulderListContainer({navigation}: any) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    inputView: {
-        margin: 20,
-        fontFamily: 'sans-serif-medium',
-    },
-
-    text: {
-        marginBottom: 20,
-        fontFamily: 'sans-serif-medium',
-        fontSize: 24,
-    },
-
-    btn: {
-        width: '80%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 25,
-        height: 50,
-        backgroundColor: "#147aff",
-    },
-    bouldList:{
-        marginTop: 30,
-    },
-    buttonText: {
-        color: '#ffffff',
-    },
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    buttonContainer: {
-        flex: 1,
-        alignItems: 'center',
-    }
-});
