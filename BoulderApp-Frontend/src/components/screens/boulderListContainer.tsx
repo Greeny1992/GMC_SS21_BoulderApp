@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import BoulderList from "../widgets/boulderList";
 import Navbar from "../widgets/navbar";
+import ButtonStyles from "../../styles/button";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
@@ -15,7 +16,7 @@ export default function BoulderListContainer({navigation}: any) {
         return (
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={[styles.btn]}  onPress={handlePress}>
-                    <Text style={styles.buttonText}>
+                    <Text style={ButtonStyles.buttonText}>
                         <AntDesign name="plus" size={20} color="#ffffff" />
                         Add
                     </Text>
@@ -26,7 +27,7 @@ export default function BoulderListContainer({navigation}: any) {
     const FilterButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
-                <TouchableOpacity  style={[styles.btn]} >
+                <TouchableOpacity  style={[ButtonStyles.btn]} >
                     <Text style={styles.buttonText}>Filter</Text>
                 </TouchableOpacity>
             </View>
