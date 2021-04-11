@@ -1,7 +1,9 @@
 import React from "react";
-import {StyleSheet, Text, TouchableOpacity, View,Button} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import BoulderList from "../widgets/boulderList";
+import Navbar from "../widgets/navbar";
+import ButtonStyles from "../../styles/button";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
@@ -9,39 +11,37 @@ export default function BoulderListContainer({navigation}: any) {
             passingParams: 'Testparameters',
         })
     }
+  
     const AddButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={[styles.btn]}  onPress={handlePress}>
-                    <Text style={styles.buttonText}>
+                    <Text style={ButtonStyles.buttonText}>
                         <AntDesign name="plus" size={20} color="#ffffff" />
                         Add
                     </Text>
                 </TouchableOpacity>
             </View>
-        )
-        
+        ) 
     }
     const FilterButton = ()=>{
         return (
             <View style={styles.buttonContainer}>
-                <TouchableOpacity  style={[styles.btn]} >
+                <TouchableOpacity  style={[ButtonStyles.btn]} >
                     <Text style={styles.buttonText}>Filter</Text>
                 </TouchableOpacity>
             </View>
         )
-        
-    }
-   
-      
+    } 
     return (
         <View style={styles.inputView}>
             <View style={styles.container}>
                 <AddButton/>
                 <FilterButton/>
             </View>
-            <BoulderList />
-            
+            <View style={styles.bouldList}>
+                <BoulderList navigation={navigation}/> 
+            </View>
         </View>
     )
 }
@@ -49,37 +49,28 @@ export default function BoulderListContainer({navigation}: any) {
 const styles = StyleSheet.create({
     inputView: {
         margin: 20,
-        fontFamily: 'sans-serif-medium'
+        fontFamily: 'sans-serif-medium',
     },
 
     text: {
         marginBottom: 20,
         fontFamily: 'sans-serif-medium',
-        fontSize: 24
+        fontSize: 24,
     },
-    filterButton: {
-        bottom: 10,
-        right: 0
-    },
-    addButton: {
-        right: 0
-    },
+
     btn: {
         width: '80%',
         alignItems: 'center',
         justifyContent: 'center',
-        // position: 'absolute',
-        // right: 0,
-        // marginTop: 40,
-  
-        // fontFamily: 'sans-serif-medium'
         borderRadius: 25,
         height: 50,
-        backgroundColor: "#FF1493",
+        backgroundColor: "#147aff",
+    },
+    bouldList:{
+        marginTop: 30,
     },
     buttonText: {
         color: '#ffffff',
-        // fontFamily: 'sans-serif-medium'
     },
     container: {
         flex: 1,
@@ -89,6 +80,6 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     }
 });

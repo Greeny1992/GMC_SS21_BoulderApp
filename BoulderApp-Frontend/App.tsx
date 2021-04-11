@@ -7,6 +7,7 @@ import AddBoulder from "./src/components/screens/addBoulder";
 import Login from './src/components/screens/login';
 import Main from "./src/components/screens/main";
 import BoulderListContainer from "./src/components/screens/boulderListContainer";
+import DetailBoulder from "./src/components/screens/detailBoulder";
 
 
 export default function App() {
@@ -24,13 +25,14 @@ export default function App() {
             <Stack.Screen name="HomeScreen" component={Main} 
               options= {{
                 headerRight: () => (
-                  <div style={{marginRight: 5}}>
+                  <View style={{marginRight: 5}}>
                     <Button title="Logout" onPress={loggedInHandler} color="red"/>
-                  </div>
+                  </View>
                 )
                       }} />
             <Stack.Screen name="ListScreen" component={BoulderListContainer} />
             <Stack.Screen name="AddBoulderScreen" component={AddBoulder} />
+            <Stack.Screen name="DetailBoulderScreen" component={DetailBoulder} />
           </Stack.Navigator>
         ) : (
           <View style={styles.container}>

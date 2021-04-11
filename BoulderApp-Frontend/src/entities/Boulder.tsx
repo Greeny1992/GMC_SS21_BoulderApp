@@ -9,7 +9,7 @@ export interface IBoulder{
 
 const BOULDER_DATA :IBoulder[]= [
   {
-    id: 'bd7acbea-c1bdf1-46c2-aesdd5-3ad53abb28ba',
+    id: 'bd7acdd5-3ad53abb28ba',
     title: 'Blauer Fels',
     color: 'blue',
     difficulty: 3,
@@ -17,7 +17,7 @@ const BOULDER_DATA :IBoulder[]= [
     created: new Date()
   },
   {
-    id: 'bd7acbea-c1b1-4as6c2-aeasdfd5-3ad53abb28ba',
+    id: 'bea-c1b1-4as6c2-aeasdfd5-3ad53abb28ba',
     title: 'Harter Brocken',
     color: 'green',
     difficulty: 5,
@@ -25,7 +25,7 @@ const BOULDER_DATA :IBoulder[]= [
     created: new Date()
   },
   {
-    id: 'bd7acbea-c1b1-46c2-aedasdfasa5-3ad53abb28ba',
+    id: 'bd7acbea-c1b1-46c2-aedasdfhgfhsdfasa5-3ad53abb28ba',
     title: 'Firestone',
     color: 'red',
     difficulty: 7,
