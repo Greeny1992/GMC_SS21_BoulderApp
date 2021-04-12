@@ -58,6 +58,7 @@ export default function DetailBoulder({route, navigation}: any) {
                         </View>
                         
                     </View>
+
                     <View style={LayoutStyle.containerRow}>
                         <View >
                             <BText>Status: </BText>
@@ -67,6 +68,7 @@ export default function DetailBoulder({route, navigation}: any) {
                             <BText>{boulderDetails.getStatus(boulder.status).name}</BText>
                             <BText>{boulderDetails.getDifficulty(boulder.difficulty).name}</BText>
                         </View>
+
 
                     </View>
                 </View>

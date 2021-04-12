@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const DetailBoulderStyle = StyleSheet.create({
 
+
     image:{
         borderRadius: 50,
         margin: 10,
@@ -10,6 +11,7 @@ const DetailBoulderStyle = StyleSheet.create({
     },
     detailContainer:{
         margin:10
+
     }
 }
 );
