@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native'
 
 const BoulderListContainerStyle = StyleSheet.create({
     inputView: {
-        margin: 20,
         fontFamily: 'sans-serif-medium',
     },
 

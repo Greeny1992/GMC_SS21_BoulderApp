@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native'
 
 const MainStyle = StyleSheet.create({
     inputView: {
-        margin: 20,
         fontFamily: 'sans-serif-medium'
     },
 
