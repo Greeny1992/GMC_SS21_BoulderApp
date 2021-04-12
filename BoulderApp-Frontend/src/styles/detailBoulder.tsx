@@ -1,22 +1,16 @@
 import { StyleSheet } from 'react-native'
 
 const DetailBoulderStyle = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    header: {
-        width: '80%',
-    },
-    buttonContainer: {
-        width: '20%',
-        marginTop:10,
-    },
-    button:{
-        color: 'white',
-        border: 'none',
-    }
 
+    image:{
+        borderRadius: 50,
+        margin: 10,
+        width:100,
+        height:100,
+    },
+    detailContainer:{
+        margin:10
+    }
 }
 );
 export default DetailBoulderStyle;

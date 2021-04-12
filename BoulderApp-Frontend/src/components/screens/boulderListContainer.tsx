@@ -7,17 +7,18 @@ import ButtonStyles from "../../styles/button";
 import styles from '../../styles/boulderListContainer';
 import BText from "../widgets/text";
 import BButton from "../widgets/button";
+import LayoutStyle from "../../styles/layout";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
         navigation.navigate('AddBoulderScreen', {
-            passingParams: 'Testparameters',
+            boulderID:-1
         })
     }
   
     const AddButton = ()=>{
         return (
-            <View style={styles.buttonContainer}>
+            <View style={ButtonStyles.buttonContainer}>
                 <BButton style={[ButtonStyles.btn]}  onPress={handlePress}>
                     <BText style={styles.buttonText}>
                         <AntDesign name="plus" size={20} color="#ffffff" />
@@ -29,7 +30,7 @@ export default function BoulderListContainer({navigation}: any) {
     }
     const FilterButton = ()=>{
         return (
-            <View style={styles.buttonContainer}>
+            <View style={ButtonStyles.buttonContainer}>
                 <BButton onPress={() => {}}>
                     <BText style={styles.buttonText}>Filter</BText>
                 </BButton>
@@ -38,7 +39,7 @@ export default function BoulderListContainer({navigation}: any) {
     } 
     return (
         <View style={styles.inputView}>
-            <View style={styles.container}>
+            <View style={LayoutStyle.containerRow}>
                 <AddButton/>
                 <FilterButton/>
             </View>
