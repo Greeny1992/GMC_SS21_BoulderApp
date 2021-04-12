@@ -6,14 +6,14 @@ import styles from '../../styles/detailBoulder';
 import { AntDesign } from '@expo/vector-icons';
 import BText from "../widgets/text";
 import LayoutStyle from '../../styles/layout';
-import BoulderDetailValues from '../../entities/boulderDetailValues';
+import {getColor,getDifficulty} from '../../entities/boulderDetailValues';
+import getLocation from '../../entities/location';
 import BButton from '../widgets/button';
 import { Badge, Divider } from 'react-native-elements';
 import TextStyle from '../../styles/text';
 import BoulderInteractionList from '../widgets/boulderInteractionList';
 
 export default function DetailBoulder({route, navigation}: any) {
-    const boulderDetails = new BoulderDetailValues();
     const { boulderID } = route.params;
     const getBoulderDetails =(id:string):IBoulder | undefined=>{
         return BOULDER_DATA.find(boulder => boulder.id === boulderID)
@@ -25,7 +25,6 @@ export default function DetailBoulder({route, navigation}: any) {
         })
     }
     const [boulder, setBoulder] = useState(getBoulderDetails(boulderID));
-    const [counter ,setCounter]= useState(1)
     
     return ( 
         boulder === undefined
@@ -53,7 +52,7 @@ export default function DetailBoulder({route, navigation}: any) {
                         <Image source={{uri:boulder.img}} style={[styles.image]}></Image>
                         <View style={{ position: 'absolute', top:15, right: 15 ,borderRadius:25, width:25,height:25}}>
                         <Badge
-                                                        badgeStyle={{width:25,height:25,borderRadius:25, backgroundColor:boulderDetails.getColor(boulder.color).value}}
+                                                        badgeStyle={{width:25,height:25,borderRadius:25, backgroundColor:getColor(boulder.color).value}}
                         />
                         </View>
                         
@@ -61,12 +60,16 @@ export default function DetailBoulder({route, navigation}: any) {
 
                     <View style={LayoutStyle.containerRow}>
                         <View >
-                            <BText>Status: </BText>
                             <BText>Difficulty: </BText>
+                            <BText>Country: </BText>
+                            <BText>Region: </BText>
+                            <BText>City: </BText>
                         </View>
                         <View>
-                            <BText>{boulderDetails.getStatus(boulder.status).name}</BText>
-                            <BText>{boulderDetails.getDifficulty(boulder.difficulty).name}</BText>
+                            <BText>{getDifficulty(boulder.difficulty).name}</BText>
+                            <BText>{getLocation(boulder.location_id).country}</BText>
+                            <BText>{getLocation(boulder.location_id).region}</BText>
+                            <BText>{getLocation(boulder.location_id).city}</BText>
                         </View>
 
 
