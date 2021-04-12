@@ -42,7 +42,6 @@ export default function DetailBoulder({route, navigation}: any) {
                         
                     </View>
                     <View
-                        style={styles.buttonContainer}
                     >
                     <Button
                         icon={{
