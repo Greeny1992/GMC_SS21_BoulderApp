@@ -9,10 +9,15 @@ const ButtonStyles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 20,
         backgroundColor: "#147aff",
+        flexDirection:'row',
+        color: 'white'
     },
   
     buttonText: {
         color: '#ffffff',
+    },
+    btnIcon:{
+        paddingRight: 5,
     },
    
     buttonContainer: {

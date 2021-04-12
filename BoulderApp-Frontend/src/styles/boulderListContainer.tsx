@@ -32,10 +32,7 @@ const BoulderListContainerStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    buttonContainer: {
-        flex: 1,
-        alignItems: 'center',
-    }
+
 });
 
 export default BoulderListContainerStyle;
