@@ -38,15 +38,6 @@ export default function BoulderListContainer({navigation}: any) {
         )
     } 
     return (
-<<<<<<< HEAD
-        <View >
-            <View style={[LayoutStyle.containerRow]}>
-                <AddButton/>
-                <FilterButton/>
-            </View> 
-            <View style={styles.bouldList}>
-                <BoulderList navigation={navigation}/> 
-=======
         <View style={styles.inputView}>
             <View style={styles.bouldList}>
                 <BoulderList navigation={navigation}/> 
@@ -54,7 +45,6 @@ export default function BoulderListContainer({navigation}: any) {
             <View style={LayoutStyle.containerRow}>
                 <AddButton/>
                 <FilterButton/>
->>>>>>> main
             </View>
         </View>
     )
