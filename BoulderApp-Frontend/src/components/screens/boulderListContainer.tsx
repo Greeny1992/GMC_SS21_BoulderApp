@@ -7,7 +7,7 @@ import ButtonStyles from "../../styles/button";
 import styles from '../../styles/boulderListContainer';
 import BText from "../widgets/text";
 import BButton from "../widgets/button";
-import LayoutStyle from "../../styles/layout";
+import LayoutStyle from "../../styles/utils/layout";
 
 export default function BoulderListContainer({navigation}: any) {
     const handlePress = () => {
@@ -39,12 +39,12 @@ export default function BoulderListContainer({navigation}: any) {
     } 
     return (
         <View style={styles.inputView}>
+            <View style={styles.bouldList}>
+                <BoulderList navigation={navigation}/> 
+            </View>
             <View style={LayoutStyle.containerRow}>
                 <AddButton/>
                 <FilterButton/>
-            </View>
-            <View style={styles.bouldList}>
-                <BoulderList navigation={navigation}/> 
             </View>
         </View>
     )

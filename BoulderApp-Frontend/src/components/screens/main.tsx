@@ -6,7 +6,7 @@ import styles from '../../styles/main';
 export default function Main({navigation}: any) {
 
     return (
-        <View style={styles.inputView}>
+        <View >
             <BoulderListContainer navigation={navigation}/>
         </View>
     )

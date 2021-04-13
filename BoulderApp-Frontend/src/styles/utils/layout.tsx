@@ -4,6 +4,7 @@ const LayoutStyle = StyleSheet.create({
     containerRow: {
         flex: 1,
         flexDirection: 'row',
+      
     },
     containerRowSpace: {
         flex: 1,
