@@ -49,7 +49,6 @@ const BoulderListStyle = StyleSheet.create({
         fontSize: 14,
       },
       icon: {
-        textAlign: 'center',
         height: 20,
         width: 18,
         flexDirection: "column",
@@ -65,13 +64,11 @@ const BoulderListStyle = StyleSheet.create({
         borderColor: '#ffffff',
         backgroundColor: '#e0ffff',
         paddingVertical: 0,
-        underlineColorAndroid: '#e0ffff',
       },
       textInputContainerStyle: {
         borderWidth: 0,
         borderColor: '#ffffff',
         backgroundColor: '#ffffff',
-        underlineColorAndroid: '#ffffff',
         borderBottomColor: 'white',
         borderTopColor: 'white'
       },
