@@ -18,6 +18,7 @@ const ButtonStyles = StyleSheet.create({
     },
     btnIcon:{
         paddingRight: 5,
+        color:'#ffffff'
     },
    
     buttonContainer: {

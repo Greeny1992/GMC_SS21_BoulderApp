@@ -5,14 +5,14 @@ const TextStyle = StyleSheet.create({
         flex:4,
         fontSize: 35,
         fontWeight: 400,
-        marginTop:5,
-        marginLeft:5,
+        marginTop: 10,
+        marginBottom:10,
     },
     subTitle:{
         fontSize:28,
         fontWeight:400,
-        marginTop:5,
-        marginLeft:5,
+        marginTop: 10,
+        marginBottom:10,
     }
 })
 

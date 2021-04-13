@@ -5,6 +5,11 @@ const LayoutStyle = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
     },
+    containerRowSpace: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
     containerCentered: {
         flex: 1,
         flexDirection: 'row',
@@ -18,6 +23,8 @@ const LayoutStyle = StyleSheet.create({
     divider:{ 
         backgroundColor: '#147aff', 
         width:'100%',
+        marginTop: 10,
+        marginBottom:10,
     }
   
 

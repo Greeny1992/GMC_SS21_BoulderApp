@@ -6,7 +6,8 @@ export interface IBoulder{
     img:string,
     location_id:string,
     created:Date,
-    creator_id:string
+    creator_id:string,
+    like:boolean
 }
 
 const BOULDER_DATA :IBoulder[]= [
@@ -18,7 +19,8 @@ const BOULDER_DATA :IBoulder[]= [
     img:'https://42796r1ctbz645bo223zkcdl-wpengine.netdna-ssl.com/wp-content/uploads/2017/02/rock-379491_960_720-744x532.jpg',
     created: new Date(),
     location_id:'1',
-    creator_id:''
+    creator_id:'',
+    like:true
   },
   {
     id: 'bea-c1b1-4as6c2-aeasdfd5-3ad53abb28ba',
@@ -28,7 +30,8 @@ const BOULDER_DATA :IBoulder[]= [
     img:'https://static.bergzeit.de/out/pictures-imago/master/magazin_prod/9e/1b/201806bouldern-magic-wood-riverbed-christof-rauch.jpg',
     created: new Date(),
     location_id:'2',
-    creator_id:''
+    creator_id:'',
+    like:false
   },
   {
     id: 'bd7acbea-c1b1-46c2-aedasdfhgfhsdfasa5-3ad53abb28ba',
@@ -38,7 +41,8 @@ const BOULDER_DATA :IBoulder[]= [
     img:'https://kletterblock.de/wp-content/uploads/2018/10/2018_10_03_11_24_29_Microsoft_Edge.jpg',
     created: new Date(),
     location_id:'3',
-    creator_id:''
+    creator_id:'',
+    like:true
   },
 ];
 export default BOULDER_DATA;
