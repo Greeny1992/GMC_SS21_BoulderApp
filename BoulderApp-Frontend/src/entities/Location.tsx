@@ -35,6 +35,7 @@ const LOCATION_DATA : ILocation[] =[
 
 const getLocation = (id:string):ILocation =>
 {
+    console.log("GET LOCATION " + id)
     return LOCATION_DATA.filter((location:ILocation) => location.id ===id)?.[0] ?? LOCATION_DATA[0];
 }
 export default getLocation
