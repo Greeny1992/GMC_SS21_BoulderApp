@@ -29,11 +29,8 @@ export function colors(){
         return _colors
 }
     export function getColor(color_id:number|string):IColor{
-        console.log("COLOR_ID: " +color_id)
         const id = typeof color_id === 'string'? parseInt(color_id) : color_id;
         const color = _colors.filter((color:IColor) => color.id === id )?.[0];
-        console.log("COLOR: " +color)
-        console.log("value: " +color.value)
         return color ?? _colors[0];
     }
 

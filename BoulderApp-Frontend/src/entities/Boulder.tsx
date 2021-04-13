@@ -1,3 +1,4 @@
+
 export interface IBoulder{
     id:string;
     title:string;
@@ -24,7 +25,7 @@ const BOULDER_DATA :IBoulder[]= [
   },
   {
     id: 'bea-c1b1-4as6c2-aeasdfd5-3ad53abb28ba',
-    title: 'Ultra Harter Brocken',
+    title: 'Ultra Harter Brocken der Stainz',
     color: 3,
     difficulty: 1,
     img:'https://static.bergzeit.de/out/pictures-imago/master/magazin_prod/9e/1b/201806bouldern-magic-wood-riverbed-christof-rauch.jpg',
@@ -45,4 +46,10 @@ const BOULDER_DATA :IBoulder[]= [
     like:true
   },
 ];
+
+export function toggleLike (boulder: IBoulder):IBoulder{
+  const tempBoulder = boulder;
+  tempBoulder.like =!boulder.like
+  return tempBoulder
+}
 export default BOULDER_DATA;
