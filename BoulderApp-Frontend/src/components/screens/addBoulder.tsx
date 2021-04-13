@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, CheckBox} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, CheckBox, ImageBackground} from 'react-native';
 // Find more icons at https://icons.expo.fyi/
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -33,14 +33,17 @@ export interface Boulder {
 
 export default function AddBoulder({route, navigation}: any) {
     // const { passingParams } = route.params;
+    const bg = require('../../assets/images/background.jpg');
     return (
         <>
+            <ImageBackground source={bg} style={styles.background}>
             <BText style={styles.text}>Add new boulder</BText>
             <RenderName/>
             <RenderLocation/>
             <RenderDifficulty/>
             <RenderColourAndImage/>
             <RenderTopped/>
+            </ImageBackground>
         </>
     )
 }

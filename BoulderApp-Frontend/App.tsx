@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, Pressable, Button } from 'react-native';
+import { StyleSheet, View, Image, Text, Pressable, Button, ImageBackground } from 'react-native';
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AddBoulder from "./src/components/screens/addBoulder";
 import Login from './src/components/screens/login';
@@ -15,7 +15,7 @@ export default function App() {
   const loggedInHandler = () => {
       setLoggedIn(!loggedIn);
   }
-
+  const bg = require('./src/assets/images/background.jpg');
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
@@ -36,7 +36,9 @@ export default function App() {
           </Stack.Navigator>
         ) : (
           <View style={styles.container}>
+            <ImageBackground source={bg} style={styles.image}>
             <Login loggedInHandler={loggedInHandler}></Login>
+            </ImageBackground>
           </View>
         )}
     </NavigationContainer>
@@ -46,8 +48,12 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: "column"
     },
+    image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center",
+      alignItems: "center"
+    }
 });
