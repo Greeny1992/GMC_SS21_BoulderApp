@@ -20,7 +20,7 @@ const BoulderListContainerStyle = StyleSheet.create({
         backgroundColor: "#147aff",
     },
     bouldList:{
-        marginTop: 30,
+        marginTop: 0,
     },
     buttonText: {
         color: '#ffffff',
