@@ -1,6 +1,11 @@
 import {StyleSheet} from "react-native";
 
 const AddBoulderStyle = StyleSheet.create({
+    background: {
+        flex: 1,
+        resizeMode: "cover",
+        alignItems: "center"
+    },
     inputView: {
         marginTop: 20,
         width: '80%'
