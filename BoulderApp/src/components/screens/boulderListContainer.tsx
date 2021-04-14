@@ -37,7 +37,8 @@ export default function BoulderListContainer({navigation}: any) {
     return (
         <View>
             <View style={styles.bouldList}>
-                <BoulderList navigation={navigation}/> 
+            <BoulderList navigation={navigation}/> 
+
             </View>
             <View style={LayoutStyle.containerRow}>
                 <AddButton/>

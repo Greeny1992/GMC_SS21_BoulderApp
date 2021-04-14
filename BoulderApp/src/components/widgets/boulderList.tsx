@@ -25,6 +25,7 @@ import {getColor,getDifficulty} from '../../entities/boulderDetailValues';
 import { Value } from "react-native-reanimated";
 
 const BoulderList = ({navigation}: {navigation:any}) => {
+
   const [boulder_data, setBoulder_data] = useState(BOULDER_DATA);
   const [selectedId, setSelectedId] = useState("");
   const [search, setSearch] = useState('');
@@ -140,8 +141,7 @@ const BoulderList = ({navigation}: {navigation:any}) => {
   };
 
   return (
-    <SafeAreaView style={BoulderListStyle.container}>
-  
+    <View >
       <FlatList
         data={filteredDataSource}
         renderItem={renderItem}
@@ -150,8 +150,9 @@ const BoulderList = ({navigation}: {navigation:any}) => {
         ListHeaderComponent={renderHeader()}
         stickyHeaderIndices={[0]}
       />
-    </SafeAreaView>
+    </View>
   );
+  
 };
 
 export default BoulderList;
