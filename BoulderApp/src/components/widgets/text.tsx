@@ -11,7 +11,7 @@ const BText: React.FC<BTextProps> = (props: any) => {
 }
 const styles = StyleSheet.create({
     font: {
-        fontFamily: Platform.OS=== 'ios' ? 'San Francisco' : 'Roboto'
+        fontFamily: Platform.OS=== 'ios' ? 'Futura Medium' : 'Roboto'
     },
 })
 export default BText
