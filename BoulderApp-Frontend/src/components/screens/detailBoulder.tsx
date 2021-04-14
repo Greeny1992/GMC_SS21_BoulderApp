@@ -51,10 +51,10 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                 </>
             :
                 <View style={[LayoutStyle.containerView]}>
-                        <BoulderMetadata boulder={this.state.boulder} navigation={this.props.navigation} handlelikeToggle={this.toggleLike}/>
+                        {/* <BoulderMetadata boulder={this.state.boulder} navigation={this.props.navigation} handlelikeToggle={this.toggleLike}/> */}
                         <Divider style={LayoutStyle.divider} />
                         <BText style={[TextStyle.subTitle]}>Boulder Interaktion</BText>
-                        <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
+                        {/* <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/> */}
                 </View>
         )
     } 

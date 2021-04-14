@@ -16,7 +16,7 @@ const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     title: 'Great Boulder',
     status:1,
     comment:'',
-    icon: 'hand-rock-o',
+    icon: '',
     created: new Date(),
     creator_id:''
   },

@@ -3,10 +3,11 @@ import {StyleSheet} from "react-native";
 
 const BoulderMetadataStyle = StyleSheet.create({
    btn: {
-        width: 50,
+        width: '45%',
        marginTop: 0,
        justifyContent:'center',
-       alignItems:'center'
+       alignItems:'center',
+       marginBottom:10
    }
 });
 

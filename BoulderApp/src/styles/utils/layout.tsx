@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const LayoutStyle = StyleSheet.create({
     containerRow: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
       
     },

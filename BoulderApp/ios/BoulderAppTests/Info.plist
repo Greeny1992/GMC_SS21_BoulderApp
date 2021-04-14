@@ -20,5 +20,13 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome.ttf</string> 
+		<string>MaterialIcons.ttf</string> 
+		<string>MaterialCommunityIcons.ttf</string> 
+
+		<string>your custom fonts</string>
+	</array>
 </dict>
 </plist>
