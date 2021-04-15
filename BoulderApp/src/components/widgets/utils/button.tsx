@@ -1,6 +1,6 @@
 import React from 'react'
 import {TouchableOpacity, View} from 'react-native'
-import styles from '../../styles/button';
+import styles from '../../../styles/button';
 import BText from './text';
 
 interface BButtonProps {

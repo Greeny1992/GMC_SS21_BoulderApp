@@ -5,8 +5,8 @@ import {
   View,
 } from "react-native";
 import styles from '../../styles/login';
-import BButton from "../widgets/button";
-import BText from "../widgets/text";
+import BButton from "../widgets/utils/button";
+import BText from "../widgets/utils/text";
 
 export default function Login({ loggedInHandler }: any) {
   const [email, setEmail] = useState("");

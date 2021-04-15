@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View} from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
-import { BExtendedButton } from '../widgets/button';
+import { BExtendedButton } from '../widgets/utils/button';
 import LayoutStyle from '../../styles/utils/layout';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';

@@ -4,7 +4,7 @@ import { Badge } from "react-native-elements";
 import { IBoulder } from "../../../data/entities/Boulder";
 import { getColor } from "../../../data/lookupValues/boulderDetailValues";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
-import BText from "../text";
+import BText from "../utils/text";
 
 interface BoulderListItemProps {
     style?: any;

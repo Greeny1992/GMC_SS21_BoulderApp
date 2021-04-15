@@ -1,4 +1,3 @@
-
 export interface IBoulder{
     id:string;
     title:string;

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import styles from '../../styles/addBoulder';
-import BText from "../widgets/text";
+import BText from "../widgets/utils/text";
 
 
 enum colourScale {

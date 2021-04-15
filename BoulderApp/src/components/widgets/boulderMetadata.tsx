@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { Badge,Icon } from "react-native-elements";
-import BText from "../widgets/text";
+import BText from "./utils/text";
 import LayoutStyle from "../../styles/utils/layout";
 import TextStyle from "../../styles/text";
 import styles from "../../styles/detailBoulder";

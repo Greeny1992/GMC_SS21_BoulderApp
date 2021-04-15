@@ -2,7 +2,7 @@
 import React from "react";
 import { View } from "react-native";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
-import BText from "../text";
+import BText from "../utils/text";
 
 interface BoulderListHeaderProps {
     style?: any;

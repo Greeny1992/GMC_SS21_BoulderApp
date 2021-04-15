@@ -1,13 +1,13 @@
 import React, { Component, useEffect, useState } from 'react';
 import {Route, View, StyleSheet} from 'react-native';
 import { IBoulder } from '../../data/entities/Boulder';
-import BText from "../widgets/text";
+import BText from "../widgets/utils/text";
 import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
 import TextStyle from '../../styles/text';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
-import BButton from '../widgets/button';
+import BButton from '../widgets/utils/button';
 import ButtonStyles from '../../styles/button';
 import BoulderMetadataStyle from '../../styles/widgets/boulderMetadata';
 import { getBoulderDetails } from '../../data/service/BoulderService';
