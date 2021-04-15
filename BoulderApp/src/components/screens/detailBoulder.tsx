@@ -1,15 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
 import {Route, View, StyleSheet} from 'react-native';
-import BOULDER_DATA, { IBoulder } from '../../entities/Boulder';
+import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/text";
 import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
 import TextStyle from '../../styles/text';
-import BoulderInteractionList from '../widgets/boulderInteractionList';
+import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
 import BButton from '../widgets/button';
 import ButtonStyles from '../../styles/button';
 import BoulderMetadataStyle from '../../styles/widgets/boulderMetadata';
+import { getBoulderDetails } from '../../data/service/BoulderService';
 
 interface DetailBoulderProps {
     navigation: any,
@@ -24,15 +25,17 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     tempBoulder : IBoulder | undefined;
     constructor(props: DetailBoulderProps) {
         super(props);
-        this.tempBoulder = this.getBoulderDetails(this.props.route.params.boulderID ?? '')
+        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ?? '')
         this.state ={
             boulder: this.tempBoulder,
         }
         
       }
-     getBoulderDetails =(id:string):IBoulder | undefined=>{
-        return BOULDER_DATA.find(boulder => boulder.id === id)
+
+      handleBoulderSearch = (id:string):IBoulder | undefined =>{
+        return getBoulderDetails(id);
     }
+   
     toggleLike = (state:BoulderState)=>{
         const t = this.state.boulder;
         if(t){
@@ -59,7 +62,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             :
                 <View style={{justifyContent:'space-between',height:'100%'}}>
                     <View style={[LayoutStyle.containerView]}>
-                            <BoulderMetadata boulder={this.state.boulder} />
+                            <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike}/>
                             <Divider style={LayoutStyle.divider} />
                             <BText style={[TextStyle.subTitle]}>Boulder Interaktion</BText>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>

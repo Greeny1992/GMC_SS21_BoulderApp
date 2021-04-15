@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Image } from "react-native";
-import { Badge,Icon, Text } from "react-native-elements";
+import React from "react";
+import { View, Image } from "react-native";
+import { Badge,Icon } from "react-native-elements";
 import BText from "../widgets/text";
 import LayoutStyle from "../../styles/utils/layout";
 import TextStyle from "../../styles/text";
 import styles from "../../styles/detailBoulder";
-
-import BButton from "../widgets/button";
-
-import { IBoulder, toggleLike } from "../../entities/Boulder";
-import ButtonStyles from "../../styles/button";
-import { getColor, getDifficulty } from "../../entities/boulderDetailValues";
-import getLocation from "../../entities/Location";
-import BoulderMetadataStyle from "../../styles/widgets/boulderMetadata";
+import { IBoulder } from "../../data/entities/Boulder";
+import { getColor, getDifficulty } from "../../data/lookupValues/boulderDetailValues";
+import getLocation from "../../data/service/LocationService";
 
 interface BoulderMetaProps {
   style?: any;
   boulder: IBoulder;
+  handleLikeClick:Function
+
 }
 
 const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
-  const { style, boulder} = props;
+  const { style, boulder, handleLikeClick} = props;
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
   
@@ -36,15 +33,13 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
           { boulder.like 
             ?
               <View style={{flex:1,marginTop:10}}>
-                <Icon  name='thumb_up'></Icon>
+                <Icon  name="star" onPress={handleLikeClick} color="#FFD700"></Icon>
 
               </View>
             :
               <></>
           }
         </View>
-          
-        
       
         <View style={[LayoutStyle.containerRow]}>
           <View>

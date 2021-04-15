@@ -1,11 +1,6 @@
-interface ILocation {
-    id:string,
-    country:string,
-    region:string,
-    city:string
-}
+import { ILocation } from "../entities/Location";
 
-const LOCATION_DATA : ILocation[] =[
+export const LOCATION_DATA : ILocation[] =[
 
     {
         id:'-1',
@@ -33,8 +28,3 @@ const LOCATION_DATA : ILocation[] =[
     }
 ]
 
-const getLocation = (id:string):ILocation =>
-{
-    return LOCATION_DATA.filter((location:ILocation) => location.id ===id)?.[0] ?? LOCATION_DATA[0];
-}
-export default getLocation

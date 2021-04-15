@@ -27,6 +27,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         }
         
       }
+    
      getBoulderDetails =(id:string):IBoulder | undefined=>{
         return BOULDER_DATA.find(boulder => boulder.id === id)
     }

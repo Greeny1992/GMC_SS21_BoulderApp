@@ -6,7 +6,7 @@ import { StyleSheet, View, Button, ImageBackground } from 'react-native';
 import AddBoulder from "./src/components/screens/addBoulder";
 import Login from './src/components/screens/login';
 import Main from "./src/components/screens/main";
-import BoulderListContainer from "./src/components/screens/boulderListContainer";
+import BoulderListContainer from "./src/components/screens/home";
 import DetailBoulder from "./src/components/screens/detailBoulder";
 
 
