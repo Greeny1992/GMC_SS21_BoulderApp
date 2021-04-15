@@ -12,7 +12,6 @@ const LayoutStyle = StyleSheet.create({
         justifyContent: 'space-around'
     },
     containerCentered: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -20,6 +19,7 @@ const LayoutStyle = StyleSheet.create({
     containerView:{
         marginLeft:10,
         marginRight:10,
+        
     },
     divider:{ 
         backgroundColor: '#147aff', 
