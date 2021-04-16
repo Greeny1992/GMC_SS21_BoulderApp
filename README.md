@@ -20,9 +20,9 @@ On IOS there can be a lot of problems with the basic setup.
 ### 
 Inside of the folder BoulderApp
 ```
+yarn install
 npx react-native start
-cd ios
-pods install
+cd ios && pod install && cd ..
 npx react-native run-ios
 ```
 ## IOS Error messages

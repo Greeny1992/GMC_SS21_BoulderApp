@@ -11,6 +11,7 @@ const TextStyle = StyleSheet.create({
     subTitle:{
         fontSize:18,
         fontWeight:'200',
+        marginTop: 80
         // marginTop: 10,
         // marginBottom:10,
     }

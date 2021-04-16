@@ -1,10 +1,5 @@
-import { IBasic } from "./boulderDetailValues";
+import { IStatus } from "../entities/BoulderInteractionValues";
 
-interface IStatus extends IBasic {
-    id: number,
-    name: string,
-    icon: string
-}
 const _status :IStatus[] = [
     {id:-1, name:'none',icon:'circle-outline'},
     {id:1, name:'idea',icon:'circle-outline'},
@@ -13,7 +8,9 @@ const _status :IStatus[] = [
     {id:4, name:'topped',icon:'circle-slice-8'},
 ]
 
-export function status(){
+export function getAllStatus(){
+    console.log("--------------------------------")
+    console.log(_status)
     return _status
 }
 export function getStatus(status_id:number|string):IStatus{

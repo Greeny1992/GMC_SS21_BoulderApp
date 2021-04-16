@@ -1,15 +1,6 @@
-interface IBoulderInteraction {
-    boulder_id:string,   
-    user_id:string, 
-    title: string,
-    status:number,
-    comment:string,
-    icon: string,
-    created: Date,
-    creator_id:string,
-}
+import { IBoulderInteraction } from "../entities/BoulderInteraction";
 
-const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
+export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     {
     boulder_id:'bd7acdd5-3ad53abb28ba',   
     user_id:'', 
@@ -52,9 +43,4 @@ const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     creator_id:''
   }
 ]
-
-const getCurrentBoulderInteraction=(boulder_id:string, user_id:string) : IBoulderInteraction[]=>{
-    return BOULDER_INTERACTION_DATA.filter(interaction => interaction.boulder_id === boulder_id && interaction.user_id=== user_id )
-}
-export default getCurrentBoulderInteraction;
 

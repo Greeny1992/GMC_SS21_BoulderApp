@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Icon, ListItem } from 'react-native-elements';
-import getCurrentBoulderInteraction from '../../entities/BoulderInteraction';
+import getCurrentBoulderInteraction from '../../../data/service/BoulderInteractionService';
+import BoulderInteractionItem from './boulderInteractionItem';
 
 interface BoulderInteractionListProps {
     boulder_id: string,
@@ -15,17 +15,13 @@ const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: an
         <View>
             {
                 boulder_interaction.map((interaction, i) => (
-                <ListItem key={i} bottomDivider>
-                    
-                    <Icon name={interaction.icon} />
-                    <ListItem.Content>
-                    <ListItem.Title>{interaction.title}</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.Chevron />
-                </ListItem>
+                <BoulderInteractionItem 
+                    key={i}
+                    interaction={interaction}/>
+        
                 ))
             }
-            </View>
+        </View>
     )
 }
 
