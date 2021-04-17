@@ -1,23 +1,6 @@
 import React, { useState } from "react";
 import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
-import {
-  SafeAreaView,
-  View,
-  FlatList,
-  SectionList,
-  StyleSheet,
-  Text,
-  StatusBar,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  ImageComponent,
-} from "react-native";
-import {
-  SearchBar,
-  Badge,
-} from "react-native-elements";
-
+import { View, Text, Image } from "react-native";
 import { Icon, ListItem } from 'react-native-elements';
 import BoulderInteractionListStyle from  '../../../styles/widgets/boulderInteractionList';
 import TextStyle from "../../../styles/text";
@@ -29,14 +12,14 @@ interface BoulderInteractionItemProps {
 
 const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: BoulderInteractionItemProps) => {
     const {interaction, style} = props;
+    console.log(interaction.icon.toString());
     return (
         <View>
-            {
-            
+            {               
                 <ListItem bottomDivider>
                     <View style={BoulderInteractionListStyle.item}>
                         <View style={BoulderInteractionListStyle.box}>
-                            <Image style={BoulderInteractionListStyle.icon} source={require('../../../assets/images/user.png')}></Image>
+                            <Image style={BoulderInteractionListStyle.icon} source={interaction.icon.toString()}></Image>
                         </View>
                         <View style={BoulderInteractionListStyle.box}>
                             <Text style={BoulderInteractionListStyle.title}>{interaction.title}</Text>

@@ -23,26 +23,25 @@ const BoulderListStyle = StyleSheet.create({
       difficulty: {
         textAlign: 'center',
         flexDirection: "column",
-        width: '20%',
         fontSize: 14,
+        justifyContent: 'center',
       },
       badge: {
         textAlign: 'center',
         flexDirection: "column",
-        width: '5%',
       },
       date: {
         flexDirection: "column",
         textAlign: 'center',
         fontSize: 14,
-        width: '25%',
       },
       itemsgroup: {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        width: '25%',
+        width: '20%',
         alignItems: 'center',
+        justifyContent: 'center',
       },
       location: {
         flexDirection: "row",
@@ -52,6 +51,13 @@ const BoulderListStyle = StyleSheet.create({
         height: 20,
         width: 18,
         flexDirection: "column",
+        justifyContent: 'center',
+      },
+
+
+      //Search and Add-button
+      headerSearch: {
+        flexDirection: 'row',
       },
       textInputStyle: {
         height: 40,
@@ -93,43 +99,44 @@ const BoulderListStyle = StyleSheet.create({
         flexDirection:'row',
         color: 'white'
       },
-      header: {
-        flexDirection: 'row',
-      },
+
+
+      //Header List
       itemheader: {
         flexDirection: 'row',
         width: '100%',
         backgroundColor: "#c0e6ff",
-        padding: 20,
+        padding: 5,
+
       },
       headlinesectiontitle: {
         fontSize: 16,
         fontWeight: 'bold',
-        width: '23%',
+        width: '20%',
         textAlign: 'center',
       },
       headlinesectionlocation: {
         fontSize: 16,
         fontWeight: 'bold',
-        width: '25%',
+        width: '20%',
         textAlign: 'center',
       },
       headlinesectiondifficulty: {
         fontSize: 16,
         fontWeight: 'bold',
-        width: '25%',
+        width: '20%',
         textAlign: 'center',
       },
       headlinesectiondate: {
         fontSize: 16,
         fontWeight: 'bold',
-        width: '25%',
+        width: '20%',
         textAlign: 'center',
       },
       headlinesectioncolor: {
         fontSize: 16,
         fontWeight: 'bold',
-        width: '18%',
+        width: '20%',
         textAlign: 'center',
       },
 });

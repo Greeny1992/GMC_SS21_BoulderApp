@@ -28,9 +28,8 @@ interface BoulderSearchProps {
   }
 
 
-
     return (
-            <View style={BoulderListStyle.header}>
+            <View style={BoulderListStyle.headerSearch}>
               <View style={BoulderListStyle.searchbox}>
                 <SearchBar inputContainerStyle={BoulderListStyle.textInputStyle}
                 containerStyle={BoulderListStyle.textInputContainerStyle} round searchIcon={{ size: 24 }}
