@@ -17,10 +17,11 @@ interface BExtendedButtonProps {
     title:string
 }
 export const BExtendedButton: React.FC<BExtendedButtonProps> = (props: BExtendedButtonProps) => {
-    const {onPress,title}=props
+    const {onPress,title, style}=props
+    console.log("Console " + style)
     return (
         <View style={styles.buttonContainer}>
-            <BButton style={[styles.btn]}  onPress={onPress}>
+            <BButton style={[styles.btn, style]}  onPress={onPress}>
                 <BText style={styles.buttonText}>
                     {title}
                 </BText>
