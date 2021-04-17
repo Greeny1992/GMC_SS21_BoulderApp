@@ -9,7 +9,7 @@ interface BoulderListHeaderProps {
   }
 const BoulderListHeader: React.FC<BoulderListHeaderProps> = (props: BoulderListHeaderProps) => {
     return (
-            <View style={BoulderListStyle.item}>
+            <View style={BoulderListStyle.itemheader}>
                 <BText style={BoulderListStyle.headlinesectiontitle}>Name</BText>
                 <BText style={BoulderListStyle.headlinesectionlocation}>Location</BText>
                 <BText style={BoulderListStyle.headlinesectiondifficulty}>Difficulty</BText>

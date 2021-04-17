@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View} from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
-import { BExtendedButton } from '../widgets/utils/button';
-import LayoutStyle from '../../styles/utils/layout';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface HomeProps {
   style?: any;
@@ -27,9 +26,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
             boulderID:id,
         })
     }
-    const handleFilter =()=>{
-        console.log("Filter")
-    }
+
     const handleSearchInput = (input:string)=> {
         setSearchText(input)
         searchBoulderList(searchText)
@@ -48,17 +45,12 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
   return (
-    <View>
+    <SafeAreaView>
       <View >
-        <BoulderSearch searchBoulderList={handleSearchInput} searchText={searchText}/>
-        <View style={LayoutStyle.containerRow}>
-            <BExtendedButton onPress={handleAddBoulder} title="Add"/>
-            <BExtendedButton onPress={handleFilter} title="Filter"/>
-        </View> 
+        <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} items={filteredDataSource}/>
       </View>
-    
-    </View>
+    </SafeAreaView>
   );
 };
 

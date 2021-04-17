@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView, FlatList } from 'react-native';
 import getCurrentBoulderInteraction from '../../../data/service/BoulderInteractionService';
 import BoulderInteractionItem from './boulderInteractionItem';
 
@@ -21,8 +21,28 @@ const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: an
         
                 ))
             }
-        </View>
+        </View >
     )
 }
 
-export default BoulderInteractionList 
+export default BoulderInteractionList;
+
+
+/**
+ * 
+
+<FlatList
+                data={boulder_interaction}
+                renderItem={({item}) => (
+                <BoulderInteractionItem
+                interaction={item}/>
+                )}
+                keyExtractor={(item) => item.user_id}
+            >
+
+            </FlatList>
+
+
+
+
+ */

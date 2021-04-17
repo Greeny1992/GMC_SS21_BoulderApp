@@ -13,7 +13,6 @@ interface BoulderListItemProps {
   }
 const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemProps) => {
     const {style,item,onPress} = props;
-    console.log(item)
     return (
       <TouchableOpacity onPress={onPress} style={[BoulderListStyle.item, style]}>
         <BText style={BoulderListStyle.title}>{item.title}</BText>
@@ -25,9 +24,13 @@ const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemP
           </View>
         </View>
 
-        <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
+        <View style={BoulderListStyle.itemsgroup}>
+          <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
+        </View>
 
-        <BText style={BoulderListStyle.date}>{item.created.toDateString()}</BText>
+        <View style={BoulderListStyle.itemsgroup}>
+          <BText style={BoulderListStyle.date}>{item.created.toDateString()}</BText>
+        </View>
 
         <View style={BoulderListStyle.itemsgroup}>
           <View style={BoulderListStyle.badge}>

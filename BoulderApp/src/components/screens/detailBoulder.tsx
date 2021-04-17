@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, View} from 'react-native';
+import {Route, ScrollView, View} from 'react-native';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import LayoutStyle from '../../styles/utils/layout';
@@ -76,7 +76,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             :
                 <View style={{justifyContent:'space-between',height:'100%'}}>
                     <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.handleShowVisibility} handleSaveInteraction={this.handleSaveBoulderInteraction}/>
-                    <View style={[LayoutStyle.containerView]}>
+                    <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>
                                 <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike}/>
                             </View>
@@ -84,7 +84,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={{marginBottom:15}} title="Add Interaction" />
                             <BText style={[TextStyle.subTitle]}>Activities</BText>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
-                    </View>
+                    </ScrollView>
                     <View style={[LayoutStyle.containerRow,{justifyContent:'space-around'}]}>
                         <BExtendedButton onPress={this.toggleLike} title={this.state.boulder.like ? "liked": "not liked"} style={[
                             BoulderMetadataStyle.btn,{

@@ -7,7 +7,7 @@ export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     title: 'Great Boulder',
     status:1,
     comment:'Yessssssss!',
-    icon: '',
+    icon: require('boulderapp/src/assets/images/user.png'),
     created: new Date(),
     creator_id:''
   },
@@ -17,7 +17,17 @@ export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     title: 'What a rook',
     status:2,
     comment:'neverStop',
-    icon: 'dumbbell',
+    icon: require('boulderapp/src/assets/images/user.png'),
+    created: new Date(),
+    creator_id:''
+  },
+  {
+    boulder_id:'bd7acdd5-3ad53abb28ba',
+    user_id:'', 
+    title: 'What a rook',
+    status:2,
+    comment:'never!Stop',
+    icon: require('boulderapp/src/assets/images/user.png'),
     created: new Date(),
     creator_id:''
   },
