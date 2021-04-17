@@ -15,8 +15,8 @@ const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     user_id:'', 
     title: 'Great Boulder',
     status:1,
-    comment:'',
-    icon: 'hand-rock-o',
+    comment:'Yesssssss!',
+    icon: '../assets/images/user.png',
     created: new Date(),
     creator_id:''
   },
@@ -25,8 +25,8 @@ const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     user_id:'', 
     title: 'What a rook',
     status:2,
-    comment:'',
-    icon: 'dumbbell',
+    comment:'Never give up!',
+    icon: '../assets/images/user.png',
     created: new Date(),
     creator_id:''
   },
