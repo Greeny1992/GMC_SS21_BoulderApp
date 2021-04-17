@@ -45,12 +45,12 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
   return (
-    <SafeAreaView>
+    <View >
       <View >
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} items={filteredDataSource}/>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

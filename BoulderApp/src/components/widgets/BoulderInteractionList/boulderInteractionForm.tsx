@@ -5,6 +5,7 @@ import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import { IStatus } from '../../../data/entities/BoulderInteractionValues';
 import { getAllStatus } from '../../../data/lookupValues/BoulderInteractionValues';
 import LayoutStyle from '../../../styles/utils/layout';
+import TextStyle from '../../../styles/utils/text';
 import styles from '../../../styles/widgets/boulderInteractionForm';
 import { BExtendedButton } from '../utils/button';
 import IconPicker from '../utils/IconPicker';
@@ -17,11 +18,6 @@ interface BoulderInteractionFormProps {
 
 const BoulderInteractionForm: React.FC<BoulderInteractionFormProps> = (props: BoulderInteractionFormProps) => {
   const {handleHideModal,handleSaveInteraction,style}=props
-    const iconValues = [
-        {label: 'What a move', value: 'What a move', icon: () => <Icon name="star" size={18} color="#900" />},
-        {label: 'Awesome', value: 'Awesome', icon: () => <Icon name="flag" size={18} color="#900" />},
-        {label: 'I did it', value: 'I did it', icon: () => <Icon name="check-circle" size={18} color="#900" />},
-    ]
     const statusValues = getAllStatus();
     const statusPickerItems = statusValues.map((item:IStatus )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color="#900" />}})
     // const statusPickerItems = statusValues.forEach((item:IStatus )=> {console.log(item.icon)})
@@ -45,6 +41,7 @@ const BoulderInteractionForm: React.FC<BoulderInteractionFormProps> = (props: Bo
     }
   return (
     <View style={styles.container}>
+      <BText style={TextStyle.title}>Create a activity</BText>
       <BText >Boulder Interaction Title</BText>
       <View style={styles.content}>
         <TextInput 
