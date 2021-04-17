@@ -22,6 +22,16 @@ export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     creator_id:''
   },
   {
+    boulder_id:'bd7acdd5-3ad53abb28ba',
+    user_id:'', 
+    title: 'What a rook',
+    status:2,
+    comment:'never!Stop',
+    icon: 'dumbbell',
+    created: new Date(),
+    creator_id:''
+  },
+  {
     boulder_id:'bea-c1b1-4as6c2-aeasdfd5-3ad53abb28ba',
     user_id:'', 
     title: 'So cute',

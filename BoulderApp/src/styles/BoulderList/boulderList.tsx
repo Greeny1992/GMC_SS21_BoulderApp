@@ -53,9 +53,6 @@ const BoulderListStyle = StyleSheet.create({
         width: 18,
         flexDirection: "column",
       },
-      header: {
-        flexDirection: 'column',
-      },
       textInputStyle: {
         height: 40,
         borderWidth: 0,
@@ -79,10 +76,14 @@ const BoulderListStyle = StyleSheet.create({
         paddingTop: 1,
       },
       searchbox: {
-        width: '100%',
+        width: '80%',
+      },
+      btnbox: {
+        width: '20%',
+        height: '100%',
+        backgroundColor: 'white',      
       },
       btn: {
-        width: "30%",
         borderRadius: 25,
         height: 30,
         alignItems: "center",
@@ -91,6 +92,15 @@ const BoulderListStyle = StyleSheet.create({
         backgroundColor: "#147aff",
         flexDirection:'row',
         color: 'white'
+      },
+      header: {
+        flexDirection: 'row',
+      },
+      itemheader: {
+        flexDirection: 'row',
+        width: '100%',
+        backgroundColor: "#c0e6ff",
+        padding: 20,
       },
       headlinesectiontitle: {
         fontSize: 16,
