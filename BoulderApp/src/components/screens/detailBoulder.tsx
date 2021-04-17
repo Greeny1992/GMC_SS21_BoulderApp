@@ -84,12 +84,12 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             <BText style={[TextStyle.subTitle]}>Activities</BText>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
                     </ScrollView>
-                    <View style={[LayoutStyle.containerRow,{justifyContent:'space-around'}]}>
+                    <View style={[LayoutStyle.containerRow,{justifyContent:'space-around', marginTop:5}]}>
                         <BExtendedButton onPress={this.toggleLike} title={this.state.boulder.like ? "liked": "not liked"} style={[
                             BoulderMetadataStyle.btn,{
                                 backgroundColor: this.state.boulder.like ? "#ffffff" : "#147aff",},
                             ]}/>
-                        <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={BoulderMetadataStyle.btn} title="Add activity" />
+                        <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={[BoulderMetadataStyle.btn,{width:'85%'}]} title="Add activity" />
 
                         <BExtendedButton onPress={this.handlePress} title="Edit" style={BoulderMetadataStyle.btn}/>
                     </View> 

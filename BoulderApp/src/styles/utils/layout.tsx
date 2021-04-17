@@ -26,8 +26,10 @@ const LayoutStyle = StyleSheet.create({
         width:'100%',
         marginTop: 10,
         marginBottom:10,
+    },
+    red:{
+        backgroundColor:'red'
     }
-  
 
 }
 );
