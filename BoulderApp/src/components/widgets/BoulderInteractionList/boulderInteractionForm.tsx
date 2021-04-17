@@ -58,8 +58,10 @@ const BoulderInteractionForm: React.FC<BoulderInteractionFormProps> = (props: Bo
             style={styles.multiLine}
             editable
         />
+        <BText >Status </BText>
+
         <IconPicker items={statusPickerItems} placeholder="Select Status" style={{zIndex:200}}/>
-        <IconPicker items={iconValues} placeholder="Select Tag" style={{zIndex:9}}/>
+        {/* <IconPicker items={iconValues} placeholder="Select Tag" style={{zIndex:9}}/> */}
         <View style={LayoutStyle.containerRow}>
                         <BExtendedButton onPress={()=>handleHideModal(false) } title="Cancel" />
                         <BExtendedButton onPress={()=>storeInteraction() } title="Save" />
