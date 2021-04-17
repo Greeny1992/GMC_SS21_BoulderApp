@@ -3,38 +3,32 @@ import { withTheme } from 'react-native-elements';
 
 const BoulderInteractionListStyle = StyleSheet.create({
       item: {
-        flexDirection: 'row',
         flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
         flex: 1,
         position: 'relative',
         backgroundColor: "#c0e6ff",
         padding: 20,
       },
       icon: {
-        height: 50,
-        width: 50,
+        height: 70,
+        width: 70,
       },
-      title: {
-        textAlign: 'center',
-        justifyContent: 'center',
-        flexDirection: "column",
-        fontSize: 14,
+      title: {      
+        fontSize: 18,
       },
       box: {
-        position: 'relative',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '25%',
-        paddingRight: 5,
+        minWidth: '22%',
+        maxWidth: '90%',
+        margin: 10,
       },
       comment: {
-        textAlign: 'center',
-        flexDirection: "column",
-        fontSize: '12',
+        fontSize: 12,
       },
       date: {
-        flexDirection: "column",
-        textAlign: 'center',
         fontSize: 12,
       },
 });
