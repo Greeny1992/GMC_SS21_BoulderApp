@@ -82,7 +82,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             </View>
                             <Divider style={LayoutStyle.divider} />
                             <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={{marginBottom:15}} title="Add Interaction" />
-                            <BText style={[TextStyle.subTitle]}>Boulder Interaktion</BText>
+                            <BText style={[TextStyle.subTitle]}>Activities</BText>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
                     </View>
                     <View style={[LayoutStyle.containerRow,{justifyContent:'space-around'}]}>
