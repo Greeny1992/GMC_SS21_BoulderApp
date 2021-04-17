@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { Badge,Icon } from "react-native-elements";
 import BText from "./utils/text";
 import LayoutStyle from "../../styles/utils/layout";
-import TextStyle from "../../styles/text";
+import TextStyle from "../../styles/utils/text";
 import styles from "../../styles/detailBoulder";
 import { IBoulder } from "../../data/entities/Boulder";
 import { getColor, getDifficulty } from "../../data/lookupValues/boulderDetailValues";

@@ -4,7 +4,7 @@ import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
-import TextStyle from '../../styles/text';
+import TextStyle from '../../styles/utils/text';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
 import { BExtendedButton } from '../widgets/utils/button';
@@ -81,7 +81,6 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                                 <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike}/>
                             </View>
                             <Divider style={LayoutStyle.divider} />
-                            <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={{marginBottom:15}} title="Add Interaction" />
                             <BText style={[TextStyle.subTitle]}>Activities</BText>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
                     </ScrollView>
@@ -90,6 +89,8 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             BoulderMetadataStyle.btn,{
                                 backgroundColor: this.state.boulder.like ? "#ffffff" : "#147aff",},
                             ]}/>
+                        <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={BoulderMetadataStyle.btn} title="Add activity" />
+
                         <BExtendedButton onPress={this.handlePress} title="Edit" style={BoulderMetadataStyle.btn}/>
                     </View> 
                 </View>
