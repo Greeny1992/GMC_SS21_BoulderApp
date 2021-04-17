@@ -8,51 +8,57 @@ import Login from './src/components/screens/login';
 import Main from "./src/components/screens/main";
 import BoulderListContainer from "./src/components/screens/home";
 import DetailBoulder from "./src/components/screens/detailBoulder";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { AuthContext } from "./src/contexts/auth_context";
+import NewsNavigation from "./src/components/widgets/news_navigation";
+import MainNavigation from "./src/components/widgets/main_navigation";
+import LoginNavigation from "./src/components/widgets/login_navigation";
 
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const loggedInHandler = () => {
-      setLoggedIn(!loggedIn);
-  }
-  const bg = require('./src/assets/images/background.jpg');
-  const Stack = createStackNavigator();
-  return (
-    <NavigationContainer>
-        {loggedIn ? (
-          <Stack.Navigator initialRouteName="HomeScreen">
-            <Stack.Screen name="HomeScreen" component={Main} 
-              options= {{
-                headerRight: () => (
-                  <View style={{marginRight: 5}}>
-                    <Button title="Logout" onPress={loggedInHandler} color="red"/>
-                  </View>
-                )
-                      }} />
-            <Stack.Screen name="ListScreen" component={BoulderListContainer} />
-            <Stack.Screen name="AddBoulderScreen" component={AddBoulder} />
-            <Stack.Screen name="DetailBoulderScreen" component={DetailBoulder} />
-          </Stack.Navigator>
-        ) : (
-          <View style={styles.container}>
-            <ImageBackground source={bg} style={styles.image}>
-            <Login loggedInHandler={loggedInHandler}></Login>
-            </ImageBackground>
-          </View>
-        )}
-    </NavigationContainer>
-  );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column"
+  const [state, dispatch] = React.useReducer(
+    (prevState: any, action: any) => {
+        switch (action.type) {
+            case 'VERIFY':
+                return {
+                    ...prevState,
+                    hasVerified: action.hasVerified,
+                }
+            case 'LOGIN':
+                return {
+                    ...prevState,
+                    isLoggedIn: action.isLoggedIn,
+                }
+        }
     },
-    image: {
-      flex: 1,
-      resizeMode: "cover",
-      justifyContent: "center",
-      alignItems: "center"
-    }
-});
+    {
+        hasVerified: false,
+        isLoggedIn: false,
+    },
+  );
+
+  const authContext = {
+    verify: (hasVerified: boolean) => {
+        dispatch({type: 'VERIFY', hasVerified: hasVerified})
+    },
+    login: (isLoggedIn: boolean) => {
+        dispatch({type: 'LOGIN', isLoggedIn: isLoggedIn})
+    },
+  }
+
+  return(
+    <SafeAreaProvider>
+      <AuthContext.Provider value={authContext}>
+        {!state.isLoggedIn ? (
+          <NewsNavigation/>
+        ) : state.hasVerified ? (
+          <MainNavigation/>
+        ) : (
+          <LoginNavigation/>
+        )}
+      </AuthContext.Provider>
+    </SafeAreaProvider>
+  )
+
+
+}

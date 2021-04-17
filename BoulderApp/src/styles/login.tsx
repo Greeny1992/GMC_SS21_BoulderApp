@@ -16,6 +16,16 @@ const LoginStyle = StyleSheet.create({
       padding: 10,
       marginLeft: 20,
       
+    },
+    container: {
+      flex: 1,
+      flexDirection: "column"
+    },
+    image: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center",
+      alignItems: "center"
     }
   });
 

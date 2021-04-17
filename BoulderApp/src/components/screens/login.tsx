@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {
   Alert,
+  ImageBackground,
   TextInput,
   View,
 } from "react-native";
+import { AuthContext } from "../../contexts/auth_context";
 import styles from '../../styles/login';
 import BButton from "../widgets/utils/button";
 import BText from "../widgets/utils/text";
@@ -11,11 +13,13 @@ import BText from "../widgets/utils/text";
 export default function Login({ loggedInHandler }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const authContext = useContext(AuthContext);
+
   const loginHandler = () => {
-    loggedInHandler();
+    authContext.verify(true);
   };
 
-  const createTwoButtonAlert = () =>
+  const createAlert = () =>
   Alert.alert(
     "Passwort vergessen",
     "HAHA, du solltest dir besser dein Passwort merken! ;)",
@@ -23,10 +27,11 @@ export default function Login({ loggedInHandler }: any) {
       { text: "OK", onPress: () => console.log("OK Pressed") },
     ]
   );
-
+  const bg = require('../../assets/images/background.jpg');
   return (
-    <React.Fragment>
+    <ImageBackground source={bg} style={styles.image}>
       <View style={styles.inputView}>
+        
         <TextInput
           style={styles.TextInput}
           placeholder="Email."
@@ -44,13 +49,13 @@ export default function Login({ loggedInHandler }: any) {
           onChangeText={(password: string) => setPassword(password)}
         />
       </View>
-      <BButton onPress={createTwoButtonAlert}>
+      <BButton onPress={createAlert}>
         <BText>Forgot Password?</BText>
       </BButton>
       <BButton onPress={loginHandler}>
         <BText>LOGIN</BText>
       </BButton>
-    </React.Fragment>
+    </ImageBackground>
   );
 }
 
