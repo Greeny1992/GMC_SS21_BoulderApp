@@ -6,7 +6,7 @@ export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     user_id:'', 
     title: 'Great Boulder',
     status:1,
-    comment:'',
+    comment:'Yessssssss!',
     icon: '',
     created: new Date(),
     creator_id:''
@@ -16,7 +16,7 @@ export const BOULDER_INTERACTION_DATA:IBoulderInteraction[] = [
     user_id:'', 
     title: 'What a rook',
     status:2,
-    comment:'',
+    comment:'neverStop',
     icon: 'dumbbell',
     created: new Date(),
     creator_id:''
