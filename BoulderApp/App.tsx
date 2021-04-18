@@ -1,18 +1,10 @@
 import 'react-native-gesture-handler';
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import React, { useState } from 'react';
-import { StyleSheet, View, Button, ImageBackground } from 'react-native';
-import AddBoulder from "./src/components/screens/addBoulder";
-import Login from './src/components/screens/login';
-import Main from "./src/components/screens/main";
-import BoulderListContainer from "./src/components/screens/home";
-import DetailBoulder from "./src/components/screens/detailBoulder";
+import React from 'react';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AuthContext } from "./src/contexts/auth_context";
-import NewsNavigation from "./src/components/widgets/news_navigation";
-import MainNavigation from "./src/components/widgets/main_navigation";
-import LoginNavigation from "./src/components/widgets/login_navigation";
+import NewsNavigation from "./src/components/widgets/Navigation/news_navigation";
+import MainNavigation from "./src/components/widgets/Navigation/main_navigation";
+import LoginNavigation from "./src/components/widgets/Navigation/login_navigation";
 
 
 export default function App() {
