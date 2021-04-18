@@ -4,7 +4,6 @@ export interface IBoulderInteraction {
   title: string,
   status:number,
   comment:string,
-  icon: string,
   created: Date,
-  creator_id:string,
+  creator_id:string, //TODO remove
 }

@@ -41,8 +41,16 @@ Follow this easy steps [LINK](https://reactnativecode.com/unrecognized-font-fami
 Für alle POST und POT Calls wird die UserID als Parameter mitgesendet
 ```
 Boulder
+Object
+    BoulderDetails: Object
+    Like: boolean
+    Action: Action [
+        Object,
+    ]
+
 _api/boulder/                   GET  - UC03     -> alle Boulder ohne Einschränkung returnen
-_api/boulderDetail/{id}         GET  - UC05     -> spezifischer Boulder gefiltert nach ID
+_api/boulderDetail/{id}         POST  - UC05    -> spezifischer Boulder gefiltert nach ID
+                                                    inkl. Like
                                                     inkl. aller Boulderinteraktionen zu diesem Boulder returnen
 _api/boulderDetail/{id}         POST - UC10     -> spezifischen Boulder updaten und returnen                                         
 _api/boulderDetail              PUT  - UC08     -> neuen Boulder erstellen und returnen
@@ -54,9 +62,8 @@ _api/boulderInteraction/        PUT  - UC06     -> neue Boulderinteraktion erste
 
 
 Like
-_api/like/{boulderID}           POST - UC11     -> userID als Parameter, wenn userID und boulderID auf Eintrag 
-                                                    in boulderlike_user_assigned matcht, 
-                                                    diesen löschen sonst Eintrag erstellen
+_api/like/{boulderID}           POST - UC11     -> userID als Parameter like erstellen
+_api/like/{boulderID}           DELETE - UC11   -> userID als Parameter like entfernen
 
 User
 _api/user                       GET  - UC02     -> Email & Passwort als Parameter mitgesendet 
