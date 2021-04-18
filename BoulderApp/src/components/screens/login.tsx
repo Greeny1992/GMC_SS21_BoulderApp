@@ -16,7 +16,28 @@ export default function Login({ loggedInHandler }: any) {
   const authContext = useContext(AuthContext);
 
   const loginHandler = () => {
-    authContext.verify(true);
+    fetch('api/user', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    }).then((response) => {
+      if(response.status >= 200 && response.status < 300){
+        authContext.verify(true);
+      } else {
+        console.log("Login Failed")
+        throw response
+      }
+    }).catch((error) => {
+      console.error("ErrrrroR: " + error);
+      authContext.verify(true);
+    })
+    
   };
 
   const createAlert = () =>
