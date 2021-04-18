@@ -1,15 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Alert, View } from "react-native";
-import AddBoulder from "../screens/addBoulder";
-import DetailBoulder from "../screens/detailBoulder";
-import Home from "../screens/home";
-import Login from "../screens/login";
-import Main from "../screens/main";
-import NewsScreen from "../screens/news";
-import BButton from "./utils/button";
-import BText from "./utils/text";
+import Login from "../../screens/login";
 
 
 const LoginStack = createStackNavigator();

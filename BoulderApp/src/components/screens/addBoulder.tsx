@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground} fr
 import CheckBox from '@react-native-community/checkbox';
 import styles from '../../styles/addBoulder';
 import BText from "../widgets/utils/text";
-
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 
 enum colourScale {
     black = 'black',
