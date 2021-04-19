@@ -8,8 +8,6 @@ const _status :IStatus[] = [
 ]
 
 export function getAllStatus(){
-    console.log("--------------------------------")
-    console.log(_status)
     return _status
 }
 export function getStatus(status_id:number|string):IStatus{

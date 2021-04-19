@@ -8,8 +8,8 @@ import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInt
 import BoulderMetadata from '../widgets/boulderMetadata';
 import { getBoulderDetails } from '../../data/service/BoulderService';
 import BoulderInteractionModal from '../widgets/BoulderInteractionList/boulderInteractionModal';
-import { IBoulderInteraction } from '../../data/entities/BoulderInteraction';
-import { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
+import { BoulderInteraction, IBoulderInteraction } from '../../data/entities/BoulderInteraction';
+import getCurrentBoulderInteraction, { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
 import BIcon from '../widgets/utils/icon';
 
 interface DetailBoulderProps {
@@ -20,18 +20,21 @@ interface DetailBoulderProps {
 interface BoulderState {
     boulder:IBoulder | undefined,
     showModal:boolean,
-    selectedInteraction:IBoulderInteraction|undefined
+    selectedInteraction:BoulderInteraction|undefined,
+    boulderInteractions:BoulderInteraction[]
 }
 
 class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     tempBoulder : IBoulder | undefined;
+    user_id='';
     constructor(props: DetailBoulderProps) {
         super(props);
         this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ?? '')
         this.state ={
             boulder: this.tempBoulder,
             showModal:false,
-            selectedInteraction:undefined
+            selectedInteraction:undefined,
+            boulderInteractions:getCurrentBoulderInteraction(this.tempBoulder?.id??'',this.user_id)
         }
         
       }
@@ -39,9 +42,14 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     handleBoulderSearch = (id:string):IBoulder | undefined =>{
         return getBoulderDetails(id);
     }
-    handleSaveBoulderInteraction= (interaction: IBoulderInteraction):void=>{
-        storeBoulderInteraction(interaction)
+    handleSaveBoulderInteraction= (interaction: BoulderInteraction):void=>{
+
+        console.log(this.state.boulderInteractions.length)
+        
+        this.setState({boulderInteractions:storeBoulderInteraction(interaction)})
+        console.log(this.state.boulderInteractions.length)
     }
+    
     handleShowVisibility=(value:boolean):void=>{
         this.setState({
             showModal:value
@@ -69,10 +77,11 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
           boulderID: id,
         });
       };
-    handleEditInteraction =(interaction :IBoulderInteraction) =>{
+    handleEditInteraction =(interaction :BoulderInteraction) =>{
         this.setState({
             selectedInteraction:interaction
         })
+        
         this.showModal();
     }
 
@@ -87,7 +96,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                 </>
             :
                 <View style={{justifyContent:'center'}}>
-                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal}  handleSaveInteraction={this.handleSaveBoulderInteraction}/>
+                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal}  handleSaveInteraction={this.handleSaveBoulderInteraction} currentAction={this.state.selectedInteraction} boulderID={this.state.boulder.id}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>
                                 <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike} handleEditClick={this.handleEditBoulder}/>
@@ -97,7 +106,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                                 <BTitle label="Activities" style={[{flex:8}]}/>
                                 <BIcon icon="add" onPress={()=> this.showModal()} style={{flex:2}}/>
                             </View>
-                            <BoulderInteractionList boulder_id={this.state.boulder.id} user_id='' handleEditInteraction={this.handleEditInteraction}/>
+                            <BoulderInteractionList boulder_id={this.state.boulder.id} boulder_interaction={this.state.boulderInteractions} user_id='' handleEditInteraction={this.handleEditInteraction} />
                     </ScrollView>
                    
                 </View>

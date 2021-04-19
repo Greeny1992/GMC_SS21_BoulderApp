@@ -12,14 +12,13 @@ interface BoulderInteractionItemProps {
 
 const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: BoulderInteractionItemProps) => {
     const {interaction, style} = props;
-    console.log(interaction.icon.toString());
     return (
         <View>
             {               
                 <ListItem bottomDivider>
                     <View style={BoulderInteractionListStyle.item}>
                         <View style={BoulderInteractionListStyle.box}>
-                            <Image style={BoulderInteractionListStyle.icon} source={interaction.icon.toString()}></Image>
+                            {/* <Image style={BoulderInteractionListStyle.icon} source={interaction.icon.toString()}></Image> */}
                         </View>
                         <View style={BoulderInteractionListStyle.box}>
                             <Text style={BoulderInteractionListStyle.title}>{interaction.title}</Text>

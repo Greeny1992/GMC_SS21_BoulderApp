@@ -25,7 +25,6 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
   
   
 
-  console.log(boulder)
 
   return (
     <View style={LayoutStyle.fullWidth}>

@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, ScrollView, FlatList } from 'react-native';
+import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import getCurrentBoulderInteraction from '../../../data/service/BoulderInteractionService';
 import BoulderInteractionItem from './boulderInteractionItem';
 
 interface BoulderInteractionListProps {
     boulder_id: string,
     user_id: any,
-    handleEditInteraction:Function
+    handleEditInteraction:Function,
+    boulder_interaction?:IBoulderInteraction[] 
 }
 
 const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: any) => {
-    const {boulder_id, user_id, handleEditInteraction} = props;
-    const boulder_interaction = getCurrentBoulderInteraction(boulder_id,user_id)
+    const {boulder_id, user_id, handleEditInteraction,boulder_interaction} = props;
     return (
         <View>
             {
-                boulder_interaction.map((interaction, i) => (
+                boulder_interaction.map((interaction:IBoulderInteraction, i:number) => (
                 <BoulderInteractionItem 
                     key={i}
                     interaction={interaction}/>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View}from 'react-native'
 import {Overlay } from 'react-native-elements';
-import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
+import { BoulderInteraction, IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import { getAllStatus } from '../../../data/lookupValues/BoulderInteractionValues';
 import LayoutStyle from '../../../styles/utils/layout';
 import TextStyle from '../../../styles/utils/text';
@@ -16,27 +16,35 @@ interface BoulderInteractionModalProps {
    style?:any,
    showModal:boolean;
    handleHideModal:Function;
-   handleSaveInteraction:Function
+   handleSaveInteraction:Function;
+   currentAction?: IBoulderInteraction;
+   boulderID:string
 }
 
 const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: BoulderInteractionModalProps) => {
-   const {showModal, handleHideModal,handleSaveInteraction} = props
-
+   const {showModal, handleHideModal,handleSaveInteraction,currentAction, boulderID} = props
+   const action = currentAction ?? new BoulderInteraction(boulderID,'')
+   const [title,setTitle] =useState(action.title)
+   const [comment,setComment] =useState(action.comment)
+   const [status,setStatus] =useState(action.status)
    const statusValues = getAllStatus();
    
    const storeInteraction = ()=>{
-     const interaction :IBoulderInteraction ={
-       boulder_id:'',   
-       user_id:'', 
-       title: '',
-       status:1,
-       comment:'',
-       created: new Date(),
-       creator_id:''
-     }
-     handleSaveInteraction(interaction)
-   //   handleHideModal();
+      action['title']=title;
+      action['comment']=comment;
+      action['status']=status;
+      handleSaveInteraction(action)
+      closeModal();
    }
+
+   const closeModal = ()=>{
+      setTitle('');
+      setComment('');
+      setStatus(1);
+      handleHideModal()
+   }
+ 
+   
    
    return (
             <Overlay animationType = {"slide"} transparent = {true}
@@ -53,16 +61,16 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
                   <View >
 
-                     <BInput label="Title" placeholder="First trial and I did it"/>
-                     <BInput  label="Description" multiline={true} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
+                     <BInput label="Headline" placeholder="First trial and I did it" value={title} onChangeText={setTitle}/>
+                     <BInput  label="Comment" multiline={true} value={comment} onChangeText={setComment} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
 
-                     <IconPicker items={statusValues} placeholder="Select Status" containerStyle={{zIndex:200}} label="Status"/>
+                     <IconPicker items={statusValues} placeholder="Select Status" containerStyle={{zIndex:200}} onChange={setStatus} defaultSelectedItem={status} label="Status"/>
 
                      <View style={[LayoutStyle.containerRowSpace,{marginTop:30}]}>
 
                         {/* <BIconBackround onPress={()=>handleHideModal(false) } icon="cancel" style={{flex:3,width:'30%'}}/>
                         <BIconBackround onPress={()=>storeInteraction() } icon="save"  style={{flex:3,width:'30%'}}/> */}
-                        <BExtendedButton  underlined={true} onPress={()=>storeInteraction() } title="cancel"/>
+                        <BExtendedButton  underlined={true} onPress={()=>closeModal() } title="cancel"/>
                         <BExtendedButton  underlined={true} onPress={()=>storeInteraction() } title="save"/>
 
                      </View>
@@ -75,4 +83,3 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
    
 }
 export default BoulderInteractionModal
-
