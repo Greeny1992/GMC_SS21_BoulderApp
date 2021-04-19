@@ -7,9 +7,10 @@ import LayoutStyle from '../../../styles/utils/layout';
 import TextStyle from '../../../styles/utils/text';
 import styles from '../../../styles/widgets/boulderInteractionModal';
 import { BExtendedButton } from '../utils/button';
+import BIcon from '../utils/icon';
 import IconPicker from '../utils/IconPicker';
 import BInput from '../utils/Input';
-import BText from '../utils/text';
+import BText, { BTitle } from '../utils/text';
 
 interface BoulderInteractionModalProps {
    style?:any,
@@ -19,7 +20,7 @@ interface BoulderInteractionModalProps {
 }
 
 const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: BoulderInteractionModalProps) => {
-   const {showModal, handleHideModal, handleSaveInteraction} = props
+   const {showModal, handleHideModal,handleSaveInteraction} = props
 
    const statusValues = getAllStatus();
    
@@ -34,7 +35,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
        creator_id:''
      }
      handleSaveInteraction(interaction)
-     handleHideModal(false);
+     handleHideModal();
    }
    const handleChangeTitle = (title:string)=>{
      console.log(title)
@@ -47,8 +48,10 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                overlayStyle={styles.modal}
                >
               <View >
-
-                  <BText style={TextStyle.title}>Create a activity</BText>
+                  <View style={LayoutStyle.containerRow}>
+                     <BTitle label="Create a activity" style={[{flex:8}]}/>
+                     <BIcon icon="close" onPress={()=> handleHideModal()} style={{flex:2}}/>
+                  </View>
 
                   <View >
 

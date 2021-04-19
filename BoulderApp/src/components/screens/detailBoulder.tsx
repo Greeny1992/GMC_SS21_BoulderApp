@@ -45,6 +45,12 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             showModal:value
         })
     }
+    hideModal = ():void=>{
+        this.handleShowVisibility(false)
+    }
+    showModal = ():void=>{
+        this.handleShowVisibility(true)
+    }
 
     toggleLike = (state:BoulderState)=>{
         const t = this.state.boulder;
@@ -73,7 +79,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                 </>
             :
                 <View style={{justifyContent:'center'}}>
-                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.handleShowVisibility} handleSaveInteraction={this.handleSaveBoulderInteraction}/>
+                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal}  handleSaveInteraction={this.handleSaveBoulderInteraction}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>
                                 <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike} handleEditClick={this.handleEditBoulder}/>
@@ -81,7 +87,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             <Divider style={LayoutStyle.divider} />
                             <View style={LayoutStyle.containerRow}>
                                 <BTitle label="Activities" style={[{flex:8}]}/>
-                                <BIcon icon="add" onPress={()=> this.handleShowVisibility(true)} style={{flex:2}}/>
+                                <BIcon icon="add" onPress={()=> this.showModal()} style={{flex:2}}/>
                             </View>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
                     </ScrollView>
