@@ -1,15 +1,6 @@
-import {IColor} from './IColor'
+import {IColor} from './store/IColor'
+import ColorMainTheme from './store/ColorMainTheme'
 
-const ColorTheme: IColor = {
-    hightlight:'#147aff',
-    primary:'#222222',
-    primary_dark:'#064780',
-    primary_light:'#CDEFFF',
-    secondary:'#000000',
-    background: '#d77079',
-    warning:'df4040',
-    success:'#4BB543',
-    like:'#FFD700'
-}
+const ColorTheme: IColor = ColorMainTheme
 
 export default ColorTheme

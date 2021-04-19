@@ -8,14 +8,25 @@ const ButtonStyles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: ColorTheme.hightlight,
+        backgroundColor: ColorTheme.highlight,
         flexDirection:'row',
-        color: 'white',
+        color: ColorTheme.highlightContrast,
         marginTop:10
+    },
+    btnUnderlined:{
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection:'row',
+        
+        color: ColorTheme.highlight,
+        marginTop:10,
+        borderBottomWidth:1,
+        borderColor:ColorTheme.primary
     },
   
     buttonText: {
-        color: '#ffffff',
+        color: ColorTheme.primary,
+        fontSize: 20
     },
    
    
