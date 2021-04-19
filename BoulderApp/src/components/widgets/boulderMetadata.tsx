@@ -4,20 +4,22 @@ import { Badge,Icon } from "react-native-elements";
 import BText from "./utils/text";
 import LayoutStyle from "../../styles/utils/layout";
 import TextStyle from "../../styles/utils/text";
-import styles from "../../styles/detailBoulder";
+import styles from "../../styles/widgets/boulderMetadata";
 import { IBoulder } from "../../data/entities/Boulder";
 import { getColor, getDifficulty } from "../../data/lookupValues/boulderDetailValues";
 import getLocation from "../../data/service/LocationService";
+import BIcon from "./utils/icon";
 
 interface BoulderMetaProps {
   style?: any;
   boulder: IBoulder;
-  handleLikeClick:Function
+  handleLikeClick:Function;
+  handleEditClick: Function
 
 }
 
 const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
-  const { style, boulder, handleLikeClick} = props;
+  const { style, boulder, handleLikeClick, handleEditClick} = props;
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
   
@@ -26,19 +28,13 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
   console.log(boulder)
 
   return (
-    <View>
+    <View style={LayoutStyle.fullWidth}>
       <View >
         <View style={LayoutStyle.containerRow}>
-          <BText style={[TextStyle.title,{flex:10}]}>{boulder.title}</BText>
-          { boulder.like 
-            ?
-              <View style={{flex:1,marginTop:10}}>
-                <Icon  name="star" onPress={handleLikeClick} color="#FFD700"></Icon>
 
-              </View>
-            :
-              <></>
-          }
+          <BText style={[TextStyle.title, {flex:8}]}>{boulder.title}</BText>
+          <BIcon icon="favorite" onPress={handleLikeClick} style={{flex:2}}
+                  color={ boulder.like ? 'gold':'grey'}/>
         </View>
       
         <View style={[LayoutStyle.containerRow]}>
@@ -53,7 +49,7 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
               />
             </View>
           </View>
-          <View style={styles.column}>
+          <View style={[styles.column,styles.details]}>
             <View style={[LayoutStyle.containerRow]}>
               <View style={[styles.column]}>
                 <BText style={[styles.row]}>Difficulty: </BText>
@@ -61,17 +57,23 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
                 <BText style={[styles.row]}>Region: </BText>
                 <BText style={[styles.row]}>City: </BText>
               </View>
-              <View>
+              <View style={styles.column}>
                 <BText style={[styles.row]}>{difficulty.name}</BText>
                 <BText style={[styles.row]}>{location.country}</BText>
                 <BText style={[styles.row]}>{location.region}</BText>
                 <BText style={[styles.row]}>{location.city}</BText>
               </View>
             </View>
+
           </View>
           
       
         </View>
+            <View style={[LayoutStyle.containerRow,{justifyContent:'flex-end'}]}>
+
+              <BIcon icon="edit" onPress={handleEditClick} style={styles.icon}/>
+
+            </View>
       </View>
                 
     </View>

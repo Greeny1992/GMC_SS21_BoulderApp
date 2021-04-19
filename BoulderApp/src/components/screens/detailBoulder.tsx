@@ -13,6 +13,7 @@ import { getBoulderDetails } from '../../data/service/BoulderService';
 import BoulderInteractionModal from './boulderInteractionModal';
 import { IBoulderInteraction } from '../../data/entities/BoulderInteraction';
 import { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
+import BIcon from '../widgets/utils/icon';
 
 interface DetailBoulderProps {
     navigation: any,
@@ -58,7 +59,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         }
     }
 
-     handlePress = (id: string) => {
+    handleEditBoulder = (id: string) => {
         this.props.navigation.navigate("AddBoulderScreen", {
           boulderID: id,
         });
@@ -78,21 +79,17 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                     <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.handleShowVisibility} handleSaveInteraction={this.handleSaveBoulderInteraction}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>
-                                <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike}/>
+                                <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike} handleEditClick={this.handleEditBoulder}/>
                             </View>
                             <Divider style={LayoutStyle.divider} />
-                            <BText style={[TextStyle.subTitle]}>Activities</BText>
+                            <View style={LayoutStyle.containerRow}>
+                                <BText style={[TextStyle.title, {flex:8}]}>Activities</BText>
+
+                                <BIcon icon="add" onPress={()=> this.handleShowVisibility(true)} style={{flex:2}}/>
+                            </View>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
                     </ScrollView>
-                    <View style={[LayoutStyle.containerRow,{justifyContent:'space-around', marginTop:5}]}>
-                        <BExtendedButton onPress={this.toggleLike} title={this.state.boulder.like ? "liked": "not liked"} style={[
-                            BoulderMetadataStyle.btn,{
-                                backgroundColor: this.state.boulder.like ? "#ffffff" : "#147aff",},
-                            ]}/>
-                        <BExtendedButton onPress={()=> this.handleShowVisibility(true)} style={[BoulderMetadataStyle.btn,{width:'85%'}]} title="Add activity" />
-
-                        <BExtendedButton onPress={this.handlePress} title="Edit" style={BoulderMetadataStyle.btn}/>
-                    </View> 
+                   
                 </View>
         )
     } 

@@ -4,6 +4,7 @@ import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { IBoulder } from '../../data/entities/Boulder';
 
 interface HomeProps {
   style?: any;
