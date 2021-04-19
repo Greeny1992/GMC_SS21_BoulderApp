@@ -8,7 +8,7 @@ const TextStyle = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 10,
         marginBottom:10,
-        color:ColorTheme.hightlight
+        color:ColorTheme.highlight
     },
     subTitle:{
         fontSize:18,

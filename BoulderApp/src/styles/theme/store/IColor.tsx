@@ -1,5 +1,6 @@
 export interface IColor {
-    hightlight:string,
+    highlight:string,
+    highlightContrast:string,
     primary:string,
     primary_dark:string,
     primary_light:string,

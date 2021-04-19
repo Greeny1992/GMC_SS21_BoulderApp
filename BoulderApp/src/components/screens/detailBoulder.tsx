@@ -7,7 +7,7 @@ import {  Divider } from 'react-native-elements';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
 import { getBoulderDetails } from '../../data/service/BoulderService';
-import BoulderInteractionModal from './boulderInteractionModal';
+import BoulderInteractionModal from '../widgets/BoulderInteractionList/boulderInteractionModal';
 import { IBoulderInteraction } from '../../data/entities/BoulderInteraction';
 import { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
 import BIcon from '../widgets/utils/icon';
@@ -72,7 +72,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                     </BText>
                 </>
             :
-                <View style={{justifyContent:'space-between',height:'100%'}}>
+                <View style={{justifyContent:'center'}}>
                     <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.handleShowVisibility} handleSaveInteraction={this.handleSaveBoulderInteraction}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>

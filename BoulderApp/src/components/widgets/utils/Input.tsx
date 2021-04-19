@@ -1,7 +1,7 @@
 import React from 'react'
 import {TextInput, View} from 'react-native'
 import styles from '../../../styles/utils/Input';
-import BText from './text';
+import BLabel from './label';
 
 
 
@@ -10,19 +10,22 @@ interface BInputProps {
     onChangeText: Function,
     label:string,
     placeholder:string,
-    numberOfLines?:number
+    multiline?:boolean
 }
 export const BInput: React.FC<BInputProps> = (props: BInputProps) => {
-    const {onChangeText,label,placeholder, style,numberOfLines}=props
+    const {onChangeText,label,placeholder, style,multiline}=props
+    const styling = multiline ? styles.multiline : styles.input ;
+
     return (
             <View >
-                <BText style={styles.label}>{label}</BText>
+                <BLabel label={label}/>
                 <TextInput
-                    style={styles.input}
+                    style={[styling]}
                     placeholder={ placeholder ?? "Placeholder"}
                     placeholderTextColor="#adadad"
                     onChangeText={(text)=> onChangeText(text)}
-                    numberOfLines={numberOfLines ?? 1}
+                    numberOfLines={multiline ? 8 : 1}
+                    multiline={multiline}
                 />
             </View>
         )

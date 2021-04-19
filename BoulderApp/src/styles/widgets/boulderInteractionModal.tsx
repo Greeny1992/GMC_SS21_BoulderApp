@@ -6,18 +6,15 @@ const styles = StyleSheet.create ({
        flexDirection:'column',
        justifyContent:'center',
        alignItems: 'center',
-        width:'100%',
-
+       marginTop:'40%',
+       marginBottom:'40%',
+       padding:30,
+        width:'80%',
     },
     text: {
        color: '#3f2949',
-       marginTop: 10
     },
-    modalInside:{
-        alignItems: 'center',
-        height:'50%',
-        width: '80%'
-    }
+  
  })
 
  export default styles
