@@ -5,11 +5,12 @@ import BoulderInteractionItem from './boulderInteractionItem';
 
 interface BoulderInteractionListProps {
     boulder_id: string,
-    user_id: any
+    user_id: any,
+    handleEditInteraction:Function
 }
 
 const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: any) => {
-    const {boulder_id, user_id} = props;
+    const {boulder_id, user_id, handleEditInteraction} = props;
     const boulder_interaction = getCurrentBoulderInteraction(boulder_id,user_id)
     return (
         <View>

@@ -19,7 +19,8 @@ interface DetailBoulderProps {
 }
 interface BoulderState {
     boulder:IBoulder | undefined,
-    showModal:boolean
+    showModal:boolean,
+    selectedInteraction:IBoulderInteraction|undefined
 }
 
 class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
@@ -29,7 +30,8 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ?? '')
         this.state ={
             boulder: this.tempBoulder,
-            showModal:false
+            showModal:false,
+            selectedInteraction:undefined
         }
         
       }
@@ -67,6 +69,12 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
           boulderID: id,
         });
       };
+    handleEditInteraction =(interaction :IBoulderInteraction) =>{
+        this.setState({
+            selectedInteraction:interaction
+        })
+        this.showModal();
+    }
 
      render(){
         return ( 
@@ -89,7 +97,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                                 <BTitle label="Activities" style={[{flex:8}]}/>
                                 <BIcon icon="add" onPress={()=> this.showModal()} style={{flex:2}}/>
                             </View>
-                            <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
+                            <BoulderInteractionList boulder_id={this.state.boulder.id} user_id='' handleEditInteraction={this.handleEditInteraction}/>
                     </ScrollView>
                    
                 </View>
