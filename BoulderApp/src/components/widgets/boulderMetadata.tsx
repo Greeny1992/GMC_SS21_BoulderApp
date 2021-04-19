@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Image } from "react-native";
-import { Badge,Icon } from "react-native-elements";
-import BText from "./utils/text";
+import { Badge } from "react-native-elements";
+import BText, { BTitle } from "./utils/text";
 import LayoutStyle from "../../styles/utils/layout";
-import TextStyle from "../../styles/utils/text";
 import styles from "../../styles/widgets/boulderMetadata";
 import { IBoulder } from "../../data/entities/Boulder";
 import { getColor, getDifficulty } from "../../data/lookupValues/boulderDetailValues";
 import getLocation from "../../data/service/LocationService";
 import BIcon from "./utils/icon";
+import ColorTheme from "../../styles/theme/Color";
 
 interface BoulderMetaProps {
   style?: any;
@@ -19,7 +19,7 @@ interface BoulderMetaProps {
 }
 
 const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
-  const { style, boulder, handleLikeClick, handleEditClick} = props;
+  const { boulder, handleLikeClick, handleEditClick} = props;
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
   
@@ -31,10 +31,11 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
     <View style={LayoutStyle.fullWidth}>
       <View >
         <View style={LayoutStyle.containerRow}>
+          <BTitle label={boulder.title} style={[{flex:8}]}/>
 
-          <BText style={[TextStyle.title, {flex:8}]}>{boulder.title}</BText>
           <BIcon icon="favorite" onPress={handleLikeClick} style={{flex:2}}
-                  color={ boulder.like ? 'gold':'grey'}/>
+                  color={ boulder.like ? ColorTheme.like : ColorTheme.primary_light }
+                  />
         </View>
       
         <View style={[LayoutStyle.containerRow]}>

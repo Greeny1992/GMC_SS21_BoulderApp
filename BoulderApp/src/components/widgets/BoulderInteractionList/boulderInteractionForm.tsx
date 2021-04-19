@@ -9,6 +9,7 @@ import TextStyle from '../../../styles/utils/text';
 import styles from '../../../styles/widgets/boulderInteractionForm';
 import { BExtendedButton } from '../utils/button';
 import IconPicker from '../utils/IconPicker';
+import { BInput } from '../utils/Input';
 import BText from '../utils/text';
 interface BoulderInteractionFormProps {
   style?:any,
@@ -32,12 +33,14 @@ const BoulderInteractionForm: React.FC<BoulderInteractionFormProps> = (props: Bo
         title: '',
         status:1,
         comment:'',
-        icon: '',
         created: new Date(),
         creator_id:''
       }
       handleSaveInteraction(interaction)
       handleHideModal(false);
+    }
+    const handleChangeTitle = (title:string)=>{
+      console.log(title)
     }
   return (
     <View style={styles.container}>
@@ -47,14 +50,17 @@ const BoulderInteractionForm: React.FC<BoulderInteractionFormProps> = (props: Bo
         <TextInput 
           placeholder="Title"
           style={styles.input} />
-      <BText >Boulder Interaction Description </BText>
+
+          <BInput onChangeText={handleChangeTitle} label="Title" placeholder="First trial and I did it"/>
+          <BInput onChangeText={handleChangeTitle} label="Description" numberOfLines={4} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
+      {/* <BText >Boulder Interaction Description </BText>
         <TextInput
           placeholder="Description"
           multiline
           numberOfLines={4}
             style={styles.multiLine}
             editable
-        />
+        /> */}
         <BText >Status </BText>
 
         <IconPicker items={statusPickerItems} placeholder="Select Status" style={{zIndex:200}}/>

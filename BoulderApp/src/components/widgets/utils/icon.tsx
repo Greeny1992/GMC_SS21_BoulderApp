@@ -6,14 +6,14 @@ interface BIconProps {
     style?: any,
     onPress: any,
     icon:string,
-    color?:string
+    color?:string,
 }
 
 const BIcon: React.FC<BIconProps> = (props: any) => {
     const {onPress,title, style, icon,color}=props
     return (
         <TouchableOpacity onPress={onPress} style={[style, IconStyle.iconContainer]}>
-            <Icon  name={icon} color={color} size={35}/>
+            <Icon  name={icon} color={color} size={35} type="material" />
         </TouchableOpacity>
     )
 }

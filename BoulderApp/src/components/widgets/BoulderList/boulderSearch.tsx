@@ -37,7 +37,8 @@ interface BoulderSearchProps {
                 value={searchText}
                 placeholder="Enter a name..."/>
               </View>
-              <View style={BoulderListStyle.btnbox}>
+              <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>
+                <BIcon icon="filter-alt" onPress={handleFilter}/>
                 <BIcon icon="add" onPress={handleAddBoulder}/>
               </View>  
             </View>

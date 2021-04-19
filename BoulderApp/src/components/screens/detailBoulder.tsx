@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import {Route, ScrollView, View} from 'react-native';
 import { IBoulder } from '../../data/entities/Boulder';
-import BText from "../widgets/utils/text";
+import BText, { BTitle } from "../widgets/utils/text";
 import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
-import TextStyle from '../../styles/utils/text';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
-import { BExtendedButton } from '../widgets/utils/button';
-import BoulderMetadataStyle from '../../styles/widgets/boulderMetadata';
 import { getBoulderDetails } from '../../data/service/BoulderService';
 import BoulderInteractionModal from './boulderInteractionModal';
 import { IBoulderInteraction } from '../../data/entities/BoulderInteraction';
@@ -83,8 +80,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             </View>
                             <Divider style={LayoutStyle.divider} />
                             <View style={LayoutStyle.containerRow}>
-                                <BText style={[TextStyle.title, {flex:8}]}>Activities</BText>
-
+                                <BTitle label="Activities" style={[{flex:8}]}/>
                                 <BIcon icon="add" onPress={()=> this.handleShowVisibility(true)} style={{flex:2}}/>
                             </View>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} user_id=''/>
