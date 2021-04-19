@@ -7,7 +7,7 @@ import BLabel from './label';
 
 interface BInputProps {
     style?: any,
-    onChangeText: Function,
+    onChangeText?: Function,
     label:string,
     placeholder:string,
     multiline?:boolean

@@ -5,6 +5,7 @@ const inputBasic = {
     color: ColorTheme.primary,
     borderBottomColor: ColorTheme.primary_dark,
     borderBottomWidth: 2,
+    width:250
 }
 
 const InputStyle = StyleSheet.create({

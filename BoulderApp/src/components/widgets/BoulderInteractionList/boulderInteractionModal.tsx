@@ -35,11 +35,9 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
        creator_id:''
      }
      handleSaveInteraction(interaction)
-     handleHideModal();
+   //   handleHideModal();
    }
-   const handleChangeTitle = (title:string)=>{
-     console.log(title)
-   }
+   
    return (
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}
@@ -55,8 +53,8 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
                   <View >
 
-                     <BInput onChangeText={handleChangeTitle} label="Title" placeholder="First trial and I did it"/>
-                     <BInput onChangeText={handleChangeTitle} label="Description" multiline={true} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
+                     <BInput label="Title" placeholder="First trial and I did it"/>
+                     <BInput  label="Description" multiline={true} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
 
                      <IconPicker items={statusValues} placeholder="Select Status" containerStyle={{zIndex:200}} label="Status"/>
 
