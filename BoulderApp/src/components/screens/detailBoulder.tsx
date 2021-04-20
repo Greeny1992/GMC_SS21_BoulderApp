@@ -51,7 +51,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     handleBoulderSearch = (id:string):IBoulder | undefined => getBoulderDetails(id); 
     handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
         storeBoulderInteraction(data,this.state.boulder.id,this.state.user_id)
-        this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id,this.state.user_id)})
+        this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id)})
     }
     
     handleShowVisibility=(value:boolean):void=>{
