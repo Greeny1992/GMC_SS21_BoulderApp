@@ -9,18 +9,17 @@ import BIcon from "../utils/icon";
 interface BoulderSearchProps {
     style?: any;
     searchBoulderList:Function;
-    searchText:string
-    navigation: any
-  
+    searchText:string;
+    navigation: any;
+    showFilterDialog: Function;
   }
   const BoulderSearch: React.FC<BoulderSearchProps> = (props: BoulderSearchProps) => {
 
-    const {searchBoulderList,searchText, navigation} = props;
+    const {searchBoulderList,searchText, navigation,showFilterDialog} = props;
 
 
     const handleFilter =()=>{
-      console.log("Filter")
-  }
+      showFilterDialog(true)  }
 
   const handleAddBoulder = () => {
     navigation.navigate('AddBoulderScreen');

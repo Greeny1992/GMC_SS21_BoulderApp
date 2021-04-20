@@ -1,5 +1,16 @@
-import { ILocation } from "../entities/Location";
+import { ILocation, ILocationFilterValues } from "../entities/Location";
 import { LOCATION_DATA } from "../fakeData/Location";
+
+export const getDistinctLocations=():ILocationFilterValues=>{
+    const tempLocation =LOCATION_DATA.filter(i => i.country !== 'Undefined')
+    const countries = [...new Set(tempLocation.map(loc=> loc.country))]
+    const region =[...new Set(tempLocation.map(loc=> loc.region))]
+    const cities = [...new Set(tempLocation.map(loc=> loc.city))]
+    return {countries, region,cities}
+}
+export const getAllLocations=():ILocation[]=>{
+    return LOCATION_DATA
+}
 
 const getLocation = (id:string):ILocation =>
 {
