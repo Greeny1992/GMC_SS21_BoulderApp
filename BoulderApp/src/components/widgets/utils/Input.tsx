@@ -1,5 +1,6 @@
 import React from 'react'
-import {TextInput, View} from 'react-native'
+import { NativeSyntheticEvent } from 'react-native';
+import { TextInput, View} from 'react-native'
 import styles from '../../../styles/utils/Input';
 import BLabel from './label';
 
@@ -10,12 +11,13 @@ interface BInputProps {
     onChangeText: Function,
     label:string,
     placeholder:string,
-    multiline?:boolean
+    value?:string,
+    multiline?:boolean,
 }
 export const BInput: React.FC<BInputProps> = (props: BInputProps) => {
-    const {onChangeText,label,placeholder, style,multiline}=props
+    const {onChangeText,label,placeholder, style,multiline, value}=props
     const styling = multiline ? styles.multiline : styles.input ;
-
+    
     return (
             <View >
                 <BLabel label={label}/>
@@ -23,9 +25,10 @@ export const BInput: React.FC<BInputProps> = (props: BInputProps) => {
                     style={[styling]}
                     placeholder={ placeholder ?? "Placeholder"}
                     placeholderTextColor="#adadad"
-                    onChangeText={(text)=> onChangeText(text)}
                     numberOfLines={multiline ? 8 : 1}
                     multiline={multiline}
+                    value={value ??''}
+                    onChangeText={  (text)=> onChangeText(text) }
                 />
             </View>
         )

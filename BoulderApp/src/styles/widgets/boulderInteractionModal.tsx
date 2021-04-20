@@ -10,6 +10,7 @@ const styles = StyleSheet.create ({
        marginBottom:'40%',
        padding:30,
         width:'80%',
+        height:400
     },
     text: {
        color: '#3f2949',

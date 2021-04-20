@@ -3,9 +3,7 @@ import {TouchableOpacity, View} from 'react-native'
 import { Icon } from 'react-native-elements';
 import ColorTheme from '../../../styles/theme/Color';
 import IconStyle from '../../../styles/utils/icon';
-import styles from '../../../styles/utils/icon';
-import BButton from './button';
-import BText from './text';
+
 export interface BIconProps {
     style?: any,
     onPress?: any,
