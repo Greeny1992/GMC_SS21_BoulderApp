@@ -22,8 +22,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     
     getData('user').then(user => {
       setUserId(user.userId);  
-    })
-    
+    }).catch(err => 
+      console.error(err)
+    )
+
     const handleAddBoulder = () => {
         navigation.navigate('AddBoulderScreen', {
         boulderID: -1,
