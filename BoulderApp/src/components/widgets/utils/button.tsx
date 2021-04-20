@@ -27,7 +27,7 @@ export const BExtendedButton: React.FC<BExtendedButtonProps> = (props: BExtended
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={[btnStyle, props.style]} onPress={onPress}>
-                <BText style={[styles.buttonText, {fontSizes:22}]}>
+                <BText style={[styles.buttonText, {fontSize:FontSizes.normal}]}>
                     {title}
                 </BText>
 
