@@ -8,11 +8,13 @@ const userImage = require('../../../../../BoulderApp/src/assets/images/user.png'
 interface BoulderInteractionItemProps {
     style?:any;
     interaction: BoulderInteraction,
-    handleEdit:Function
+    handleEdit:Function,
+    editAble:boolean
 }
 
 const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: BoulderInteractionItemProps) => {
-    const {interaction, style,handleEdit} = props;
+
+    const {interaction, style,handleEdit,editAble} = props;
     return (
         <View>
             {               
@@ -30,8 +32,15 @@ const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: Bo
                         </View>
                         <View style={BoulderInteractionListStyle.box}>
                         <Text>{interaction.created.toDateString()}</Text>
+                        <Text>{interaction.user_id}</Text>
                         </View>
-                        <BIcon icon="edit" onPress={() => handleEdit(interaction)} />
+                        {editAble ? 
+                            <BIcon icon="edit" onPress={() => handleEdit(interaction)} />
+                            :
+                            <></>
+                        }
+
+                    
 
                     </View>
                 </ListItem>

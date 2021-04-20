@@ -3,8 +3,8 @@ import { BoulderInteraction, BoulderInteractionFormData } from "../entities/Boul
 import { BOULDER_INTERACTION_DATA } from "../fakeData/BoulderInteraction";
 let boulder_interaction_data = BOULDER_INTERACTION_DATA;
 
-const getCurrentBoulderInteraction=(boulder_id:string, user_id:string) : BoulderInteraction[]=>{
-    return boulder_interaction_data.filter(interaction => interaction.boulder_id === boulder_id && interaction.user_id=== user_id )
+const getCurrentBoulderInteraction=(boulder_id:string) : BoulderInteraction[]=>{
+    return boulder_interaction_data.filter(interaction => interaction.boulder_id === boulder_id  )
 }
 export const storeBoulderInteraction = (formData:BoulderInteractionFormData, boulderID:string,userID:string):void=>{
     let tempBoulder:BoulderInteraction;

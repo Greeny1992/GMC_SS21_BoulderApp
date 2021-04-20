@@ -21,6 +21,7 @@ const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: an
                     key={i}
                     interaction={interaction}
                     handleEdit={handleEditInteraction}
+                    editAble={user_id == interaction.user_id}
                     />
         
                 ))

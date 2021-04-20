@@ -29,7 +29,6 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
          setDefaultForm()
       }, [showModal])
    const onSubmit = (data: BoulderInteractionFormData) => {
-      console.log("SUBMIT " + data.id)
       handleSaveInteraction(data)
       handleHideModal()
       clearForm()
