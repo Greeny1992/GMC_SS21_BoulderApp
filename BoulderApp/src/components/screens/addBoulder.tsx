@@ -5,6 +5,7 @@ import styles from '../../styles/addBoulder';
 import BText from "../widgets/utils/text";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { ScreenSizes } from "../../constants/ui";
+import img from "../../assets/images/base64-climbing-wall";
 
 enum colourScale {
     black = 'black',
@@ -36,7 +37,7 @@ export default function AddBoulder({route, navigation}: any) {
     const [difficulty, setDifficulty] = useState('');
     const [colour, setColour] = useState(colourScale.none);
     const [topped, setTopped] = useState(false);
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(img);
 
     const RenderName = () =>  {
         return (
@@ -87,7 +88,6 @@ export default function AddBoulder({route, navigation}: any) {
         launchCamera({mediaType: 'photo'}, res => {
             if(res && res.uri) {
                 setImage(res.uri);
-                console.log(image)
             }
         })
     }
@@ -97,7 +97,6 @@ export default function AddBoulder({route, navigation}: any) {
         return (
             <View style={styles.buttonView}>
                 <View style={{width: '50%'}}>
-                    <BText style={styles.inputText}>Add colour</BText>
                     <TouchableOpacity style={styles.colourButton}>
                         <BText style={styles.buttonText}>
                             Pick colour
@@ -105,7 +104,6 @@ export default function AddBoulder({route, navigation}: any) {
                     </TouchableOpacity>
                 </View>
                 <View style={{width: '50%'}}>
-                    <BText style={styles.inputText}>Add image</BText>
                     <TouchableOpacity style={styles.imageButton} onPress={onPressImageUpload}>
                         <BText style={styles.buttonText}>
                             Add image
@@ -119,7 +117,7 @@ export default function AddBoulder({route, navigation}: any) {
     const RenderImage = () => {
         return(
             <View style={{flex: 1, padding: ScreenSizes.layout_distance }}>
-                <Image source={{uri: image}} style={{width: 200, height: '100%', borderRadius: 5 }}/>
+                <Image source={{uri: image}} style={{width: 200, height: 200, borderRadius: 5 }}/>
             </View>
         )
     }

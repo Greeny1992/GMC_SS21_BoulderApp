@@ -55,13 +55,13 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
    
    
-   return ( <ScrollView >
+   return ( 
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}
                onBackdropPress = {closeForm }
                overlayStyle={styles.modal}
                >
-             
+             <ScrollView >
                   <View style={LayoutStyle.containerRow}>
                      <BTitle label="Create a activity" style={[{flex:8}]}/>
                      
@@ -113,9 +113,8 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
                   </View>
           
-   
+                  </ScrollView>
             </Overlay>
-            </ScrollView>
             
          )
    
