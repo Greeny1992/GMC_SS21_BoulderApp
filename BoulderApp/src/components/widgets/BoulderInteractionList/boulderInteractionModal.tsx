@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Text, TextInput, View}from 'react-native'
+import { Button, ScrollView, Text, TextInput, View}from 'react-native'
 import {Overlay } from 'react-native-elements';
 import { BoulderInteraction, IBoulderInteraction,BoulderInteractionFormData } from '../../../data/entities/BoulderInteraction';
 import { getAllStatus } from '../../../data/lookupValues/BoulderInteractionValues';
@@ -56,13 +56,13 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
    
    
-   return (
+   return ( <ScrollView >
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}
                onBackdropPress = {closeForm }
                overlayStyle={styles.modal}
                >
-              <View >
+             
                   <View style={LayoutStyle.containerRow}>
                      <BTitle label="Create a activity" style={[{flex:8}]}/>
                      
@@ -113,9 +113,10 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                      </View>
 
                   </View>
-               </View>
+          
    
             </Overlay>
+            </ScrollView>
             
          )
    

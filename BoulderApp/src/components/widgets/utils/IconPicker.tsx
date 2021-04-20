@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon } from 'react-native-elements';
@@ -27,7 +27,11 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
       onChange(item)
   }
   return (
-    <View style={containerStyle}>
+    <View style={[containerStyle,{
+      ...(Platform.OS !== 'android' && {
+        zIndex: 10
+    })
+    }]}>
         {label ? <BLabel label={label}/> : <></>}
         <DropDownPicker
             items={ItemPickerItems}
