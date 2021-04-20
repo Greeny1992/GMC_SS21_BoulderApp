@@ -6,6 +6,7 @@ import {
   View,
 } from "react-native";
 import { AuthContext } from "../../contexts/auth_context";
+import { storeData } from "../../data/store/store";
 import styles from '../../styles/login';
 import BButton from "../widgets/utils/button";
 import BText from "../widgets/utils/text";
@@ -15,7 +16,7 @@ export default function Login({ loggedInHandler }: any) {
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     fetch('api/user', {
       method: 'POST',
       headers: {
@@ -29,12 +30,21 @@ export default function Login({ loggedInHandler }: any) {
     }).then((response) => {
       if(response.status >= 200 && response.status < 300){
         authContext.verify(true);
+        const user = response.json().then(json => {return {
+          userId: json.userId,
+          userEmail: json.email
+        }})
+        storeData('user', user)
       } else {
         console.log("Login Failed")
         throw response
       }
     }).catch((error) => {
       console.error("ErrrrroR: " + error);
+      const testUser = {
+        userId: 12345
+      }
+      storeData('user', testUser)
       authContext.verify(true);
     })
     
@@ -52,7 +62,6 @@ export default function Login({ loggedInHandler }: any) {
   return (
     <ImageBackground source={bg} style={styles.image}>
       <View style={styles.inputView}>
-        
         <TextInput
           style={styles.TextInput}
           placeholder="Email."
