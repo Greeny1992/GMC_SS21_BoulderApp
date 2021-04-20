@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 16, 2021 at 06:39 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Host: sql11.freemysqlhosting.net
+-- Erstellungszeit: 20. Apr 2021 um 20:07
+-- Server-Version: 5.5.62-0ubuntu0.14.04.1
+-- PHP-Version: 7.0.33-0ubuntu0.16.04.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,15 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `boulderapp`
+-- Datenbank: `sql11407083`
 --
-CREATE DATABASE IF NOT EXISTS `boulderapp` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `boulderapp`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `boulder`
+-- Tabellenstruktur für Tabelle `boulder`
 --
 
 CREATE TABLE `boulder` (
@@ -44,7 +42,7 @@ CREATE TABLE `boulder` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bouldereditor_user_assigned`
+-- Tabellenstruktur für Tabelle `bouldereditor_user_assigned`
 --
 
 CREATE TABLE `bouldereditor_user_assigned` (
@@ -57,7 +55,7 @@ CREATE TABLE `bouldereditor_user_assigned` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `boulderinteraction_user_assigned`
+-- Tabellenstruktur für Tabelle `boulderinteraction_user_assigned`
 --
 
 CREATE TABLE `boulderinteraction_user_assigned` (
@@ -72,7 +70,7 @@ CREATE TABLE `boulderinteraction_user_assigned` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `boulderlike_user_assigned`
+-- Tabellenstruktur für Tabelle `boulderlike_user_assigned`
 --
 
 CREATE TABLE `boulderlike_user_assigned` (
@@ -84,7 +82,7 @@ CREATE TABLE `boulderlike_user_assigned` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `location`
+-- Tabellenstruktur für Tabelle `location`
 --
 
 CREATE TABLE `location` (
@@ -97,21 +95,22 @@ CREATE TABLE `location` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabellenstruktur für Tabelle `user`
 --
 
 CREATE TABLE `user` (
   `ID` int(6) UNSIGNED NOT NULL,
   `Name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+  `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Password` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Indexes for dumped tables
+-- Indizes der exportierten Tabellen
 --
 
 --
--- Indexes for table `boulder`
+-- Indizes für die Tabelle `boulder`
 --
 ALTER TABLE `boulder`
   ADD PRIMARY KEY (`ID`),
@@ -119,7 +118,7 @@ ALTER TABLE `boulder`
   ADD KEY `FK_BoulderErsteller` (`ID_Ersteller`);
 
 --
--- Indexes for table `bouldereditor_user_assigned`
+-- Indizes für die Tabelle `bouldereditor_user_assigned`
 --
 ALTER TABLE `bouldereditor_user_assigned`
   ADD PRIMARY KEY (`ID`),
@@ -127,7 +126,7 @@ ALTER TABLE `bouldereditor_user_assigned`
   ADD KEY `FK_BoulderEditorUser` (`ID_User`);
 
 --
--- Indexes for table `boulderinteraction_user_assigned`
+-- Indizes für die Tabelle `boulderinteraction_user_assigned`
 --
 ALTER TABLE `boulderinteraction_user_assigned`
   ADD PRIMARY KEY (`ID`),
@@ -135,7 +134,7 @@ ALTER TABLE `boulderinteraction_user_assigned`
   ADD KEY `FK_BoulderInteractionUser` (`ID_User`);
 
 --
--- Indexes for table `boulderlike_user_assigned`
+-- Indizes für die Tabelle `boulderlike_user_assigned`
 --
 ALTER TABLE `boulderlike_user_assigned`
   ADD PRIMARY KEY (`ID`),
@@ -143,84 +142,78 @@ ALTER TABLE `boulderlike_user_assigned`
   ADD KEY `FK_BoulderLikeUser` (`ID_User`);
 
 --
--- Indexes for table `location`
+-- Indizes für die Tabelle `location`
 --
 ALTER TABLE `location`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `user`
+-- Indizes für die Tabelle `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT für exportierte Tabellen
 --
 
 --
--- AUTO_INCREMENT for table `boulder`
+-- AUTO_INCREMENT für Tabelle `boulder`
 --
 ALTER TABLE `boulder`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `bouldereditor_user_assigned`
+-- AUTO_INCREMENT für Tabelle `bouldereditor_user_assigned`
 --
 ALTER TABLE `bouldereditor_user_assigned`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `boulderinteraction_user_assigned`
+-- AUTO_INCREMENT für Tabelle `boulderinteraction_user_assigned`
 --
 ALTER TABLE `boulderinteraction_user_assigned`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `boulderlike_user_assigned`
+-- AUTO_INCREMENT für Tabelle `boulderlike_user_assigned`
 --
 ALTER TABLE `boulderlike_user_assigned`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `location`
+-- AUTO_INCREMENT für Tabelle `location`
 --
 ALTER TABLE `location`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT für Tabelle `user`
 --
 ALTER TABLE `user`
   MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Constraints der exportierten Tabellen
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `boulder`
+-- Constraints der Tabelle `boulder`
 --
 ALTER TABLE `boulder`
   ADD CONSTRAINT `FK_BoulderErsteller` FOREIGN KEY (`ID_Ersteller`) REFERENCES `user` (`ID`),
   ADD CONSTRAINT `FK_BoulderLocation` FOREIGN KEY (`ID_Location`) REFERENCES `location` (`ID`);
 
 --
--- Constraints for table `bouldereditor_user_assigned`
+-- Constraints der Tabelle `bouldereditor_user_assigned`
 --
 ALTER TABLE `bouldereditor_user_assigned`
   ADD CONSTRAINT `FK_BoulderEditorBoulder` FOREIGN KEY (`ID_Boulder`) REFERENCES `boulder` (`ID`),
   ADD CONSTRAINT `FK_BoulderEditorUser` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `boulderinteraction_user_assigned`
+-- Constraints der Tabelle `boulderinteraction_user_assigned`
 --
 ALTER TABLE `boulderinteraction_user_assigned`
   ADD CONSTRAINT `FK_BoulderInteractionBoulder` FOREIGN KEY (`ID_Boulder`) REFERENCES `boulder` (`ID`),
   ADD CONSTRAINT `FK_BoulderInteractionUser` FOREIGN KEY (`ID_User`) REFERENCES `user` (`ID`);
 
 --
--- Constraints for table `boulderlike_user_assigned`
+-- Constraints der Tabelle `boulderlike_user_assigned`
 --
 ALTER TABLE `boulderlike_user_assigned`
   ADD CONSTRAINT `FK_BoulderLikeBoulder` FOREIGN KEY (`ID_Boulder`) REFERENCES `boulder` (`ID`),
