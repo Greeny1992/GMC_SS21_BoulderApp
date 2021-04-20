@@ -16,7 +16,6 @@ const AddBoulderStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     checkboxView: {
-        marginTop: 20,
         width: '80%',
         flexDirection: 'row'
     },
