@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, FlatList } from 'react-native';
-import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
+import { BoulderInteraction, IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import getCurrentBoulderInteraction from '../../../data/service/BoulderInteractionService';
 import BoulderInteractionItem from './boulderInteractionItem';
 
@@ -16,10 +16,12 @@ const BoulderInteractionList: React.FC<BoulderInteractionListProps> = (props: an
     return (
         <View>
             {
-                boulder_interaction.map((interaction:IBoulderInteraction, i:number) => (
+                boulder_interaction.map((interaction:BoulderInteraction, i:number) => (
                 <BoulderInteractionItem 
                     key={i}
-                    interaction={interaction}/>
+                    interaction={interaction}
+                    handleEdit={handleEditInteraction}
+                    />
         
                 ))
             }

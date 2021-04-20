@@ -8,59 +8,55 @@ import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInt
 import BoulderMetadata from '../widgets/boulderMetadata';
 import { getBoulderDetails } from '../../data/service/BoulderService';
 import BoulderInteractionModal from '../widgets/BoulderInteractionList/boulderInteractionModal';
-import { BoulderInteraction, IBoulderInteraction } from '../../data/entities/BoulderInteraction';
+import { BoulderInteraction, BoulderInteractionFormData } from '../../data/entities/BoulderInteraction';
 import getCurrentBoulderInteraction, { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
 import BIcon from '../widgets/utils/icon';
-
+import { getAllStatus } from '../../data/lookupValues/BoulderInteractionValues';
 interface DetailBoulderProps {
     navigation: any,
     route:Route
     style:any
 }
 interface BoulderState {
-    boulder:IBoulder | undefined,
+    boulder:IBoulder ,
     showModal:boolean,
     selectedInteraction:BoulderInteraction|undefined,
     boulderInteractions:BoulderInteraction[]
 }
-
 class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     tempBoulder : IBoulder | undefined;
     user_id='';
+    statusValues = getAllStatus();
+
     constructor(props: DetailBoulderProps) {
         super(props);
-        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ?? '')
+        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ) as IBoulder
         this.state ={
             boulder: this.tempBoulder,
             showModal:false,
             selectedInteraction:undefined,
             boulderInteractions:getCurrentBoulderInteraction(this.tempBoulder?.id??'',this.user_id)
         }
-        
-      }
-
-    handleBoulderSearch = (id:string):IBoulder | undefined =>{
-        return getBoulderDetails(id);
+        this.state.boulderInteractions.map((item)=>{
+            console.log(item.id)
+        })
     }
-    handleSaveBoulderInteraction= (interaction: BoulderInteraction):void=>{
-
-        console.log(this.state.boulderInteractions.length)
-        
-        this.setState({boulderInteractions:storeBoulderInteraction(interaction)})
-        console.log(this.state.boulderInteractions.length)
+  
+    handleBoulderSearch = (id:string):IBoulder | undefined => getBoulderDetails(id); 
+    handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
+        storeBoulderInteraction(data,this.state.boulder.id,this.user_id)
+        this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id,this.user_id)})
     }
     
     handleShowVisibility=(value:boolean):void=>{
         this.setState({
             showModal:value
         })
+        console.log(this.state)
     }
-    hideModal = ():void=>{
-        this.handleShowVisibility(false)
-    }
-    showModal = ():void=>{
-        this.handleShowVisibility(true)
-    }
+
+    hideModal = ():void=>{ this.handleShowVisibility(false)}
+    showModal = ():void=>{this.handleShowVisibility(true)}
 
     toggleLike = (state:BoulderState)=>{
         const t = this.state.boulder;
@@ -74,18 +70,25 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
 
     handleEditBoulder = (id: string) => {
         this.props.navigation.navigate("AddBoulderScreen", {
-          boulderID: id,
+          boulder: this.state.boulder,
         });
-      };
+    }
+
     handleEditInteraction =(interaction :BoulderInteraction) =>{
         this.setState({
             selectedInteraction:interaction
         })
-        
         this.showModal();
     }
 
-     render(){
+    handleNewInteraction = () =>{
+        this.setState({
+            selectedInteraction: new BoulderInteraction(this.state.boulder?.id ?? '','')
+        })
+        this.showModal();
+    }
+    
+    render(){
         return ( 
             this.state.boulder === undefined
             ?
@@ -96,7 +99,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                 </>
             :
                 <View style={{justifyContent:'center'}}>
-                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal}  handleSaveInteraction={this.handleSaveBoulderInteraction} currentAction={this.state.selectedInteraction} boulderID={this.state.boulder.id}/>
+                    <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal} handleSaveInteraction={this.handleSaveBoulderInteraction} currentAction={this.state.selectedInteraction} boulderID={this.state.boulder.id}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>
                                 <BoulderMetadata boulder={this.state.boulder} handleLikeClick={this.toggleLike} handleEditClick={this.handleEditBoulder}/>
@@ -104,7 +107,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                             <Divider style={LayoutStyle.divider} />
                             <View style={LayoutStyle.containerRow}>
                                 <BTitle label="Activities" style={[{flex:8}]}/>
-                                <BIcon icon="add" onPress={()=> this.showModal()} style={{flex:2}}/>
+                                <BIcon icon="add" onPress={()=> this.handleNewInteraction()} style={{flex:2}}/>
                             </View>
                             <BoulderInteractionList boulder_id={this.state.boulder.id} boulder_interaction={this.state.boulderInteractions} user_id='' handleEditInteraction={this.handleEditInteraction} />
                     </ScrollView>

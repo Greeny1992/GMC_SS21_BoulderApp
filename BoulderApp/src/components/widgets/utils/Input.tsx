@@ -1,5 +1,6 @@
 import React from 'react'
-import {TextInput, View} from 'react-native'
+import { NativeSyntheticEvent } from 'react-native';
+import { TextInput, View} from 'react-native'
 import styles from '../../../styles/utils/Input';
 import BLabel from './label';
 
@@ -11,7 +12,7 @@ interface BInputProps {
     label:string,
     placeholder:string,
     value?:string,
-    multiline?:boolean
+    multiline?:boolean,
 }
 export const BInput: React.FC<BInputProps> = (props: BInputProps) => {
     const {onChangeText,label,placeholder, style,multiline, value}=props
