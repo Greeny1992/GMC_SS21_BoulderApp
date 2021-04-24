@@ -1,25 +1,27 @@
 import React, { useState } from "react";
-import { IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
+import { BoulderInteraction, IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import { View, Text, Image } from "react-native";
 import { Icon, ListItem } from 'react-native-elements';
 import BoulderInteractionListStyle from  '../../../styles/widgets/boulderInteractionList';
-import TextStyle from "../../../styles/text";
-
+import BIcon from "../utils/icon";
+const userImage = require('../../../../../BoulderApp/src/assets/images/user.png')
 interface BoulderInteractionItemProps {
     style?:any;
-    interaction: IBoulderInteraction,
+    interaction: BoulderInteraction,
+    handleEdit:Function,
+    editAble:boolean
 }
 
 const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: BoulderInteractionItemProps) => {
-    const {interaction, style} = props;
-    console.log(interaction.icon.toString());
+
+    const {interaction, style,handleEdit,editAble} = props;
     return (
         <View>
             {               
                 <ListItem bottomDivider>
                     <View style={BoulderInteractionListStyle.item}>
                         <View style={BoulderInteractionListStyle.box}>
-                            <Image style={BoulderInteractionListStyle.icon} source={interaction.icon.toString()}></Image>
+                            <Image style={BoulderInteractionListStyle.icon} source={userImage}></Image>
                         </View>
                         <View style={BoulderInteractionListStyle.box}>
                             <Text style={BoulderInteractionListStyle.title}>{interaction.title}</Text>
@@ -30,7 +32,16 @@ const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: Bo
                         </View>
                         <View style={BoulderInteractionListStyle.box}>
                         <Text>{interaction.created.toDateString()}</Text>
+                        <Text>{interaction.user_id}</Text>
                         </View>
+                        {editAble ? 
+                            <BIcon icon="edit" onPress={() => handleEdit(interaction)} />
+                            :
+                            <></>
+                        }
+
+                    
+
                     </View>
                 </ListItem>
                 

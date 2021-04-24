@@ -1,16 +1,13 @@
 import { IStatus } from "../entities/BoulderInteractionValues";
 
 const _status :IStatus[] = [
-    {id:-1, name:'none',icon:'circle-outline'},
-    {id:1, name:'idea',icon:'circle-outline'},
-    {id:2, name:'tried',icon:'circle-slice-1'},
-    {id:3, name:'training for',icon:'circle-slice-6'},
-    {id:4, name:'topped',icon:'circle-slice-8'},
+    {id:0, name:'idea',icon:'lightbulb'},
+    {id:1, name:'tried',icon:'looks-one'},
+    {id:2, name:'training for',icon:'construction'},
+    {id:3, name:'topped',icon:'emoji-events'},
 ]
 
 export function getAllStatus(){
-    console.log("--------------------------------")
-    console.log(_status)
     return _status
 }
 export function getStatus(status_id:number|string):IStatus{

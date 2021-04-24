@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import ColorTheme from '../theme/Color'
 
 const TextStyle = StyleSheet.create({
     title: {
@@ -7,13 +8,12 @@ const TextStyle = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 10,
         marginBottom:10,
+        color:ColorTheme.highlight
     },
     subTitle:{
         fontSize:18,
         fontWeight:'200',
-        // marginTop: 80
-        // marginTop: 10,
-        // marginBottom:10,
+        color:ColorTheme.primary_dark
     }
 })
 

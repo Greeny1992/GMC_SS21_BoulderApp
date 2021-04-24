@@ -27,8 +27,14 @@ const LayoutStyle = StyleSheet.create({
         marginTop: 10,
         marginBottom:10,
     },
-    red:{
+    debug:{
         backgroundColor:'red'
+    },
+    debug_2:{
+        backgroundColor:'green'
+    },
+    fullWidth:{
+        width:'100%'
     }
 
 }

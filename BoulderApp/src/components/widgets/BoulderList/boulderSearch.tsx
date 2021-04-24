@@ -1,30 +1,28 @@
 import React from "react";
 import { View } from "react-native";
-import { SearchBar } from "react-native-elements";
+import { Icon, SearchBar } from "react-native-elements";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
 import { BExtendedButton } from '../../widgets/utils/button';
 import LayoutStyle from '../../../styles/utils/layout';
+import BIcon from "../utils/icon";
 
 interface BoulderSearchProps {
     style?: any;
     searchBoulderList:Function;
-    searchText:string
-    navigation: any
-  
+    searchText:string;
+    navigation: any;
+    showFilterDialog: Function;
   }
   const BoulderSearch: React.FC<BoulderSearchProps> = (props: BoulderSearchProps) => {
 
-    const {searchBoulderList,searchText, navigation} = props;
+    const {searchBoulderList,searchText, navigation,showFilterDialog} = props;
 
 
     const handleFilter =()=>{
-      console.log("Filter")
-  }
+      showFilterDialog(true)  }
 
   const handleAddBoulder = () => {
-    navigation.navigate('AddBoulderScreen', {
-    boulderID: -1,
-    });
+    navigation.navigate('AddBoulderScreen');
   }
 
 
@@ -38,8 +36,9 @@ interface BoulderSearchProps {
                 value={searchText}
                 placeholder="Enter a name..."/>
               </View>
-              <View style={BoulderListStyle.btnbox}>
-                <BExtendedButton onPress={handleAddBoulder} title="Add"/>
+              <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>
+                <BIcon icon="filter-alt" onPress={handleFilter}/>
+                <BIcon icon="add" onPress={handleAddBoulder}/>
               </View>  
             </View>
     )       
