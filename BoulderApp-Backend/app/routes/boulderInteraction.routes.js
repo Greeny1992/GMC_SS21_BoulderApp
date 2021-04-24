@@ -3,11 +3,11 @@ module.exports = app => {
 
 
     // Retrieve recent Interactions for boulder
-    app.get("/user/:boulderId", boulderInteraction.find);
+    app.get("/boulderInteraction/:boulderId", boulderInteraction.find);
 
     // Create a new Interaction
-    app.post("/user", boulderInteraction.create);
+    app.post("/boulderInteraction", boulderInteraction.create);
 
     // Update a Interaction with interactionId
-    app.put("/user/:interactionId", boulderInteraction.update);
+    app.put("/boulderInteraction/:interactionId", boulderInteraction.update);
 };
