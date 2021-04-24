@@ -7,7 +7,7 @@ const Like = function(like) {
 };
 
 Like.create = (userId, boulderId, result) => {
-    sql.query("INSERT INTO boulderlike_user_assigned (ID_Boulder, ID_User) VALUES (? ,?)", boulderId, userId, (err, res) => {
+    sql.query("INSERT INTO boulderlike_user_assigned (ID_Boulder, ID_User) VALUES (? ,?)", [boulderId, userId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -19,7 +19,7 @@ Like.create = (userId, boulderId, result) => {
 };
 
 Like.remove = (userId, boulderId, result) => {
-    sql.query("DELETE FROM boulderlike_user_assigned WHERE BoulderId = ? AND UserId = ?", boulderId, userId, (err, res) => {
+    sql.query("DELETE FROM boulderlike_user_assigned WHERE BoulderId = ? AND UserId = ?", [boulderId, userId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);

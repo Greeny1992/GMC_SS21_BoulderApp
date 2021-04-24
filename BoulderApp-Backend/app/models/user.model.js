@@ -39,8 +39,8 @@ User.findById = (userId, result) => {
 };
 
 User.get = (password, email, result) => {
-    sql.query("SELECT * FROM user WHERE email = ?",
-        [email],
+    sql.query("SELECT * FROM user WHERE email = ? AND password = ?",
+        [email, password],
         (err, res) => {
         if (err) {
             console.log("error: ", err);

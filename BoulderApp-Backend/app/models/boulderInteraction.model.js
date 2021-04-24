@@ -10,7 +10,7 @@ const BoulderInteraction = function(boulderInteraction) {
 
 BoulderInteraction.getRecent = (boulderId, result) => {
     sql.query("SELECT a.ID, a.comment, a.status, b.name FROM boulderinteraction_user_assigned a, user b WHERE a.ID_User = b.ID AND a.ID Boulder = ? ORDER BY Erstellt DESC LIMIT 3"
-        , boulderId, (err, res) => {
+        , [boulderId], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -23,7 +23,7 @@ BoulderInteraction.getRecent = (boulderId, result) => {
 };
 
 BoulderInteraction.create = (boulderId, userId, comment, status, result) => {
-    sql.query("INSERT INTO boulderinteraction_user_assigned (ID_Boulder, ID_User, Kommentar, Status) VALUES ", boulderId, userId, comment, status, (err, res) => {
+    sql.query("INSERT INTO boulderinteraction_user_assigned (ID_Boulder, ID_User, Kommentar, Status) VALUES ", [boulderId, userId, comment, status], (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
