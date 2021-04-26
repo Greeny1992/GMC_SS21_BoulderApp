@@ -103,7 +103,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
                     </BText>
                 </>
             :
-                <View style={{justifyContent:'center'}}>
+                <View style={[{justifyContent:'center'}, {backgroundColor: 'white'}]}>
                     <BoulderInteractionModal showModal={this.state.showModal} handleHideModal={this.hideModal} handleSaveInteraction={this.handleSaveBoulderInteraction} currentAction={this.state.selectedInteraction} boulderID={this.state.boulder.id}/>
                     <ScrollView style={[LayoutStyle.containerView]}>
                             <View style={[LayoutStyle.containerCentered]}>

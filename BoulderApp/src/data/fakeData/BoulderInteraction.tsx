@@ -24,7 +24,7 @@ export const BOULDER_INTERACTION_DATA:BoulderInteraction[] = [
       '', 
       'Blue Boulder',
       1,
-      'Igit!',
+      'Igit!gdsfsgdsgfdsfgdfskoigkodsgpodsjpfkgfpdb ofgk bgdkvmdof fdk fd fkm fk fko of f f dfkofpodskopüdspkpa ksdf oks dfg',
       new Date(),
       '1234'
     ),
