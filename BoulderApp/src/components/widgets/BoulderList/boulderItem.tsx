@@ -18,19 +18,11 @@ const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemP
         <BText style={BoulderListStyle.title}>{item.title}</BText>
 
         <View style={BoulderListStyle.itemsgroup}>
-          <View style={BoulderListStyle.location}>
-            <Image style={BoulderListStyle.icon} source={require('../../../assets/images/location.svg')}></Image>
-            <BText style={BoulderListStyle.location}>{item.location_id}</BText>
-          </View>
-        </View>
-
-        <View style={BoulderListStyle.itemsgroup}>
           <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
         </View>
-
-        <View style={BoulderListStyle.itemsgroup}>
+        <View style={BoulderListStyle.itemsgroupdate}>
           <BText style={BoulderListStyle.date}>{item.created.toDateString()}</BText>
-        </View>
+        </View>    
 
         <View style={BoulderListStyle.itemsgroup}>
           <View style={BoulderListStyle.badge}>
@@ -42,3 +34,4 @@ const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemP
     );
   };
   export default BoulderListItem
+  
