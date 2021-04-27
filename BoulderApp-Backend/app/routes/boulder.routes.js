@@ -1,24 +1,16 @@
 module.exports = app => {
-    const user = require("../controllers/user.controller.js");
+    const boulder = require("../controllers/boulder.controller.js");
 
 
-    // Retrieve all Customers
-    app.get("/user", user.find);
+    // Retrieve all Boulders
+    app.get("/boulder", boulder.find);
 
+    // Create a new Boulder
+    app.post("/boulderDetail", boulder.create);
 
-    //the following routes are not used, they currently only serve as a template
-    // Create a new Customer
-    //app.post("/user", user.create);
+    // Retrieve a single Boulder with boulderId
+    app.get("/boulderDetail/:boulderId", boulder.findOne);
 
-    // Retrieve a single Customer with customerId
-    //app.get("/user/:userId", user.findOne);
-
-    // Update a Customer with customerId
-    //app.put("/user/:userId", user.update);
-
-    // Delete a Customer with customerId
-    //app.delete("/user/:userId", user.delete);
-
-    // Create a new Customer
-    //app.delete("/user", user.deleteAll);
+    // Update a Boulder with boulderId
+    app.put("/boulderDetail/:boulderId", boulder.update);
 };
