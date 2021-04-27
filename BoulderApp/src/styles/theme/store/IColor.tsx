@@ -8,5 +8,6 @@ export interface IColor {
     background:string,
     warning:string,
     success:string,
-    like:string
+    like:string,
+    default:string,
 }
