@@ -1,7 +1,5 @@
-import { StyleSheet, StatusBar } from 'react-native'
-import { withTheme } from 'react-native-elements';
+import { StyleSheet } from 'react-native'
 import {FontSizes} from "../../constants/ui";
-import {IColor} from "../theme/store/IColor"
 import ColorTheme from '../theme/store/ColorMainTheme'
 
 const BoulderInteractionListStyle = StyleSheet.create({
