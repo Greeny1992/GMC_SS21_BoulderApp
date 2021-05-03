@@ -8,9 +8,6 @@ module.exports = app => {
     // Create a new Boulder
     app.post("/boulderDetail", boulder.create);
 
-    // Retrieve a single Boulder with boulderId
-    app.get("/boulderDetail/:boulderId", boulder.findOne);
-
     // Update a Boulder with boulderId
     app.put("/boulderDetail/:boulderId", boulder.update);
 };

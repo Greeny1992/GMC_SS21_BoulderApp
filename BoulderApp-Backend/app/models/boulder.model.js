@@ -25,13 +25,18 @@ Boulder.create = (name, colour, difficulty, photo, locationId, creatorId, result
     });
 };
 
-Boulder.findById = (boulderId, result) => {
-    sql.query(`SELECT b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.foto photo, b.ID_Location locationId, c.name creatorName, e.name lastChangeUserName, beass.erstellt lastChangeTimestamp   
+Boulder.findById = (boulderId, userId, result) => {
+    sql.query(`SELECT b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.foto photo, b.ID_Location locationId, c.name creatorName, e.name lastChangeUserName, beass.erstellt lastChangeTimestamp, 
+                   CASE
+                       WHEN l.ID IS NOT NULL THEN "true"
+                       ELSE "false" 
+                   END isLikeAssigned
                    FROM boulder b 
                        INNER JOIN user c ON b.ID_Ersteller = c.ID 
                        LEFT JOIN bouldereditor_user_assigend beass ON b.ID = beass.ID_boulder
-                      LEFT JOIN user e ON e.ID = beass.ID_User
-                   WHERE  id = ${userId}`, (err, res) => {
+                       LEFT JOIN user e ON e.ID = beass.ID_User
+                       LEFT JOIN boulderlike_user_assigend l ON l.ID_boulder = b.ID AND l.ID = ${userId}
+                   WHERE  id = ${boulderId}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -49,12 +54,17 @@ Boulder.findById = (boulderId, result) => {
     });
 };
 
-Boulder.get = (result) => {
-    sql.query(`SELECT b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.foto photo, b.ID_Location locationId, c.name creatorName, e.name lastChangeUserName, beass.erstellt lastChangeTimestamp
+Boulder.get = (userId, result) => {
+    sql.query(`SELECT b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.foto photo, b.ID_Location locationId, c.name creatorName, e.name lastChangeUserName, beass.erstellt lastChangeTimestamp, 
+                   CASE
+                       WHEN l.ID IS NOT NULL THEN "true"
+                       ELSE "false" 
+                   END isLikeAssigned
     FROM boulder b
     INNER JOIN user c ON b.ID_Ersteller = c.ID
     LEFT JOIN bouldereditor_user_assigend beass ON b.ID = beass.ID_boulder
-    LEFT JOIN user e ON e.ID = beass.ID_User`,
+    LEFT JOIN user e ON e.ID = beass.ID_User
+    LEFT JOIN boulderlike_user_assigend l ON l.ID_boulder = b.ID AND l.ID = ${userId}`,
         (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -84,8 +94,8 @@ Boulder.updateById = (id, name, colour, difficulty, photo, locationId, changeUse
                 return;
             }
 
-            console.log("updated customer: ", { id: id, ...user });
-            result(null, { id: id, ...user });
+            console.log("updated boulder: ", { id: id});
+            result(null, { id: id });
         }
 
     );

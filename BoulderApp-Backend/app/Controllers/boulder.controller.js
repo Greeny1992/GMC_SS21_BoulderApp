@@ -23,7 +23,7 @@ exports.create = (req, res) => {
 // Retrieve all Boulders from the database.
 exports.find = (req, res) => {
 
-    Boulder.get((err, data) => {
+    Boulder.get(req.query.userId, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
@@ -33,9 +33,9 @@ exports.find = (req, res) => {
     });
 };
 
-// Find a single Boulder with a customerId
+// Find a single Boulder with a boulderId
 exports.findOne = (req, res) => {
-    Boulder.findById(req.params.boulderId, (err, data) => {
+    Boulder.findById(req.params.boulderId, req.query.userId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
