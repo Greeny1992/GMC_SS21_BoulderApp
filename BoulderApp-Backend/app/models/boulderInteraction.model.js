@@ -9,7 +9,7 @@ const BoulderInteraction = function(boulderInteraction) {
 
 
 BoulderInteraction.getRecent = (boulderId, result) => {
-    sql.query("SELECT a.ID, a.Kommentar comment, a.status, b.name userName FROM boulderinteraction_user_assigned a, user b WHERE a.ID_User = b.ID AND a.ID_Boulder = ? ORDER BY Erstellt DESC LIMIT 3"
+    sql.query("SELECT a.ID, a.Kommentar comment, a.status, b.name userName FROM boulderinteraction_user_assigned a, user b WHERE a.ID_User = b.ID AND a.ID_Boulder = ? ORDER BY Erstellt DESC"
         , [boulderId], (err, res) => {
         if (err) {
             console.log("error: ", err);

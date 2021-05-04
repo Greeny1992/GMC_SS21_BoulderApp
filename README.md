@@ -48,15 +48,15 @@ Object
         Object,
     ]
 
-_api/boulder/                   GET  - UC03     -> alle Boulder ohne Einschränkung returnen
-_api/boulderDetail/{id}         GET  - UC05    -> spezifischer Boulder gefiltert nach ID
-                                                    inkl. aller Boulderinteraktionen zu diesem Boulder returnen
-_api/boulderDetail/{id}         POST - UC10     -> spezifischen Boulder updaten und returnen                                         
-_api/boulderDetail              PUT  - UC08     -> neuen Boulder erstellen und returnen
+_api/boulder/                         GET  - UC03     -> alle Boulder ohne Einschränkung returnen tkes UserId as parameter
+_api/boulderDetail/{id}               PUT  - UC10     -> spezifischen Boulder updaten und returnen                                         
+_api/boulderDetail                    POST - UC08     -> neuen Boulder erstellen und returnen
 
 Boulder Interaktionen
-_api/boulderInteraction/{id}    POST - UC06     -> spezifische Boulderinteraktion updaten und returnen
-_api/boulderInteraction/        PUT  - UC06     -> neue Boulderinteraktion erstellen und returnen
+_api/boulderInteraction               GET  - UC10     -> boulderId als parameter 
+                                                         Boulder Interaktionen für gewählten Boulder returnen
+_api/boulderInteraction/{id}          PUT  - UC06     -> spezifische Boulderinteraktion updaten und returnen
+_api/boulderInteraction/              POST - UC06     -> neue Boulderinteraktion erstellen und returnen
 
 
 Like

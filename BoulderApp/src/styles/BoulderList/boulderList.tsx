@@ -1,5 +1,6 @@
 import { StyleSheet, StatusBar } from 'react-native'
-import { withTheme } from 'react-native-elements';
+import {FontSizes} from "../../constants/ui";
+import ColorTheme from '../theme/store/ColorMainTheme'
 
 const BoulderListStyle = StyleSheet.create({
     container: {
@@ -11,19 +12,20 @@ const BoulderListStyle = StyleSheet.create({
         width: '100%',
         backgroundColor: "#c0e6ff",
         padding: 20,
-        marginVertical: 8,
+        marginVertical: 0,
         marginHorizontal: 0,
+        borderWidth:0.5,
+        borderColor: ColorTheme.highlightContrast,
+        alignItems: 'center',
       },
       title: {
         textAlign: 'center',
-        flexDirection: "row",
-        width: '25%',
-        fontSize: 18,
+        fontSize: FontSizes.normal,
+        width: '50%'
       },
       difficulty: {
         textAlign: 'center',
-        flexDirection: "column",
-        fontSize: 14,
+        fontSize: FontSizes.normal,
         justifyContent: 'center',
       },
       badge: {
@@ -33,24 +35,22 @@ const BoulderListStyle = StyleSheet.create({
       date: {
         flexDirection: "column",
         textAlign: 'center',
-        fontSize: 14,
+        fontSize: FontSizes.small
       },
       itemsgroup: {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        width: '20%',
+        width: '10%',
         alignItems: 'center',
         justifyContent: 'center',
       },
-      location: {
-        flexDirection: "row",
-        fontSize: 14,
-      },
-      icon: {
-        height: 20,
-        width: 18,
-        flexDirection: "column",
+      itemsgroupdate: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        width: '20%',
+        alignItems: 'center',
         justifyContent: 'center',
       },
 
@@ -102,43 +102,18 @@ const BoulderListStyle = StyleSheet.create({
 
 
       //Header List
-      itemheader: {
+      sectionheader: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: "#c0e6ff",
-        padding: 5,
-
+        backgroundColor: ColorTheme.highlight,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
       },
-      headlinesectiontitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        width: '20%',
-        textAlign: 'center',
-      },
-      headlinesectionlocation: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        width: '20%',
-        textAlign: 'center',
-      },
-      headlinesectiondifficulty: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        width: '20%',
-        textAlign: 'center',
-      },
-      headlinesectiondate: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        width: '20%',
-        textAlign: 'center',
-      },
-      headlinesectioncolor: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        width: '20%',
-        textAlign: 'center',
-      },
+      textsectionheader: {
+        fontSize: FontSizes.large,
+        color: ColorTheme.highlightContrast,
+      }
 });
 
 export default BoulderListStyle;

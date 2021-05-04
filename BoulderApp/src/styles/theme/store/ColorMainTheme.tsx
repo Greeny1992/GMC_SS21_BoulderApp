@@ -8,9 +8,10 @@ const ColorTheme: IColor = {
     primary_light:'#CDEFFF',
     secondary:'#000000',
     background: '#d77079',
-    warning:'df4040',
+    warning:'#df4040',
     success:'#4BB543',
-    like:'#FFD700'
+    like:'#FFD700',
+    default: '#000000',
 }
 
 export default ColorTheme
