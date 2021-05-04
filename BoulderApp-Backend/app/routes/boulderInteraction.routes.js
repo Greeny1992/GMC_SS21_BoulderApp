@@ -2,8 +2,8 @@ module.exports = app => {
     const boulderInteraction = require("../controllers/boulderInteraction.controller.js");
 
 
-    // Retrieve recent Interactions for boulder
-    app.get("/boulderInteraction/:boulderId", boulderInteraction.find);
+    // Retrieve Interactions for boulder
+    app.get("/boulderInteraction", boulderInteraction.find);
 
     // Create a new Interaction
     app.post("/boulderInteraction", boulderInteraction.create);

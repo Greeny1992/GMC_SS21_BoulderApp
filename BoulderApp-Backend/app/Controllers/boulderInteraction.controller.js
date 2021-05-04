@@ -4,7 +4,7 @@ const BoulderInteraction = require("../models/boulderInteraction.model.js");
 // Retrieve recent Interactions for boulder from the database.
 exports.find = (req, res) => {
 
-    let boulderId = req.param.boulderId;
+    let boulderId = req.query.boulderId;
 
     BoulderInteraction.getRecent(boulderId, (err, data) => {
         if (err)
