@@ -28,10 +28,8 @@ exports.create = (req, res) => {
 
 // Retrieve all User from the database.
 exports.find = (req, res) => {
-
-    let password = req.query.password;
-    let email = req.query.email;
-
+    let password = req.body.password;
+    let email = req.body.email;
     User.get(password, email,(err, data) => {
         if (err)
             res.status(500).send({

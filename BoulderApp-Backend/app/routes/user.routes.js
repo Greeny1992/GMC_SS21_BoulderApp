@@ -3,7 +3,7 @@ module.exports = app => {
 
 
     // Retrieve all Customers
-    app.get("/user", user.find);
+    app.post("/user", user.find);
 
 
     //the following routes are not used, they currently only serve as a template

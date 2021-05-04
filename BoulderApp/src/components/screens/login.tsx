@@ -10,6 +10,7 @@ import { storeData } from "../../data/store/store";
 import styles from '../../styles/login';
 import BButton from "../widgets/utils/button";
 import BText from "../widgets/utils/text";
+import { UserApi } from "../../../api/index";
 
 export default function Login({ loggedInHandler }: any) {
   const [email, setEmail] = useState("");
@@ -17,35 +18,28 @@ export default function Login({ loggedInHandler }: any) {
   const authContext = useContext(AuthContext);
 
   const loginHandler = async () => {
-    fetch('api/user', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    }).then((response) => {
+    const api = new UserApi();
+    const body = {
+      email: email,
+      password: password
+    };
+    api.loginUser(body).then((response) => {
       if(response.status >= 200 && response.status < 300){
-        authContext.verify(true);
-        const user = response.json().then(json => {return {
-          userId: json.userId,
-          userEmail: json.email
-        }})
-        storeData('user', user)
+        console.log(response)
+        response.json().then(json => {
+          const user = {
+            'userId': json[0].ID,
+            'userEmail': json[0].email
+          }
+          storeData('user', user)
+          authContext.verify(true);
+      })
       } else {
         console.log("Login Failed")
         throw response
       }
     }).catch((error) => {
-      console.error("ErrrrroR: " + error);
-      const testUser = {
-        userId: 12345
-      }
-      storeData('user', testUser)
-      authContext.verify(true);
+      console.error(error);
     })
     
   };

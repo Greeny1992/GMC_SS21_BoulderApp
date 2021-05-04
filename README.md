@@ -49,14 +49,12 @@ Object
     ]
 
 _api/boulder/                   GET  - UC03     -> alle Boulder ohne Einschränkung returnen
-_api/boulderDetail/{id}         POST  - UC05    -> spezifischer Boulder gefiltert nach ID
-                                                    inkl. Like
+_api/boulderDetail/{id}         GET  - UC05    -> spezifischer Boulder gefiltert nach ID
                                                     inkl. aller Boulderinteraktionen zu diesem Boulder returnen
 _api/boulderDetail/{id}         POST - UC10     -> spezifischen Boulder updaten und returnen                                         
 _api/boulderDetail              PUT  - UC08     -> neuen Boulder erstellen und returnen
 
 Boulder Interaktionen
-_api/boulderInteractionRecent   GET  - UC04     -> letzten 3 erstellten Boulder Interaktionen returnen
 _api/boulderInteraction/{id}    POST - UC06     -> spezifische Boulderinteraktion updaten und returnen
 _api/boulderInteraction/        PUT  - UC06     -> neue Boulderinteraktion erstellen und returnen
 
@@ -66,7 +64,7 @@ _api/like/{boulderID}           POST - UC11     -> userID als Parameter like ers
 _api/like/{boulderID}           DELETE - UC11   -> userID als Parameter like entfernen
 
 User
-_api/user                       GET  - UC02     -> Email & Passwort als Parameter mitgesendet 
+_api/user                       POST  - UC02     -> Email & Passwort als Parameter mitgesendet 
                                                     returned userID
 
 ```
