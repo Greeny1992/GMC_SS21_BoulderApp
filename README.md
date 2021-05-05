@@ -60,12 +60,12 @@ _api/boulderInteraction/              POST - UC06     -> neue Boulderinteraktion
 
 
 Like
-_api/like/{boulderID}                 POST - UC11     -> userID als Parameter like erstellen
-_api/like/{boulderID}                 DELETE - UC11   -> userID als Parameter like entfernen
-      
-User      
-_api/user                             GET  - UC02     -> Email & Passwort als Parameter mitgesendet 
-                                                         returned userID
+_api/like/{boulderID}           POST - UC11     -> userID als Parameter like erstellen
+_api/like/{boulderID}           DELETE - UC11   -> userID als Parameter like entfernen
+
+User
+_api/user                       POST  - UC02     -> Email & Passwort als Parameter mitgesendet 
+                                                    returned userID
 
 ```
 
