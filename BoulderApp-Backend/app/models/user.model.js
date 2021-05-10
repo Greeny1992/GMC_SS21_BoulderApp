@@ -36,21 +36,30 @@ User.findById = (userId, result) => {
         // not found User with the id
         result({ kind: "not_found" }, null);
     });
+    
 };
 
 User.get = (password, email, result) => {
-    sql.query("SELECT * FROM user WHERE email = ? AND password = ?",
+    console.log(password + " " + email)
+    sql.connect();
+    try {
+        sql.query("SELECT * FROM user WHERE email = ? AND password = ?",
         [email, password],
         (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
-
-        console.log("users: ", res);
-        result(null, res);
-    });
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+            console.log("users: ", res);
+            result(null, res);
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send("Error while saving");
+        sql.end();
+    }
+    sql.end();
 };
 
 User.updateById = (id, user, result) => {

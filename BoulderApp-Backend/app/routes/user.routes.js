@@ -2,8 +2,8 @@ module.exports = app => {
     const user = require("../controllers/user.controller.js");
 
 
-    // Retrieve all Users
-    app.get("/user", user.find);
+    // Retrieve all Customers
+    app.post("/user", user.find);
 
 
     //the following routes are not used, they currently only serve as a template
