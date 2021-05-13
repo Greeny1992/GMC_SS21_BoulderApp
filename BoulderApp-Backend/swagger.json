@@ -1,0 +1,400 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is the boulder app api",
+      "version": "1.0.0",
+      "title": "Swagger BoulderApp",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "georg.prassl@edu.campus02.at"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "host": "localhost:3000",
+    "tags": [
+      {
+        "name": "User"
+      },
+      {
+        "name": "Boulder"
+      },
+      {
+        "name": "Boulder Details"
+      },
+      {
+        "name": "Boulder Interactions"
+      },
+      {
+        "name": "Boulder Like"
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/user": {
+        "post": {
+          "tags": [
+            "User"
+          ],
+          "summary": "Logs user into the system",
+          "description": "",
+          "operationId": "loginUser",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User-mail and user-password",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Invalid username/password supplied"
+            }
+          }
+        }
+      },
+      "/boulder": {
+        "get": {
+          "tags": [
+            "Boulder"
+          ],
+          "summary": "Get list of all boulder",
+          "description": "",
+          "operationId": "getBoulderList",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      },
+      "/boulderDetail/{boulderId}": {
+        "get": {
+          "tags": [
+            "Boulder Details"
+          ],
+          "summary": "Get details of specific boulder",
+          "description": "",
+          "operationId": "getBoulderDetails",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "boulderId",
+              "in": "path",
+              "description": "ID of boulder to return",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Boulder Details"
+          ],
+          "summary": "Update details of specific boulder",
+          "description": "",
+          "operationId": "updateBoulderDetails",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "boulderId",
+              "in": "path",
+              "description": "ID of boulder to return",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      },
+      "/boulderDetail": {
+        "put": {
+          "tags": [
+            "Boulder Details"
+          ],
+          "summary": "Add a new boulder",
+          "description": "",
+          "operationId": "addBoulder",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Boulder which has to be created ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Boulder"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      },
+      "/boulderInteraction/{boulderinteractionId}": {
+        "post": {
+          "tags": [
+            "Boulder Interactions"
+          ],
+          "summary": "Update a boulder interaction",
+          "description": "",
+          "operationId": "updateBoulderInteraction",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],          
+          "parameters": [
+            {
+              "name": "boulderinteractionId",
+              "in": "path",
+              "description": "ID of boulderInteraction to update",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Boulder which has to be updated ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BoulderInteraction"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      },
+      "/boulderInteraction": {
+        "put": {
+          "tags": [
+            "Boulder Interactions"
+          ],
+          "summary": "create a boulder interaction",
+          "description": "",
+          "operationId": "create BoulderInteraction",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],          
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Boulderinteraction which has to be created ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BoulderInteraction"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      },
+      "/like/{boulderId}": {
+        "post": {
+          "tags": [
+            "Boulder Like"
+          ],
+          "summary": "Like a Boulder",
+          "description": "",
+          "operationId": "likeBoulder",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],          
+          "parameters": [
+            {
+              "name": "boulderId",
+              "in": "path",
+              "description": "ID boulder to like",
+              "required": true,
+              "type": "integer",
+              "format": "int64"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Boulder which has to be updated ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/BoulderLike"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "failed"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },      
+      "Boulder": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "creatorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "boulderName": {
+            "type": "string"
+          },
+          "colorId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "difficultyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "picture": {
+            "type": "string"
+          }
+        }   
+        ,
+        "xml": {
+          "name": "User"
+        }
+      },
+      "BoulderInteraction": {
+        "type": "object",
+        "properties": {
+          "boulderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "BoulderLike": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }

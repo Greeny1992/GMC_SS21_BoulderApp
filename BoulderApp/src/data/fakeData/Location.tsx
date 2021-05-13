@@ -17,7 +17,7 @@ export const LOCATION_DATA : ILocation[] =[
     {
         id:'2',
         country:'Austria',
-        region:'Styria',
+        region:'Vienna',
         city:'Deutschlandsberg'
     },
     {

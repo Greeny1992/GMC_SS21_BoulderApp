@@ -17,6 +17,12 @@ Backend will follow the next days
 ## Android
 ## IOS
 On IOS there can be a lot of problems with the basic setup.
+For generating IOS folder
+```
+npm i react-native-eject
+npm i @react-native-community/cli
+react-native eject
+```
 ### 
 Inside of the folder BoulderApp
 ```
@@ -60,15 +66,16 @@ _api/boulderInteraction/              POST - UC06     -> neue Boulderinteraktion
 
 
 Like
-_api/like/{boulderID}                 POST - UC11     -> userID als Parameter like erstellen
-_api/like/{boulderID}                 DELETE - UC11   -> userID als Parameter like entfernen
-      
-User      
-_api/user                             GET  - UC02     -> Email & Passwort als Parameter mitgesendet 
-                                                         returned userID
+_api/like/{boulderID}           POST - UC11     -> userID als Parameter like erstellen
+_api/like/{boulderID}           DELETE - UC11   -> userID als Parameter like entfernen
+
+User
+_api/user                       POST  - UC02     -> Email & Passwort als Parameter mitgesendet 
+                                                    returned userID
 
 ```
 
 ### Resources
 [Swagger Editor](https://editor.swagger.io/)
+[IOS Error Handling while building](https://stackoverflow.com/questions/46428752/how-to-clear-or-clean-specific-pod-from-the-local-cocoapods-cache)
 - 
