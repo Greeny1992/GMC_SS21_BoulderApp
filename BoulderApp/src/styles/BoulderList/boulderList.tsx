@@ -3,6 +3,9 @@ import {FontSizes} from "../../constants/ui";
 import ColorTheme from '../theme/store/ColorMainTheme'
 
 const BoulderListStyle = StyleSheet.create({
+  sectionLi: {
+    height: '90%',
+  },
     container: {
         flex: 1,
         width: '100%',
@@ -58,12 +61,14 @@ const BoulderListStyle = StyleSheet.create({
       //Search and Add-button
       headerSearch: {
         flexDirection: 'row',
+        backgroundColor: 'red',
+        height: '10%',
       },
       textInputStyle: {
         height: 40,
         borderWidth: 0,
         paddingLeft: 20,
-        margin: 5,
+        margin: 10,
         borderColor: '#ffffff',
         backgroundColor: '#e0ffff',
         paddingVertical: 0,
@@ -71,18 +76,19 @@ const BoulderListStyle = StyleSheet.create({
       textInputContainerStyle: {
         borderWidth: 0,
         borderColor: '#ffffff',
+        borderBottomColor: '#ffffff',
+        borderTopColor: '#ffffff',
         backgroundColor: '#ffffff',
-        borderBottomColor: 'white',
-        borderTopColor: 'white'
       },
       addbuttoncontainer: {
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: 'yellow',
         paddingBottom: 10,
         paddingTop: 1,
       },
       searchbox: {
         width: '80%',
+        height: '100%',
       },
       btnbox: {
         width: '20%',
@@ -94,7 +100,6 @@ const BoulderListStyle = StyleSheet.create({
         height: 30,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 0,
         backgroundColor: "#147aff",
         flexDirection:'row',
         color: 'white'

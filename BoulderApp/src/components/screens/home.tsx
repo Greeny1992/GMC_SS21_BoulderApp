@@ -3,7 +3,6 @@ import { View} from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
@@ -73,7 +72,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
   return (
     <View >
       <View >
-        <BText>UserId: {userId}</BText>
+        {/* <BText>UserId: {userId}</BText> */}
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
