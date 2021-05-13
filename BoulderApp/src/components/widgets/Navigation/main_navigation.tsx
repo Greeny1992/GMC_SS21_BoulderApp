@@ -5,6 +5,7 @@ import { Icon } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ScreenSizes } from "../../../constants/ui";
 import { AuthContext } from "../../../contexts/auth_context";
+import { clearData } from "../../../data/store/store";
 import ButtonStyles from "../../../styles/button";
 import AddBoulder from "../../screens/addBoulder";
 import DetailBoulder from "../../screens/detailBoulder";
@@ -19,15 +20,8 @@ const MainNavigation = () => {
     const onPressLogout = () =>{
         authContext.login(false);
         authContext.verify(false);
+        clearData();
     };
-
-    const logoutButton = ()  => {
-      return (
-        <TouchableOpacity onPress={onPressLogout} style={ButtonStyles.btn}>
-                    <BText>Logout</BText>
-        </TouchableOpacity>
-      )
-    }
     return(
     <NavigationContainer>
           <MainStack.Navigator initialRouteName="HomeScreen">
