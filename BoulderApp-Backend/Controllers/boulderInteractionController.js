@@ -1,18 +1,17 @@
-const BoulderInteraction = require("../models/boulderInteraction.model.js");
+const BoulderInteraction = require("../Models/BoulderInteraction.js");
 
 
 // Retrieve recent Interactions for boulder from the database.
 exports.find = (req, res) => {
 
-    let boulderId = req.query.boulderId;
-
-    BoulderInteraction.getRecent(boulderId, (err, data) => {
+    let boulderId = req.params.boulderId;
+    BoulderInteraction.getRecent(boulderId, (err, status,data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).json({
                 message:
-                    err.message || "Some error occurred while retrieving Users."
+                    err.message || "Some error occurred while retrieving Interactions."
             });
-        else res.send(data);
+        else res.status(200).json(data);
     });
 };
 
@@ -61,7 +60,9 @@ exports.update = (req, res) => {
                         message: "Error updating Interaction with id " + req.params.interactionId
                     });
                 }
-            } else res.send(data);
+            } else res.status(200).send({
+                message: "Successfully updated interaction: " + req.params.interactionId
+            });
         }
     );
 };
