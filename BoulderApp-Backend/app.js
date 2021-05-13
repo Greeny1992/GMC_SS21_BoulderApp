@@ -20,9 +20,15 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cors());
 
 // import our routes
-const userRoutes = require('./Routes/UserRoutes');
+const userRoutes = require('./Routes/userRoutes');
+const boulderRoutes = require('./Routes/boulderRoutes');
+const boulderInteractionRoutes = require('./Routes/boulderInteractionRoutes');
+const likeRoutes = require('./Routes/likeRoutes');
 
 app.use("/user", userRoutes);
+app.use("/boulder", boulderRoutes);
+app.use("/boulderInteraction", boulderInteractionRoutes);
+app.use("/like", likeRoutes);
 
 // export the app
 module.exports = app;

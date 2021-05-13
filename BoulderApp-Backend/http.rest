@@ -1,7 +1,81 @@
-GET http://localhost:3000/user
+POST http://localhost:3000/user
 content-type: application/json
 
 {
-    "email": "georg@georg.at",
-    "password": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "email": "georg@boulder.at",
+    "password": "georgPrassl"
 }
+
+###
+POST http://localhost:3000/boulder
+content-type: application/json
+
+{
+    "name": "TestBoulder",
+    "colour": 1,
+    "difficulty": 1,
+    "locationId": 1,
+    "creatorId": 5 
+}
+
+###
+PUT http://localhost:3000/boulder/53
+content-type: application/json
+
+{
+    "name": "Testersdfsdfsdf",
+    "colour": 1,
+    "difficulty": 1,
+    "locationId": 1,
+    "changeUserId": 5 
+}
+
+###
+
+GET http://localhost:3000/boulder
+content-type: application/json
+
+{
+    "userId": "5"
+}
+
+###
+POST http://localhost:3000/boulderInteraction
+content-type: application/json
+
+{
+    "boulderId": 53, 
+    "userId": 2,
+    "comment": "Testkommentar",
+    "status": 1
+}
+
+###
+GET http://localhost:3000/boulderInteraction/53
+
+###
+PUT http://localhost:3000/boulderInteraction/1
+content-type: application/json
+
+{
+    "comment": "Test",
+    "status": 5
+}
+
+###
+POST http://localhost:3000/like/53
+content-type: application/json
+
+{
+    "userId": 2
+}
+
+###
+DELETE http://localhost:3000/like/53
+content-type: application/json
+
+{
+    "userId": 2
+}
+
+###
