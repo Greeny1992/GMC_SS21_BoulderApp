@@ -35,6 +35,8 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
           <BIcon icon="favorite" onPress={handleLikeClick} style={{flex:2}}
                   color={ boulder.like ? ColorTheme.like : ColorTheme.primary_light }
                   />
+          <BIcon icon="edit" onPress={handleEditClick} style={styles.icon}/>
+
         </View>
       
         <View style={[LayoutStyle.containerRow]}>
@@ -61,20 +63,14 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
                 <BText style={[styles.row]}>{difficulty.name}</BText>
                 <BText style={[styles.row]}>{location.country}</BText>
                 <BText style={[styles.row]}>{location.region}</BText>
-                <BText style={[styles.row]}>{location.city}</BText>
               </View>
             </View>
 
           </View>
           
       
-        </View>
-            <View style={[LayoutStyle.containerRow,{justifyContent:'flex-end'}]}>
-
-              <BIcon icon="edit" onPress={handleEditClick} style={styles.icon}/>
-
-            </View>
-      </View>
+         </View>
+      </View> 
                 
     </View>
   );

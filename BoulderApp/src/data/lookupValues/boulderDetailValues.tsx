@@ -1,4 +1,4 @@
-import { IColor, IDifficulty } from "../entities/boulderDetailValues";
+import { IColor, IDifficulty,ILocation } from "../entities/boulderDetailValues";
 
 const _colors: IColor[]=[
     {id:-1, name:'none',value:'#ffffff'},
@@ -42,4 +42,29 @@ export function getDifficulty(difficulty_id:number|string):IDifficulty{
     const id = typeof difficulty_id === 'string'? parseInt(difficulty_id) : difficulty_id;
     const difficulty = _difficulty.filter((difficulty:IDifficulty) => difficulty.id === id )?.[0];
     return difficulty ?? difficulty[0];
+}
+
+const _location :ILocation[] = [
+    {id:1, country:'Austria',region:'Styria'},
+    {id:2, country:'Austria',region:'Carinthia'},
+    {id:3, country:'Austria',region:'Vienna'},
+    
+]
+
+export function location(){
+    return _location
+}
+export function getLocation(location_id:number|string):ILocation{
+    const id = typeof location_id === 'string'? parseInt(location_id) : location_id;
+    const location = _location.filter((location:ILocation) => location.id === id )?.[0];
+    return location ?? _location[0];
+}
+export function regions(){
+    let regions=[]
+    for (let location of _location){
+        regions.push({
+            id: location.id,
+            name:location.region})
+    }
+    return regions
 }

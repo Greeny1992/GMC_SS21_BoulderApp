@@ -1,11 +1,22 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Image} from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, ImageBackground, Image, TouchableWithoutFeedback} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import styles from '../../styles/addBoulder';
-import BText from "../widgets/utils/text";
+import BText, { BTitle } from "../widgets/utils/text";
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 import { ScreenSizes } from "../../constants/ui";
 import img from "../../assets/images/base64-climbing-wall";
+import { useForm, Controller, set } from "react-hook-form";
+import { BoulderFormData, IBoulder } from '../../data/entities/Boulder';
+import BButton, { BExtendedButton } from '../widgets/utils/button';
+import LayoutStyle from '../../styles/utils/layout';
+import BInput from '../widgets/utils/Input';
+import IconPicker from '../widgets/utils/IconPicker';
+import { colors,difficulty,location,regions } from '../../data/lookupValues/boulderDetailValues';
+import { ILocation } from '../../data/entities/boulderDetailValues';
+import BIcon from '../widgets/utils/icon';
+import ColorTheme from '../../styles/theme/Color';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 enum colourScale {
     black = 'black',
@@ -30,124 +41,218 @@ export interface Boulder {
     image: string;
     isTopped: boolean;
 }
+interface AddBoulderProps {
+    style?: any;
+    navigation: any;
+    route:any
+  }
+const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
+    const {navigation, route} =props;
+    const currentBoulder =route.params.boulder  as IBoulder;
+    const [locationPickerOpen, setLocationPickerOpen] = useState(false)
+    const [difficultyPickerOpen, setDifficultyPickerOpen] = useState(false)
+    const [colorPickerOpen, setColorPickerOpen] = useState(false)
+    let formTitle = "Add new boulder";
+    const { control, handleSubmit, formState: { errors },setValue } = useForm<BoulderFormData>();
+    const onSubmit = (data: BoulderFormData) => {
+        console.log("SAVE")
+        clearForm()
+     };
+     const onLocationPickerOpen = useCallback(() => {
+         console.log("LOCATION")
+         setLocationPickerOpen(true)
+         setDifficultyPickerOpen(false)
+         setColorPickerOpen(false)
+         console.log(colorPickerOpen)
+         console.log(difficultyPickerOpen)
+        },[])
+    const onDifficultyPickerOpen = useCallback(() => {
+         console.log("Difficulty")
+         setDifficultyPickerOpen(true)
+         setLocationPickerOpen(false)
+         setColorPickerOpen(false)
+        },[])
+    const onColorPickerOpen = useCallback(() => {
+        console.log("Color")
+        setLocationPickerOpen(false)
+        setDifficultyPickerOpen(false)
+    },[])
+     const clearForm= ()=>{
+        setValue('title','')
+        setValue('color',0)
+        setValue('difficulty',0)
+        setValue('img', '')
+        setValue('location_id', '')
+        setValue('boulder_id', '')
+        setValue('topped',false)
+        setValue('like',false)
+        setValue('id','')
+     }
+     const setDefaultForm= ()=>{
+        if(currentBoulder){
+            setValue('title',currentBoulder.title)
+            setValue('color',currentBoulder.color)
+            setValue('difficulty',currentBoulder.difficulty)
+            setValue('img', currentBoulder.img)
+            setValue('location_id', currentBoulder.location_id)
+            setValue('boulder_id', currentBoulder.id)
+            setValue('topped',currentBoulder?.topped ?? false)
+            setValue('like',currentBoulder.like)
+            setValue('id',currentBoulder.id)
 
-export default function AddBoulder({route, navigation}: any) {
-    const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
-    const [difficulty, setDifficulty] = useState('');
-    const [colour, setColour] = useState(colourScale.none);
-    const [topped, setTopped] = useState(false);
-    const [image, setImage] = useState(img);
+        }
+     }
+     if(currentBoulder){
+        formTitle="Edit boulder"
+        setDefaultForm();
+     } 
+     const closeForm=()=>{
+        navigation.navigate("Home");
+        clearForm()
+     }
+     const colorValues = colors();
+     const difficultyValues = difficulty();
 
-    const RenderName = () =>  {
-        return (
-            <View style={styles.inputView}>
-                <BText style={styles.inputText}>Name</BText>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter a name"
-                    placeholderTextColor="#adadad"
-                    onChangeText={(name) => setName(name)}
-                />
-            </View>
-        )
-    }
-
-    const RenderLocation = () =>  {
-        return (
-            <View style={styles.inputView}>
-                <BText style={styles.inputText}>Location</BText>
-                <View style={{flexDirection: 'row'}}>
-                    <TextInput
-                        style={styles.locationInput}
-                        placeholder="Enter a location"
-                        placeholderTextColor="#adadad"
-                        onChangeText={(location) => setLocation(location)}
-                    />
-                </View>
-            </View>
-        )
-    }
-
-    const RenderDifficulty = () => {
-    
-        return (
-            <View style={styles.inputView}>
-                <BText style={styles.inputText}>Difficulty</BText>
-                <TextInput
-                    style={styles.textInput}
-                    placeholder="Enter a difficulty"
-                    placeholderTextColor="#adadad"
-                    onChangeText={(difficulty) => setDifficulty(difficulty)}
-                />
-            </View>
-        )
-    }
-
+    //  const regionValues = regions().map((item )=> {return {label: item.name, value:item.id}})
+     const regionValues = regions();
     const onPressImageUpload = () => {
         launchCamera({mediaType: 'photo'}, res => {
             if(res && res.uri) {
-                setImage(res.uri);
+                //setImage(res.uri);
             }
         })
     }
+  
 
-    const RenderColourAndImagePicker = () =>  {
-    
-        return (
-            <View style={styles.buttonView}>
-                <View style={{width: '50%'}}>
-                    <TouchableOpacity style={styles.colourButton}>
-                        <BText style={styles.buttonText}>
-                            Pick colour
-                        </BText>
-                    </TouchableOpacity>
-                </View>
-                <View style={{width: '50%'}}>
-                    <TouchableOpacity style={styles.imageButton} onPress={onPressImageUpload}>
-                        <BText style={styles.buttonText}>
-                            Add image
-                        </BText>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        )
-    }
-
-    const RenderImage = () => {
-        return(
-            <View style={{flex: 1, padding: ScreenSizes.layout_distance }}>
-                <Image source={{uri: image}} style={{width: 200, height: 200, borderRadius: 5 }}/>
-            </View>
-        )
-    }
-    
-    const RenderTopped = () => {
-        return (
-            <View style={styles.checkboxView}>
-                <CheckBox
-                    value={topped}
-                    onValueChange={setTopped}
-                    style={styles.checkbox}
-                />
-                <BText style={styles.checkboxText}>Boulder has been topped</BText>
-            </View>
-        )
-    }
 
     const bg = require('../../assets/images/background.jpg');
     return (
         <ImageBackground source={bg} style={styles.background}>
-            <BText style={styles.text}>Add new boulder</BText>
-            {RenderName()}
-            {RenderLocation()}
-            {RenderDifficulty()}
-            {RenderColourAndImagePicker()}
-            {RenderImage()}
-            {RenderTopped()}
+            <View >
+              
+                        <BTitle label={formTitle}  color='white'/>
+
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                            <BInput label="Title" placeholder="First trial and I did it" value={value} onChangeText={(value: string)=>onChange(value)} />
+                            
+                            )}
+                            name='title'
+                            rules={{required:true}}
+                            defaultValue={control.defaultValuesRef}
+                        />
+                        {errors.title && <Text>This is required.</Text>}
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                                // <DropDownPicker
+                                //     open={locationPickerOpen}
+                                //     onOpen={onLocationPickerOpen}
+                                //     items={regionValues}
+                                //     // placeholder={placeholder}
+                                //     // defaultValue={selectedItem}
+                                //     containerStyle={[{height: 40}]}
+                                //     style={[{backgroundColor: '#fafafa',zIndex:400}]}
+                                //     itemStyle={{
+                                //         justifyContent: 'flex-start', 
+                                //     }}
+                                //     dropDownStyle={{backgroundColor: '#fafafa'}}
+                                //     // onChangeItem={(item:any, index:number) => handleChange (index)}
+                                    
+                                // />
+                               <IconPicker items={regionValues} placeholder="Select color" containerStyle={{zIndex:600}} onChange={onChange} defaultSelectedItem={1} label="Location" open={locationPickerOpen} onOpen={onLocationPickerOpen}/> 
+
+                            )}
+                            name='location_id'
+                            rules={{required:true}}
+                            defaultValue={1}
+                        />
+
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                            <IconPicker items={colorValues} placeholder="Select color" containerStyle={{zIndex:500}} onChange={onChange} defaultSelectedItem={1} label="Color"  open={colorPickerOpen} onOpen={onColorPickerOpen} /> 
+                        //     <DropDownPicker
+                        //         open={locationPickerOpen}
+                        //         onOpen={onLocationPickerOpen}
+                        //         items={regionValues}
+                        //         // placeholder={placeholder}
+                        //         // defaultValue={selectedItem}
+                        //         containerStyle={[{height: 40}]}
+                        //          style={[{backgroundColor: '#fafafa',zIndex:300}]}
+                        //         itemStyle={{
+                        //             justifyContent: 'flex-start', 
+                        //         }}
+                        //         dropDownStyle={{backgroundColor: '#fafafa'}}
+                        //         // onChangeItem={(item:any, index:number) => handleChange (index)}
+                                
+                        // />
+                            )}
+                            name='color'
+                            rules={{required:true}}
+                            defaultValue={1}
+                        />
+
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                            <IconPicker items={difficultyValues} placeholder="Select difficulty" containerStyle={{zIndex:200}} onChange={onChange} defaultSelectedItem={1} label="Difficulty"  open={difficultyPickerOpen} onOpen={onDifficultyPickerOpen}/> 
+                            )}
+                            name='difficulty'
+                            rules={{required:true}}
+                            defaultValue={1}
+                        />
+
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                                <View style={styles.formrow}>
+                                    <CheckBox
+                                                    value={value}
+                                                    onValueChange={onChange}
+                                                    style={styles.checkbox}
+                                                />
+                                    <BText >Boulder has been topped</BText>
+                                </View>
+                                )}
+                            name='topped'
+                            rules={{required:true}}
+                            defaultValue={1}
+                        />
+                        <Controller 
+                            control={control}
+                            render={({field:{onChange,onBlur,value}})=>(
+                                <View style={styles.formrow}>
+                                    <CheckBox
+                                                    value={value}
+                                                    onValueChange={onChange}
+                                                    style={styles.checkbox}
+                                                />
+                                    <BText >Like this boulder</BText>
+                                </View>
+                                )}
+                            name='like'
+                            rules={{required:true}}
+                            defaultValue={1}
+                        />
+
+
+
+                        <BExtendedButton title="Add image" onPress={()=>console.log("t")} underlined={true} />
+                        <View style={[LayoutStyle.containerRowSpace,{marginTop:10}]}>
+                            <BExtendedButton  underlined={true} onPress={closeForm } title="cancel"/>
+                            <BExtendedButton  underlined={true} onPress={handleSubmit(onSubmit)} title="save"/>
+
+                        </View>
+                   
+
+                  </View>
+            
         </ImageBackground>
     )
 }
+export default AddBoulder
 
 
 
@@ -158,4 +263,7 @@ export default function AddBoulder({route, navigation}: any) {
 
 
 
+function alert(arg0: string): void {
+    throw new Error('Function not implemented.');
+}
 

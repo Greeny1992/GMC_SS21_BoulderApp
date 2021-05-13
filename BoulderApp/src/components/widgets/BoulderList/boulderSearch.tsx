@@ -22,7 +22,9 @@ interface BoulderSearchProps {
       showFilterDialog(true)  }
 
   const handleAddBoulder = () => {
-    navigation.navigate('AddBoulderScreen');
+    navigation.navigate('AddBoulderScreen', {
+      boulder:undefined,
+  });
   }
 
 

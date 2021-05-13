@@ -35,7 +35,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         switch(type){
           case "country": item.country===value; break;
           case "region" : item.region === value; break;
-          case "city"   : item.city   === value; break;
         }
         });
       const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });

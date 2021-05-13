@@ -10,3 +10,8 @@ export interface IColor extends IBasic {
 export interface IDifficulty extends IBasic {
 }
 
+export interface ILocation {
+    id:number,
+    country:string,
+    region:string
+}
