@@ -1,7 +1,5 @@
 import React from "react";
 import {View,FlatList,SectionList} from "react-native";
-import { Text } from "react-native-elements";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { IBoulder } from "../../../data/entities/Boulder";
 import BoulderListItem from "./boulderItem";
 import BoulderSectionListHeader from "./boulderSectionListHeader";
@@ -18,7 +16,7 @@ interface BoulderMetaProps {
 }
 const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
   const {handleSelectBoulder, items} = props;
-
+  // let LOCATION_DATA = location();
 
   /**
    * Structure

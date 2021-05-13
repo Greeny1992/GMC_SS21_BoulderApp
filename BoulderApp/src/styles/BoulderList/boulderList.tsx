@@ -61,8 +61,9 @@ const BoulderListStyle = StyleSheet.create({
       //Search and Add-button
       headerSearch: {
         flexDirection: 'row',
-        backgroundColor: 'red',
-        height: '10%',
+        backgroundColor: 'white',
+        maxHeight: '10%',
+        minHeight: 79,
       },
       textInputStyle: {
         height: 40,
@@ -75,6 +76,7 @@ const BoulderListStyle = StyleSheet.create({
       },
       textInputContainerStyle: {
         borderWidth: 0,
+        height: 60,
         borderColor: '#ffffff',
         borderBottomColor: '#ffffff',
         borderTopColor: '#ffffff',
@@ -85,6 +87,7 @@ const BoulderListStyle = StyleSheet.create({
         backgroundColor: 'yellow',
         paddingBottom: 10,
         paddingTop: 1,
+        height: '10%',
       },
       searchbox: {
         width: '80%',
