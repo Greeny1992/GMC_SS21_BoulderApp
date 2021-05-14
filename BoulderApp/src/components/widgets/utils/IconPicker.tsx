@@ -11,25 +11,17 @@ interface IconPickerProps {
   style?:any;
   containerStyle?:any;
   items: any[];
-  placeholder:string;
   label: string;
-  onChange: Function;
-  open:boolean;
-  onOpen:any;
-  defaultSelectedItem?:number;
+  selectedItem: any;
+  setSelectedItem: any;
+  isOpen: boolean;
+  setIsOpen: any;
+
 }
 
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
-  const {items,placeholder,style,label,containerStyle, defaultSelectedItem,onChange,open,onOpen} = props
+  const {items,label,containerStyle, selectedItem, setSelectedItem, isOpen, setIsOpen, style} = props
   const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
-  const [isOpen,setIsOpen] = useState(open)
-  const [selectedItem, setSelectedItem ] = useState(defaultSelectedItem ?? 1);
-  const handleChange = (item:any)=>{
-      setSelectedItem(item);
-      onChange(item)
-      
-  }
-  console.log("LABEL: " + label + " " + open)
   return (
     <View style={[containerStyle
     //   ,{
@@ -40,20 +32,34 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
     ]}>
         {label ? <BLabel label={label}/> : <></>}
         <DropDownPicker
+          items={ItemPickerItems}
+          value={selectedItem}
+          setValue={setSelectedItem}
+          open={isOpen}
+          setOpen={setIsOpen}
+          containerStyle={[{height: 40}]}
+          style={[{backgroundColor: '#fafafa'},style]}
+          labelStyle={{
+              justifyContent: 'flex-start', 
+          }}
+          dropDownContainerStyle={{backgroundColor: '#fafafa'}}
+        />
+        {/* <DropDownPicker
             open={isOpen}
-            onOpen={()=> {console.log("OPEN: " + label); onOpen()}}
+            setOpen={setIsOpen}
+            setValue={setValue}
             items={ItemPickerItems}
             placeholder={placeholder}
-            defaultValue={selectedItem}
+            value={selectedItem}
             containerStyle={[{height: 40}]}
             style={[{backgroundColor: '#fafafa'},style]}
-            itemStyle={{
+            labelStyle={{
                 justifyContent: 'flex-start', 
             }}
-            dropDownStyle={{backgroundColor: '#fafafa'}}
-            onChangeItem={(item:any, index:number) => handleChange (index)}
+            dropDownContainerStyle={{backgroundColor: '#fafafa'}}
+            onChangeValue={(item:any) => handleChange(item)}
             
-        />
+        /> */}
     </View>
     
   );
