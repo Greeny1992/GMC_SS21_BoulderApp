@@ -15,7 +15,7 @@ import BText, {BTitle} from '../widgets/utils/text';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {ScreenSizes} from '../../constants/ui';
 import img from '../../assets/images/base64-climbing-wall';
-import {useForm, Controller, set} from 'react-hook-form';
+import {useForm, Controller, set, SubmitHandler} from 'react-hook-form';
 import {BoulderFormData, IBoulder} from '../../data/entities/Boulder';
 import BButton, {BExtendedButton} from '../widgets/utils/button';
 import LayoutStyle from '../../styles/utils/layout';
@@ -78,9 +78,9 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     setValue,
   } = useForm<BoulderFormData>();
 
-  const onSubmit = (data: BoulderFormData) => {
-    console.log('SAVE');
-    clearForm();
+  const onSubmit: SubmitHandler<BoulderFormData> = data => {
+    console.log('SAVE: ', data);
+
   };
 
   const onLocationPickerOpen = useCallback(() => {
@@ -132,11 +132,11 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const closeForm = () => {
     navigation.navigate('HomeScreen');
     clearForm();
-  };
+  }
+
+  //Dropdownvalues
   const colorValues = colors();
   const difficultyValues = difficulty();
-
-  //  const regionValues = regions().map((item )=> {return {label: item.name, value:item.id}})
   const regionValues = regions();
 
   const bg = require('../../assets/images/background.jpg');
@@ -270,7 +270,3 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   );
 };
 export default AddBoulder;
-
-function alert(arg0: string): void {
-  throw new Error('Function not implemented.');
-}

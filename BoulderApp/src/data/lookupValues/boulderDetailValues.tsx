@@ -28,11 +28,7 @@ const _difficulty :IDifficulty[] = [
     {id:-1, name:'none'},
     {id:1, name:'easy'},
     {id:2, name:'medium'},
-    {id:3, name:'hard'},
-    {id:4, name:'none'},
-    {id:5, name:'none'},
-    {id:6, name:'none'},
-    {id:7, name:'none'}
+    {id:3, name:'hard'}
 ]
 
 export function difficulty(){
