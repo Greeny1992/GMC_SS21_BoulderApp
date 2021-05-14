@@ -34,6 +34,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
 
  
    const onSubmit = (data: BoulderInteractionFormData) => {
+      console.log("SUBMITT")
       handleSaveInteraction(data)
       handleHideModal()
       clearForm()

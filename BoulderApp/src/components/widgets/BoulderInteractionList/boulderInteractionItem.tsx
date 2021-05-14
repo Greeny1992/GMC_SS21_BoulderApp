@@ -40,8 +40,8 @@ const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: Bo
                             <Text style={BoulderInteractionListStyle.comment}>{interaction.comment}</Text>
                         </View>
                         <View style={BoulderInteractionListStyle.boxauthor}>
-                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.created.toDateString()}</Text>
-                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.user_id + 'Max Musterkletterer'}</Text>
+                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.created}</Text>
+                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.userName}</Text>
                         </View>                          
                     </View>
                 </ListItem>

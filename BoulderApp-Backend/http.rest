@@ -40,12 +40,7 @@ GET http://localhost:3000/boulder/5
 POST http://localhost:3000/boulderInteraction
 content-type: application/json
 
-{
-    "boulderId": 59, 
-    "userId": 2,
-    "comment": "Testkommentar",
-    "status": 1
-}
+{"boulderId": 53, "comment": "Asdf", "status": 1, "title": "Asdf", "userId": 1}
 
 ###
 GET http://localhost:3000/boulderInteraction/59
@@ -74,5 +69,7 @@ content-type: application/json
 {
     "userId": 2
 }
+
+
 
 ###

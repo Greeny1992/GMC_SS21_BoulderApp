@@ -37,7 +37,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             boulder: this.tempBoulder,
             showModal:false,
             selectedInteraction:undefined,
-            boulderInteractions:getCurrentBoulderInteraction(this.tempBoulder?.id??''),
+            boulderInteractions:[] ,
             user_id:''
         }
      
@@ -48,11 +48,15 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             (error)=> console.error(error)
         )
     }
-  
+    componentDidMount(){
+        getCurrentBoulderInteraction(this.tempBoulder.id).then((val: any) => this.setState({boulderInteractions:val}))
+    }
     handleBoulderSearch = (id:string) => getBoulderDetails(id); 
+
     handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
+        console.log("formData.asdfjasldfjlajs")
         storeBoulderInteraction(data,this.state.boulder.id,this.state.user_id)
-        this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id)})
+        getCurrentBoulderInteraction(this.state.boulder.id).then((val: any) => this.setState({boulderInteractions:val}))
     }
     
     handleShowVisibility=(value:boolean):void=>{
@@ -90,7 +94,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
 
     handleNewInteraction = () =>{
         this.setState({
-            selectedInteraction: new BoulderInteraction(this.state.boulder?.id ?? '','')
+            selectedInteraction: new BoulderInteraction(this.state.boulder?.id ?? '',Number(this.state.user_id),"")
         })
         this.showModal();
     }
@@ -125,3 +129,4 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     
 }
 export default DetailBoulder;
+

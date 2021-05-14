@@ -1,4 +1,5 @@
 import { IBoulder, IEditBoulder, INewBoulder } from "../src/data/entities/Boulder";
+import { INewBoulderInteraction, IUpdateBoulderInteraction } from "../src/data/entities/BoulderInteraction";
 
 const baseUrl = "http://localhost:3000";
 export class UserApi {
@@ -83,8 +84,9 @@ export class BoulderApi {
 }
 
 export class BoulderInteractionApi {
+    entityURL = "/boulderInteraction"
     getBoulderInteractions(boulderId?: number) {
-        return fetch(baseUrl + "/boulderInteraction/" + boulderId, {
+        return fetch(baseUrl + this.entityURL +"/"+ boulderId, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
@@ -92,4 +94,34 @@ export class BoulderInteractionApi {
             }
         })
     }
+    createAction(newAction:INewBoulderInteraction){
+        
+        console.log('createAction')
+        console.log(newAction)
+        console.log(baseUrl + this.entityURL)
+        return fetch(baseUrl + this.entityURL , {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(newAction)
+
+            
+        }).then(console.log)
+    }
+    updateAction(updateAction:IUpdateBoulderInteraction){
+        return fetch(baseUrl + this.entityURL +"/"+updateAction.interactionId, {
+            method: 'PUT',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(updateAction)
+
+            
+        }).then(console.log)
+    }
 }
+
+

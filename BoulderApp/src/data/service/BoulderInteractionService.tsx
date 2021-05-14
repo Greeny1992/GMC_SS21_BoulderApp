@@ -4,21 +4,47 @@ import { BoulderInteraction, BoulderInteractionFormData } from "../entities/Boul
 import { BOULDER_INTERACTION_DATA } from "../fakeData/BoulderInteraction";
 let boulder_interaction_data = BOULDER_INTERACTION_DATA;
 
-const getCurrentBoulderInteraction=(boulder_id:any) : BoulderInteraction[]=>{
+const getCurrentBoulderInteraction= async (boulder_id:any)=>{
     const api = new BoulderInteractionApi();
     const test = api.getBoulderInteractions(boulder_id).then(result => {
         return result.json().then(json => {
             const mapedJson = json.map(
-                (boulder: any): BoulderInteraction => {
-                  return new BoulderInteraction(boulder.ID, boulder.userName, boulder.titel, boulder.status, boulder.comment, boulder.createDate, boulder.ID );
+                (action: any): BoulderInteraction => {
+                    console.log("action")
+                    console.log(action)
+                  return new BoulderInteraction(boulder_id, action.userId, action.userName, action.title, action.status, action.comment, action.createDate ,action.ID);
                 })
+            console.log("HASDJFJLSKAFJSJAFJSAJFJLSADJFJASJFSAJLJLFLJK")
+            console.log(mapedJson)
             return mapedJson;
         })
     })
-    return boulder_interaction_data.filter(interaction => interaction.boulder_id === boulder_id  )
+    return test
 }
 export const storeBoulderInteraction = (formData:BoulderInteractionFormData, boulderID:string,userID:string):void=>{
-    let tempBoulder:BoulderInteraction;
+    
+    const api = new BoulderInteractionApi();
+    if(formData.id ==='' ){
+        api.createAction({
+            boulderId:Number(boulderID), 
+            userId: Number(userID),
+            title:formData.title, 
+            comment:formData.comment, 
+            status:formData.status
+        })
+    }else{
+        api.updateAction({
+            boulderId:Number(boulderID), 
+            userId: Number(userID),
+            title:formData.title, 
+            comment:formData.comment, 
+            status:formData.status,
+            interactionId:Number(formData.id)
+        })
+
+    }
+    
+    /* let tempBoulder:BoulderInteraction;
     if(formData.id ==='' ){
         tempBoulder = new BoulderInteraction(boulderID,userID,formData.title,formData.status,formData.comment) 
         tempBoulder.id = Guid.newGuid()
@@ -44,7 +70,7 @@ export const storeBoulderInteraction = (formData:BoulderInteractionFormData, bou
         } else{
             boulder_interaction_data = [...boulder_interaction_data, tempBoulder]
         }
-    }
+    }*/
 }
 export default getCurrentBoulderInteraction;
 
