@@ -38,7 +38,7 @@ Boulder.create = async (
 
 Boulder.get = (userId, result) => {
   sql.query(
-    `SELECT b.ID boulderId, b.bezeichnung ASname, b.farbe colour, b.schwierigkeit difficulty, b.ID_Location locationId, b.Letzte_Bearbeiter lastChangeUserName, b.Letzte_Bearbeitung lastChangeTimestamp, 
+    `SELECT b.ID boulderId, b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.ID_Location locationId, b.Letzte_Bearbeiter lastChangeUserName, b.Letzte_Bearbeitung lastChangeTimestamp, 
     (CASE
         WHEN l.ID IS NOT NULL THEN "true"
         ELSE "false" 
