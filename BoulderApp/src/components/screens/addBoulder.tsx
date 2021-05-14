@@ -77,22 +77,27 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     formState: {errors},
     setValue,
   } = useForm<BoulderFormData>();
+
   const onSubmit = (data: BoulderFormData) => {
     console.log('SAVE');
     clearForm();
   };
+
   const onLocationPickerOpen = useCallback(() => {
     setDifficultyPickerOpen(false);
     setColorPickerOpen(false);
   }, []);
+
   const onDifficultyPickerOpen = useCallback(() => {
     setLocationPickerOpen(false);
     setColorPickerOpen(false);
   }, []);
+
   const onColorPickerOpen = useCallback(() => {
     setLocationPickerOpen(false);
     setDifficultyPickerOpen(false);
   }, []);
+
   const clearForm = () => {
     setValue('title', '');
     setValue('color', 0);
@@ -104,6 +109,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     setValue('like', false);
     setValue('id', '');
   };
+
   const setDefaultForm = () => {
     if (currentBoulder) {
       setValue('title', currentBoulder.title);
@@ -124,7 +130,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     clearForm();
   }
   const closeForm = () => {
-    navigation.navigate('Home');
+    navigation.navigate('HomeScreen');
     clearForm();
   };
   const colorValues = colors();
