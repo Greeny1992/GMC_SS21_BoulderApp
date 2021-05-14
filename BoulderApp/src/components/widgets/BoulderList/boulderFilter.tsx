@@ -26,7 +26,7 @@ const BBottomSheet: React.FC<BBottomSheetProps> = (props: BBottomSheetProps) => 
 
     const {visible, hide, style,locations,title, handleFilter} = props;
     const toggleBottomNavigationView =()=>{hide()}
-    const ItemPickerItems = locations?.map((location )=> {return(   <Picker.Item label={location} value={location}  />)})
+    const ItemPickerItems = locations?.map((location )=> {return(   <Picker.Item key={location} label={location} value={location}  />)})
     const [selectedItem, setSelectedItem ] = useState();
   
     return (

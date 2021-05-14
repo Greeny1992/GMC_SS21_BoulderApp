@@ -120,6 +120,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   if (currentBoulder) {
     formTitle = 'Edit boulder';
     setDefaultForm();
+  } else {
+    clearForm();
   }
   const closeForm = () => {
     navigation.navigate('Home');
@@ -130,13 +132,6 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
 
   //  const regionValues = regions().map((item )=> {return {label: item.name, value:item.id}})
   const regionValues = regions();
-  const onPressImageUpload = () => {
-    launchCamera({mediaType: 'photo'}, res => {
-      if (res && res.uri) {
-        //setImage(res.uri);
-      }
-    });
-  };
 
   const bg = require('../../assets/images/background.jpg');
   return (
@@ -183,16 +178,16 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <IconPicker
-            isOpen={colorPickerOpen}
-            setIsOpen={setColorPickerOpen}
-            items={colorValues}
-            selectedItem={colorValue}
-            setSelectedItem={setColorValue}
-            label="Color"
-            onOpen={onColorPickerOpen}
-            zIndex={2000}
-            zIndexInverse={2000}
-          />
+              isOpen={colorPickerOpen}
+              setIsOpen={setColorPickerOpen}
+              items={colorValues}
+              selectedItem={colorValue}
+              setSelectedItem={setColorValue}
+              label="Color"
+              onOpen={onColorPickerOpen}
+              zIndex={2000}
+              zIndexInverse={2000}
+            />
           )}
           name="color"
           rules={{required: true}}
@@ -252,11 +247,6 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           defaultValue={1}
         />
 
-        <BExtendedButton
-          title="Add image"
-          onPress={() => console.log('t')}
-          underlined={true}
-        />
         <View style={[LayoutStyle.containerRowSpace, {marginTop: 10}]}>
           <BExtendedButton
             underlined={true}

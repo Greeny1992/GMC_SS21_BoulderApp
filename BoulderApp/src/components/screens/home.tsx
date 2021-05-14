@@ -86,7 +86,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         {/* <BText>UserId: {userId}</BText> */}
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
-        <BBottomSheet visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
+        <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
       </View>
     </View>
   );
