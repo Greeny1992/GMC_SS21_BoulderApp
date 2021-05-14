@@ -19,7 +19,7 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:3000/boulder/53
+PUT http://localhost:3000/boulder/59
 content-type: application/json
 
 {
@@ -32,19 +32,15 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3000/boulder
-content-type: application/json
+GET http://localhost:3000/boulder/5
 
-{
-    "userId": "5"
-}
 
 ###
 POST http://localhost:3000/boulderInteraction
 content-type: application/json
 
 {
-    "boulderId": 53, 
+    "boulderId": 59, 
     "userId": 2,
     "comment": "Testkommentar",
     "status": 1
