@@ -55,8 +55,8 @@ Object
     ]
 
 _api/boulder/                         GET  - UC03     -> alle Boulder ohne Einschränkung returnen tkes UserId as parameter
-_api/boulderDetail/{id}               PUT  - UC10     -> spezifischen Boulder updaten und returnen                                         
-_api/boulderDetail                    POST - UC08     -> neuen Boulder erstellen und returnen
+_api/boulder/{id}               PUT  - UC10     -> spezifischen Boulder updaten und returnen                                         
+_api/boulder/                    POST - UC08     -> neuen Boulder erstellen und returnen
 
 Boulder Interaktionen
 _api/boulderInteraction               GET  - UC10     -> boulderId als parameter 

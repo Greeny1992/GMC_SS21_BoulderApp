@@ -1,4 +1,4 @@
-const Boulder = require("../models/boulder.model.js");
+const Boulder = require("../Models/Boulder.js");
 
 // Create and Save a new Boulder
 exports.create = (req, res) => {
@@ -10,43 +10,26 @@ exports.create = (req, res) => {
     }
 
     // Save Boulder in the database
-    Boulder.create(req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.creatorId, (err, data) => {
+    Boulder.create(req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.creatorId, (err, status, data) => {
         if (err)
-            res.status(500).send({
+            res.status(500).json({
                 message:
                     err.message || "Some error occurred while creating the Boulder."
             });
-        else res.send(data);
+        else res.status(status).json({
+            boulderId: data});
     });
 };
 
 // Retrieve all Boulders from the database.
 exports.find = (req, res) => {
-
-    Boulder.get(req.query.userId, (err, data) => {
+    Boulder.get(req.body.userId, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving Boulders."
             });
         else res.send(data);
-    });
-};
-
-// Find a single Boulder with a boulderId
-exports.findOne = (req, res) => {
-    Boulder.findById(req.params.boulderId, req.query.userId, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
-                    message: `Not found Boulder with id ${req.params.boulderId}.`
-                });
-            } else {
-                res.status(500).send({
-                    message: "Error retrieving User with id " + req.params.boulderId
-                });
-            }
-        } else res.send(data);
     });
 };
 
@@ -61,5 +44,17 @@ exports.update = (req, res) => {
 
     console.log(req.body);
 
-    User.updateById(req.params.boulderId,req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.changeUserId, res);
+    Boulder.updateById(req.params.boulderId,req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.changeUserId, (err, status, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Boulder with id ${req.params.boulderId}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving User with id " + req.params.boulderId
+                });
+            }
+        } else res.send(data);
+    });
 };

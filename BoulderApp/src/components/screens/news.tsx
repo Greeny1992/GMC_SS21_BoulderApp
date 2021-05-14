@@ -9,6 +9,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { INews } from "../../data/entities/News";
 import { DefaultNews } from "../../constants/ui";
 import { NEWS_DATA } from "../../data/fakeData/News";
+import { getData } from "../../data/store/store";
 
 export default function NewsScreen(){
     const [news, setNews] = useState<INews[]>()
@@ -20,8 +21,17 @@ export default function NewsScreen(){
         }
     }, [news])
     const onPressLogin = () => {
-        authContext.login(true);
-
+        getData('user').then(user => {
+            if(user && user.userId) {
+                console.log("test")
+                authContext.login(true);
+                authContext.verify(true);
+            } else {
+                authContext.login(true);
+            }
+          }).catch(err => 
+            console.error(err)
+          )
     }
     var testText = [];
     for(var i = 0; i<10; i++) {

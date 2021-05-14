@@ -1,4 +1,4 @@
-const Like = require("../models/like.model.js");
+const Like = require("../Models/Like.js");
 
 // Add a like to a Boulder
 exports.create = (req, res) => {
@@ -11,25 +11,25 @@ exports.create = (req, res) => {
 
     // Create a Like
     const like = new Like({
-        boulderId: req.body.boulderId,
+        boulderId: req.params.boulderId,
         userId: req.body.userId
     });
 
     // Save Like in the database
-    Like.create(like.boulderId, like.userId, (err, data) => {
+    Like.create(like.userId, like.boulderId,  (err, data) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while liking the boulder."
             });
-        else res.send(data);
+        else res.status(200).send(data);
     });
 };
 
 
 // Removes a like from a boulder
 exports.delete = (req, res) => {
-    Like.remove(req.params.boulderId, req.params.userId, (err, data) => {
+    Like.remove(req.body.userId, req.params.boulderId, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -40,6 +40,6 @@ exports.delete = (req, res) => {
                     message: "Could not delete like"
                 });
             }
-        } else res.send({ message: `Like was deleted successfully!` });
+        } else res.status(200).send({ message: `Like was deleted successfully!` });
     });
 };

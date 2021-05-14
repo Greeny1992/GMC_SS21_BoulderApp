@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View} from 'react-native';
+import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
@@ -53,8 +52,16 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     }
 
     const handleSearchInput = (input:string)=> {
-        setSearchText(input)
-        searchBoulderList(searchText)
+        let inputLength = input? input.length : 0;
+        if(inputLength != 0) {
+          setSearchText(input);
+          searchBoulderList(input);
+        }
+        else {
+          setSearchText('');
+          resetBoulderList();
+        }
+        
     }
     //Searching for Boulders
     const searchBoulderList: any = (input: string) => {
@@ -62,17 +69,21 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
             const filteredData = masterDataSource.filter( (item) =>{
                 const itemData = item.title? item.title.toUpperCase() : '';
                 const textData = input.toUpperCase();
-                return itemData.indexOf(textData) > -1;
+                console.log(textData);
+                return itemData.indexOf(textData,0) > -1;
             });
             setFilteredDataSource(filteredData);
-        } else {
-            setFilteredDataSource(masterDataSource);
         }
     };
+
+    const resetBoulderList: any = () => {
+      setFilteredDataSource(masterDataSource);
+    };
+
   return (
-    <View >
+    <View>
       <View >
-        <BText>UserId: {userId}</BText>
+        {/* <BText>UserId: {userId}</BText> */}
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>

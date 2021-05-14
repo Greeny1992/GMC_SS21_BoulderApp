@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, SafeAreaView, KeyboardAvoidingView } from "react-native";
 import { Icon, SearchBar } from "react-native-elements";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
 import { BExtendedButton } from '../../widgets/utils/button';
