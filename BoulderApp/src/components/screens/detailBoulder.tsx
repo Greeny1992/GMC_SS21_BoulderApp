@@ -15,8 +15,9 @@ import { getAllStatus } from '../../data/lookupValues/BoulderInteractionValues';
 import { getData } from '../../data/store/store';
 interface DetailBoulderProps {
     navigation: any,
-    route:Route
-    style:any
+    route:Route,
+    style:any,
+    boulder:IBoulder
 }
 interface BoulderState {
     boulder:any ,
@@ -31,7 +32,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
 
     constructor(props: DetailBoulderProps) {
         super(props);
-        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID )
+        this.tempBoulder = this.props.route.params.boulder
         this.state ={
             boulder: this.tempBoulder,
             showModal:false,

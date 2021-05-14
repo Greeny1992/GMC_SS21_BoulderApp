@@ -18,13 +18,7 @@ export default function Login({ loggedInHandler }: any) {
   const authContext = useContext(AuthContext);
 
   const loginHandler = async () => {
-    const user = {
-      'userId': 1,
-      'userEmail': "hallo@abc"
-    }
-    storeData('user', user)
-    authContext.verify(true);
-    /*const api = new UserApi();
+    const api = new UserApi();
     const body = {
       email: email,
       password: password
@@ -48,7 +42,7 @@ export default function Login({ loggedInHandler }: any) {
     }).catch((error) => {
       console.error(error);
     })
-    */
+    
   };
 
   const createAlert = () =>

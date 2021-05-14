@@ -72,6 +72,9 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [difficultyValue, setDifficultyValue] = useState(null);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
   const [colorValue, setColorValue] = useState(null);
+
+  console.log("currentBoulder")
+  console.log(currentBoulder)
   getData('user').then(user => {
     setUserId(user.userId);  
   }).catch(err => 
@@ -183,7 +186,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="location_id"
-          rules={{required: true}}
+          // rules={{required: true}}
           defaultValue={1}
         />
 
@@ -203,7 +206,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="color"
-          rules={{required: true}}
+          // rules={{required: true}}
           defaultValue={1}
         />
 
@@ -223,7 +226,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="difficulty"
-          rules={{required: true}}
+          // rules={{required: true}}
           defaultValue={1}
         />
 

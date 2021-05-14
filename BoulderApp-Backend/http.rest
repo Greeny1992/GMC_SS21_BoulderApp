@@ -23,7 +23,7 @@ PUT http://localhost:3000/boulder/53
 content-type: application/json
 
 {
-    "name": "Testersdfsdfsdf",
+    "name": "Awesome Boulder",
     "colour": 1,
     "difficulty": 1,
     "locationId": 1,

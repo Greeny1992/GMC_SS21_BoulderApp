@@ -29,7 +29,8 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         getData('user').then(user => {
           setUserId(user.userId); 
           getBoulderData(user.userId).then((val: any) => {
-            setFilteredDataSource(val)}) 
+            setFilteredDataSource(val);
+            console.log(val)}) 
         }).catch(err => 
           console.error(err)
         )
@@ -63,9 +64,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         boulderID: -1,
         });
     };
-    const handleBoulderSelect = (id:string) => {
+    const handleBoulderSelect = (boulder:IBoulder) => {
         navigation.navigate('DetailBoulderScreen', {
-            boulderID:id,
+            boulder:boulder,
         })
     }
 
