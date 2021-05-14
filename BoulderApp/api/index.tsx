@@ -1,3 +1,4 @@
+import { IBoulder, INewBoulder } from "../src/data/entities/Boulder";
 
 const baseUrl = "http://localhost:3000";
 export class UserApi {
@@ -22,5 +23,34 @@ export class BoulderApi {
                 'Content-Type': 'application/json'
             }
         })
+    }
+
+    createBoulder(newBoulder:INewBoulder){
+        console.log('createBoulder')
+        console.log(newBoulder)
+        return fetch(baseUrl + "/boulder/", {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(newBoulder)
+
+            
+        }).then(console.log)
+    }
+    updateBoulder(updateBoulder:INewBoulder,boulderID:number){
+        console.log('updateBoulder')
+        console.log(updateBoulder)
+        return fetch(`${baseUrl}/boulder/${boulderID}`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(updateBoulder)
+
+            
+        }).then(console.log)
     }
 }

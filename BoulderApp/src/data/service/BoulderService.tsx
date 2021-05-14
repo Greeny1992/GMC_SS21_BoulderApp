@@ -59,29 +59,22 @@ export const getBoulderData = async (userId?: number) => {
 export const getBoulderDetails = (id: string) => {
   return getData('BoulderList').then(res => {return res.find((boulder: any) => boulder.id === id)});
 };
-export const storeBoulder = (formData:BoulderFormData,userID:string):void=>{
+export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:number):void=>{
+    const api = new BoulderApi();
+    const boulderData = {
+      creatorId:   Number(userID),
+      name:         formData.title,
+      colour:       formData.color,
+      difficulty:   formData.difficulty,
+      locationId:  Number(formData.location_id)
+    };
     console.log("store DATA")
-    console.log(formData);
-    if(formData.id ===''){
-        BOULDER_DATA.push(
-                {
-                    id: String(new Guid()),
-                    title: formData.title,
-                    color: formData.color,
-                    difficulty: formData.difficulty,
-                    img:formData.img,
-                    created: new Date(),
-                    location_id:formData.location_id,
-                    creator_id:userID,
-                    like:true
-                  }
-    
-        )
+    console.log(boulderData);
+    if(boulderID){
+      api.updateBoulder(boulderData,boulderID)
     }else{
-        //const tempBoulder = getBoulderData().filter(boulder => boulder.id === formData.id)
-        // tempBoulder = {
-            
-        // }
+      api.createBoulder(boulderData)
     }
+        
     
 }

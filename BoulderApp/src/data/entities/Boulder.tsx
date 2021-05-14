@@ -21,7 +21,13 @@ export type BoulderFormData = {
         like:boolean;
         id:string;
 }
-
+export interface INewBoulder {
+        creatorId:number,
+        name:string,
+        colour:number,
+        difficulty: number,
+        locationId: number
+}
 export class Boulder implements IBoulder{
         id:string;
         title:string;
