@@ -5,7 +5,7 @@ const boulder = require("../Controllers/boulderController.js");
 
 
 // Retrieve all Boulders
-router.get("", boulder.find);
+router.get("/:userId", boulder.find);
 
 // Create a new Boulder
 router.post("",[

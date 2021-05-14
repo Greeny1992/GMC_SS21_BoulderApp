@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
@@ -18,17 +18,35 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const {navigation } = props;
     const [searchText, setSearchText] = useState('');
-    const [userId, setUserId] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState(getBoulderData());
-    const [masterDataSource, setMasterDataSource] = useState(filteredDataSource);
+    const [userId, setUserId] = useState();
+    const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
+    const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
   
-    getData('user').then(user => {
-      setUserId(user.userId);  
-    }).catch(err => 
-      console.error(err)
-    )
+    useEffect(() => {
+      if(!userId){
+        getData('user').then(user => {
+          setUserId(user.userId); 
+          getBoulderData(user.userId).then((val: any) => {
+            setFilteredDataSource(val)}) 
+        }).catch(err => 
+          console.error(err)
+        )
+      }
+    }, [userId])
+
+    useEffect(() => {
+      if(!masterDataSource){
+        setMasterDataSource(filteredDataSource)
+      }
+    }, [filteredDataSource])
+
+    // useEffect(() => {
+    //   if(!masterDataSource)
+    //     setMasterDataSource(filteredDataSource)
+    // }, [masterDataSource])
+
     const handleFilter =(value:string,type:string)=>{
       const filteredLocation = getAllLocations().filter( (item) =>{
         switch(type){
@@ -36,9 +54,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
           case "region" : item.region === value; break;
         }
         });
-      const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
-      console.log(filteredBoulder)
-      setFilteredDataSource(filteredBoulder);
+      //const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
+      //console.log(filteredBoulder)
+      //setFilteredDataSource(filteredBoulder);
     }
     const handleAddBoulder = () => {
         navigation.navigate('AddBoulderScreen', {
@@ -66,13 +84,13 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     //Searching for Boulders
     const searchBoulderList: any = (input: string) => {
         if (input) {
-            const filteredData = masterDataSource.filter( (item) =>{
-                const itemData = item.title? item.title.toUpperCase() : '';
-                const textData = input.toUpperCase();
-                console.log(textData);
-                return itemData.indexOf(textData,0) > -1;
-            });
-            setFilteredDataSource(filteredData);
+            // const filteredData = masterDataSource.filter( (item) =>{
+            //     const itemData = item.title? item.title.toUpperCase() : '';
+            //     const textData = input.toUpperCase();
+            //     console.log(textData);
+            //     return itemData.indexOf(textData,0) > -1;
+            // });
+            // setFilteredDataSource(filteredData);
         }
     };
 
@@ -83,7 +101,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
   return (
     <View>
       <View >
-        {/* <BText>UserId: {userId}</BText> */}
+        {<BText>UserId: {userId}</BText> }
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>

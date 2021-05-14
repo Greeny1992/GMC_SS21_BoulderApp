@@ -23,7 +23,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Boulders from the database.
 exports.find = (req, res) => {
-    Boulder.get(req.body.userId, (err, data) => {
+    Boulder.get(req.params.userId, (err, data) => {
         if (err)
             res.status(500).send({
                 message:

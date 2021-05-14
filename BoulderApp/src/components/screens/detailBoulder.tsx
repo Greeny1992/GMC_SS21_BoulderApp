@@ -19,19 +19,19 @@ interface DetailBoulderProps {
     style:any
 }
 interface BoulderState {
-    boulder:IBoulder ,
+    boulder:any ,
     showModal:boolean,
     selectedInteraction:BoulderInteraction|undefined,
     boulderInteractions:BoulderInteraction[],
     user_id:string,
 }
 class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
-    tempBoulder : IBoulder | undefined;
+    tempBoulder;
     statusValues = getAllStatus();
 
     constructor(props: DetailBoulderProps) {
         super(props);
-        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ) as IBoulder
+        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID )
         this.state ={
             boulder: this.tempBoulder,
             showModal:false,
@@ -48,7 +48,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         )
     }
   
-    handleBoulderSearch = (id:string):IBoulder | undefined => getBoulderDetails(id); 
+    handleBoulderSearch = (id:string) => getBoulderDetails(id); 
     handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
         storeBoulderInteraction(data,this.state.boulder.id,this.state.user_id)
         this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id)})

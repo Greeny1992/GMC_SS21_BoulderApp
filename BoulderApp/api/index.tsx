@@ -12,3 +12,15 @@ export class UserApi {
         })
     }
 }
+
+export class BoulderApi {
+    getBoulderList(userID?: number){
+        return fetch(baseUrl + "/boulder/" + userID, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+}
