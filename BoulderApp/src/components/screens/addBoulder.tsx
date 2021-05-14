@@ -63,6 +63,7 @@ interface AddBoulderProps {
   route: any;
 }
 const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
+  let isEditmode=false;
   const {navigation, route} = props;
   const [userId, setUserId] = useState('');
   const currentBoulder = route.params.boulder as IBoulder;
@@ -73,8 +74,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
   const [colorValue, setColorValue] = useState(null);
 
-  console.log("currentBoulder")
-  console.log(currentBoulder)
+
   getData('user').then(user => {
     setUserId(user.userId);  
   }).catch(err => 
@@ -89,8 +89,14 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   } = useForm<BoulderFormData>();
 
   const onSubmit: SubmitHandler<BoulderFormData> = data => {
+    console.log('---')
     console.log('SAVE: ', data);
-    storeBoulder(data,userId);
+ 
+    storeBoulder(data,userId,Number(currentBoulder?.id));
+   
+    navigation.navigate('HomeScreen',
+      {update:true}
+    );
   };
 
   const onLocationPickerOpen = useCallback(() => {
@@ -108,40 +114,14 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     setDifficultyPickerOpen(false);
   }, []);
 
-  const clearForm = () => {
-    setValue('title', '');
-    setValue('color', 0);
-    setValue('difficulty', 0);
-    setValue('img', '');
-    setValue('location_id', '');
-    setValue('boulder_id', '');
-    setValue('topped', false);
-    setValue('like', false);
-    setValue('id', '');
-  };
 
-  const setDefaultForm = () => {
-    if (currentBoulder) {
-      setValue('title', currentBoulder.title);
-      setValue('color', currentBoulder.color);
-      setValue('difficulty', currentBoulder.difficulty);
-      setValue('img', currentBoulder.img);
-      setValue('location_id', currentBoulder.location_id);
-      setValue('boulder_id', currentBoulder.id);
-      setValue('topped', currentBoulder?.topped ?? false);
-      setValue('like', currentBoulder.like);
-      setValue('id', currentBoulder.id);
-    }
-  };
+
   if (currentBoulder) {
     formTitle = 'Edit boulder';
-    setDefaultForm();
-  } else {
-    clearForm();
+    isEditmode=true;
   }
   const closeForm = () => {
     navigation.navigate('HomeScreen');
-    clearForm();
   }
 
   //Dropdownvalues
@@ -167,7 +147,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           )}
           name="title"
           rules={{required: true}}
-          defaultValue={control.defaultValuesRef}
+          defaultValue={currentBoulder?.title}
         />
         {errors.title && <Text>This is required.</Text>}
         <Controller
@@ -187,7 +167,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           )}
           name="location_id"
           // rules={{required: true}}
-          defaultValue={1}
+          defaultValue={currentBoulder?.location_id}
         />
 
         <Controller
@@ -207,7 +187,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           )}
           name="color"
           // rules={{required: true}}
-          defaultValue={1}
+          defaultValue={currentBoulder?.color}
         />
 
         <Controller
@@ -230,38 +210,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           defaultValue={1}
         />
 
-        <Controller
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <View style={styles.formrow}>
-              <CheckBox
-                value={value}
-                onValueChange={onChange}
-                style={styles.checkbox}
-              />
-              <BText>Boulder has been topped</BText>
-            </View>
-          )}
-          name="topped"
-          rules={{required: true}}
-          defaultValue={1}
-        />
-        <Controller
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <View style={styles.formrow}>
-              <CheckBox
-                value={value}
-                onValueChange={onChange}
-                style={styles.checkbox}
-              />
-              <BText>Like this boulder</BText>
-            </View>
-          )}
-          name="like"
-          rules={{required: true}}
-          defaultValue={1}
-        />
+   
 
         <View style={[LayoutStyle.containerRowSpace, {marginTop: 10}]}>
           <BExtendedButton

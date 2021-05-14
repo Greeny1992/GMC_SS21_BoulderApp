@@ -29,7 +29,6 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
 export const getBoulderData = async (userId?: number) => {
   let test;
   getData("connected").then(console.log)
-      console.log("connected")
     const api = new BoulderApi();
     test = await api.getBoulderList(userId).then(res => {
       return res.json().then(json => {
@@ -59,29 +58,36 @@ export const getBoulderData = async (userId?: number) => {
 export const getBoulderDetails = (id: string) => {
   return getData('BoulderList').then(res => {return res.find((boulder: any) => boulder.id === id)});
 };
-export const storeBoulder = (formData:BoulderFormData,userID:string):void=>{
-    console.log("store DATA")
-    console.log(formData);
-    if(formData.id ===''){
-        BOULDER_DATA.push(
-                {
-                    id: String(new Guid()),
-                    title: formData.title,
-                    color: formData.color,
-                    difficulty: formData.difficulty,
-                    img:formData.img,
-                    created: new Date(),
-                    location_id:formData.location_id,
-                    creator_id:userID,
-                    like:true
-                  }
-    
-        )
+export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:number):void=>{
+    const api = new BoulderApi();
+  
+    if(boulderID){
+      console.log("UPDATE "+boulderID)
+      const boulderData = {
+        userId:   Number(userID),
+        name:         formData.title,
+        colour:       formData.color,
+        difficulty:   formData.difficulty,
+        locationId:  Number(formData.location_id)
+      };
+      api.updateBoulder(boulderData,boulderID)
     }else{
-        //const tempBoulder = getBoulderData().filter(boulder => boulder.id === formData.id)
-        // tempBoulder = {
-            
-        // }
-    }
-    
+      const boulderData = {
+        creatorId:   Number(userID),
+        name:         formData.title,
+        colour:       formData.color,
+        difficulty:   formData.difficulty,
+        locationId:  Number(formData.location_id)
+      };
+      api.createBoulder(boulderData)
+    }  
+}
+
+export const updateLike = (boulderId:number, userId:number,like:boolean) =>{
+  const api = new BoulderApi();
+  if(like){
+    api.disLikeBoulder(boulderId,userId)
+  }else{
+    api.likeBoulder(boulderId,userId)
+  }
 }

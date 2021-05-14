@@ -6,7 +6,7 @@ import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
-import { getBoulderDetails } from '../../data/service/BoulderService';
+import { getBoulderDetails, updateLike } from '../../data/service/BoulderService';
 import BoulderInteractionModal from '../widgets/BoulderInteractionList/boulderInteractionModal';
 import { BoulderInteraction, BoulderInteractionFormData } from '../../data/entities/BoulderInteraction';
 import getCurrentBoulderInteraction, { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
@@ -67,6 +67,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     toggleLike = (state:BoulderState)=>{
         const t = this.state.boulder;
         if(t){
+            updateLike(t.id, Number(this.state.user_id),t.like)
             t.like=!t.like ;
             this.setState({
                 boulder : t

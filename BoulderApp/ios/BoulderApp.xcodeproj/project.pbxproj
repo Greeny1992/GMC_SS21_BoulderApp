@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* BoulderAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BoulderAppTests.m */; };
-		04360646FFF79BBC0F7B353D /* libPods-BoulderApp-BoulderAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236C87BB5D9DBFDF2BF1277F /* libPods-BoulderApp-BoulderAppTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		A3AE08F5E462C4EF9BD0CCE4 /* libPods-BoulderApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2991A21C96A13F0E25C8B699 /* libPods-BoulderApp.a */; };
+		BFECB061F617D23A97F3447F /* libPods-BoulderApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AED52C7FCD9A3C373102AA5B /* libPods-BoulderApp.a */; };
+		D21944B8676FB1CE865CE19D /* libPods-BoulderApp-BoulderAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF03BAEA98B4995D075C1486 /* libPods-BoulderApp-BoulderAppTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,20 +30,20 @@
 		00E356EE1AD99517003FC87E /* BoulderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoulderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BoulderAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoulderAppTests.m; sourceTree = "<group>"; };
-		1193276C58C20F58DF3697DD /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp-BoulderAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		11D90024775B39FE6F67C609 /* Pods-BoulderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp.debug.xcconfig"; path = "Target Support Files/Pods-BoulderApp/Pods-BoulderApp.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BoulderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoulderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BoulderApp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = BoulderApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BoulderApp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BoulderApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BoulderApp/main.m; sourceTree = "<group>"; };
-		1ECD3F403E8B34A267599770 /* Pods-BoulderApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp.debug.xcconfig"; path = "Target Support Files/Pods-BoulderApp/Pods-BoulderApp.debug.xcconfig"; sourceTree = "<group>"; };
-		236C87BB5D9DBFDF2BF1277F /* libPods-BoulderApp-BoulderAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoulderApp-BoulderAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2991A21C96A13F0E25C8B699 /* libPods-BoulderApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoulderApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B280129A9F3C2AD5E296AE5 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp-BoulderAppTests.release.xcconfig"; path = "Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		6EA16B1DD118C5B5CE24AEFA /* Pods-BoulderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp.release.xcconfig"; path = "Target Support Files/Pods-BoulderApp/Pods-BoulderApp.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BoulderApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BF70D1DF9014F7134B0D59FC /* Pods-BoulderApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp.release.xcconfig"; path = "Target Support Files/Pods-BoulderApp/Pods-BoulderApp.release.xcconfig"; sourceTree = "<group>"; };
+		AED52C7FCD9A3C373102AA5B /* libPods-BoulderApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoulderApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C507CF0BA19EE9011BE383B6 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp-BoulderAppTests.release.xcconfig"; path = "Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF03BAEA98B4995D075C1486 /* libPods-BoulderApp-BoulderAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoulderApp-BoulderAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FE5C9F71459C94B26B28A3A3 /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoulderApp-BoulderAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04360646FFF79BBC0F7B353D /* libPods-BoulderApp-BoulderAppTests.a in Frameworks */,
+				D21944B8676FB1CE865CE19D /* libPods-BoulderApp-BoulderAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3AE08F5E462C4EF9BD0CCE4 /* libPods-BoulderApp.a in Frameworks */,
+				BFECB061F617D23A97F3447F /* libPods-BoulderApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,10 +100,22 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				2991A21C96A13F0E25C8B699 /* libPods-BoulderApp.a */,
-				236C87BB5D9DBFDF2BF1277F /* libPods-BoulderApp-BoulderAppTests.a */,
+				AED52C7FCD9A3C373102AA5B /* libPods-BoulderApp.a */,
+				DF03BAEA98B4995D075C1486 /* libPods-BoulderApp-BoulderAppTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C258782F9099479E1EE7F0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				11D90024775B39FE6F67C609 /* Pods-BoulderApp.debug.xcconfig */,
+				6EA16B1DD118C5B5CE24AEFA /* Pods-BoulderApp.release.xcconfig */,
+				FE5C9F71459C94B26B28A3A3 /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */,
+				C507CF0BA19EE9011BE383B6 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -121,7 +133,7 @@
 				00E356EF1AD99517003FC87E /* BoulderAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				C75969B71B91A28C932A9C16 /* Pods */,
+				5C258782F9099479E1EE7F0B /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -137,18 +149,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C75969B71B91A28C932A9C16 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1ECD3F403E8B34A267599770 /* Pods-BoulderApp.debug.xcconfig */,
-				BF70D1DF9014F7134B0D59FC /* Pods-BoulderApp.release.xcconfig */,
-				1193276C58C20F58DF3697DD /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */,
-				4B280129A9F3C2AD5E296AE5 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,12 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "BoulderAppTests" */;
 			buildPhases = (
-				93A2B119F15C5E519C0A0C65 /* [CP] Check Pods Manifest.lock */,
+				4517FE33450FF5982822381D /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				FEE65EC7BE610701F92FF94F /* [CP] Embed Pods Frameworks */,
-				A340AEAD8D459547FE425A15 /* [CP] Copy Pods Resources */,
+				E874DDED803ED6F8AF692041 /* [CP] Embed Pods Frameworks */,
+				8FF42EDD117A8F6D76996B4D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,14 +177,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "BoulderApp" */;
 			buildPhases = (
-				A9DF3D0210F3EB6B1C2D2F61 /* [CP] Check Pods Manifest.lock */,
+				7CA56E0C40ADB5EFB45880F0 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				C0B20168A7766071E7CEF71A /* [CP] Embed Pods Frameworks */,
-				C9A611A178E685FA6828FC07 /* [CP] Copy Pods Resources */,
+				F4863A73C017C439461989B7 /* [CP] Embed Pods Frameworks */,
+				6E677CA196D856CE31642485 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -265,7 +265,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		93A2B119F15C5E519C0A0C65 /* [CP] Check Pods Manifest.lock */ = {
+		4517FE33450FF5982822381D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -287,24 +287,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A340AEAD8D459547FE425A15 /* [CP] Copy Pods Resources */ = {
+		6E677CA196D856CE31642485 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A9DF3D0210F3EB6B1C2D2F61 /* [CP] Check Pods Manifest.lock */ = {
+		7CA56E0C40ADB5EFB45880F0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -326,7 +326,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0B20168A7766071E7CEF71A /* [CP] Embed Pods Frameworks */ = {
+		8FF42EDD117A8F6D76996B4D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E874DDED803ED6F8AF692041 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4863A73C017C439461989B7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -341,23 +375,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9A611A178E685FA6828FC07 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp/Pods-BoulderApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -377,23 +394,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FEE65EC7BE610701F92FF94F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoulderApp-BoulderAppTests/Pods-BoulderApp-BoulderAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -429,7 +429,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1193276C58C20F58DF3697DD /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */;
+			baseConfigurationReference = FE5C9F71459C94B26B28A3A3 /* Pods-BoulderApp-BoulderAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -456,7 +456,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B280129A9F3C2AD5E296AE5 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */;
+			baseConfigurationReference = C507CF0BA19EE9011BE383B6 /* Pods-BoulderApp-BoulderAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -480,7 +480,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1ECD3F403E8B34A267599770 /* Pods-BoulderApp.debug.xcconfig */;
+			baseConfigurationReference = 11D90024775B39FE6F67C609 /* Pods-BoulderApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -506,7 +506,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF70D1DF9014F7134B0D59FC /* Pods-BoulderApp.release.xcconfig */;
+			baseConfigurationReference = 6EA16B1DD118C5B5CE24AEFA /* Pods-BoulderApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

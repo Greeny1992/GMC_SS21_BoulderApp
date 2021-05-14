@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Button, View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
@@ -9,13 +9,18 @@ import { getData } from "../../data/store/store";
 import BBottomSheet from '../widgets/BoulderList/boulderFilter';
 import { getAllLocations, getDistinctLocations } from '../../data/service/LocationService';
 import { ILocationFilterValues } from '../../data/entities/Location';
+import { useRoute } from '@react-navigation/native';
+import BButton from '../widgets/utils/button';
 
 interface HomeProps {
   style?: any;
   navigation: any;
+  route:any
 }
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
+    const route = useRoute();
+
     const {navigation } = props;
     const [searchText, setSearchText] = useState('');
     const [userId, setUserId] = useState();
@@ -23,14 +28,24 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
-  
+    const {update} = route?.params;
+    console.log(update)
+    console.log(route?.params)
+    if(update){
+      navigation.setParams({update:false})
+      
+      getBoulderData(userId).then((val: any) => {
+        setFilteredDataSource(val);
+      }) 
+    }
+ 
     useEffect(() => {
       if(!userId){
         getData('user').then(user => {
           setUserId(user.userId); 
           getBoulderData(user.userId).then((val: any) => {
             setFilteredDataSource(val);
-            console.log(val)}) 
+          }) 
         }).catch(err => 
           console.error(err)
         )
@@ -38,7 +53,9 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     }, [userId])
 
     useEffect(() => {
+      console.log("filteredDataSource")
       if(!masterDataSource){
+        console.log(filteredDataSource)
         setMasterDataSource(filteredDataSource)
       }
     }, [filteredDataSource])
@@ -55,9 +72,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
           case "region" : item.region === value; break;
         }
         });
-      //const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
-      //console.log(filteredBoulder)
-      //setFilteredDataSource(filteredBoulder);
+      const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
+      console.log("filteredBoulder---------------------")
+      console.log(filteredBoulder)
+      setFilteredDataSource(filteredBoulder);
     }
     const handleAddBoulder = () => {
         navigation.navigate('AddBoulderScreen', {
@@ -82,16 +100,25 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
         
     }
+    const refresh =()=>{
+      console.log("RELOAD-1");
+
+      getBoulderData(userId).then((val: any) => {
+        console.log("RELOAD-2");
+        console.log(val)
+        setFilteredDataSource(val);
+      }) 
+    }
     //Searching for Boulders
     const searchBoulderList: any = (input: string) => {
         if (input) {
-            // const filteredData = masterDataSource.filter( (item) =>{
-            //     const itemData = item.title? item.title.toUpperCase() : '';
-            //     const textData = input.toUpperCase();
-            //     console.log(textData);
-            //     return itemData.indexOf(textData,0) > -1;
-            // });
-            // setFilteredDataSource(filteredData);
+            const filteredData = masterDataSource.filter( (item) =>{
+                const itemData = item.title? item.title.toUpperCase() : '';
+                const textData = input.toUpperCase();
+                console.log(textData);
+                return itemData.indexOf(textData,0) > -1;
+            });
+            setFilteredDataSource(filteredData);
         }
     };
 
@@ -101,6 +128,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
   return (
     <View>
+      <Button onPress={refresh} title="Title" />
       <View >
         {<BText>UserId: {userId}</BText> }
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>

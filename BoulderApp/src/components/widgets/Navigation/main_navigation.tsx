@@ -31,7 +31,9 @@ const MainNavigation = () => {
                   <TouchableOpacity onPress={onPressLogout} style={{padding: ScreenSizes.layout_distance}}>
                     <Icon  name="logout" color="#df4040"/>
                   </TouchableOpacity>
-                )}} />
+                )}} 
+                initialParams={{ update: false }}
+                />
             <MainStack.Screen name="ListScreen" component={Home} />
             <MainStack.Screen name="AddBoulderScreen" component={AddBoulder} />
             <MainStack.Screen name="DetailBoulderScreen" component={DetailBoulder} />

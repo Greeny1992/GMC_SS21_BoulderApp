@@ -16,7 +16,7 @@ interface IconPickerProps {
   setSelectedItem: any;
   isOpen: boolean;
   setIsOpen: any;
-  onOpen: any;
+  onOpen?: any;
   zIndex: any;
   zIndexInverse: any
 }
