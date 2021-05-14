@@ -10,7 +10,7 @@ const BoulderInteraction = function(boulderInteraction) {
 
 BoulderInteraction.getRecent = async (boulderId, result) => {
     try {
-        const dbResult = await sql.promise().query("SELECT a.ID, a.Kommentar comment, a.status, b.name userName FROM boulderinteraction_user_assigned a, user b WHERE a.ID_User = b.ID AND a.ID_Boulder = ? ORDER BY Erstellt DESC"
+        const dbResult = await sql.promise().query("SELECT a.ID, a.Kommentar comment, a.status, b.name userName, a.Erstellt createDate FROM boulderinteraction_user_assigned a, user b WHERE a.ID_User = b.ID AND a.ID_Boulder = ? ORDER BY Erstellt DESC"
         , [boulderId]);
         result(null,200,dbResult[0])
     } catch (error) {

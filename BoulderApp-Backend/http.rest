@@ -48,7 +48,7 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/boulderInteraction/53
+GET http://localhost:3000/boulderInteraction/59
 
 ###
 PUT http://localhost:3000/boulderInteraction/1

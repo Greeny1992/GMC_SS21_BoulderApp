@@ -25,6 +25,8 @@ export class BoulderApi {
         })
     }
 
+
+
     createBoulder(newBoulder:INewBoulder){
         console.log('createBoulder')
         console.log(newBoulder)
@@ -76,5 +78,17 @@ export class BoulderApi {
             },
             body:JSON.stringify({userId:userId})
         }).then(console.log)
+    }
+}
+
+export class BoulderInteractionApi {
+    getBoulderInteractions(boulderId?: number) {
+        return fetch(baseUrl + "/boulderInteraction/" + boulderId, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }
