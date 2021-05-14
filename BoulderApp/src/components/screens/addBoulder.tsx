@@ -82,21 +82,14 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     clearForm();
   };
   const onLocationPickerOpen = useCallback(() => {
-    console.log('LOCATION');
-    setLocationPickerOpen(true);
     setDifficultyPickerOpen(false);
     setColorPickerOpen(false);
-    console.log(colorPickerOpen);
-    console.log(difficultyPickerOpen);
   }, []);
   const onDifficultyPickerOpen = useCallback(() => {
-    console.log('Difficulty');
-    setDifficultyPickerOpen(true);
     setLocationPickerOpen(false);
     setColorPickerOpen(false);
   }, []);
   const onColorPickerOpen = useCallback(() => {
-    console.log('Color');
     setLocationPickerOpen(false);
     setDifficultyPickerOpen(false);
   }, []);
@@ -148,7 +141,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const bg = require('../../assets/images/background.jpg');
   return (
     <ImageBackground source={bg} style={styles.background}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, width: '80%'}}>
         <BTitle label={formTitle} color="white" />
 
         <Controller
@@ -176,6 +169,9 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               selectedItem={locationValue}
               setSelectedItem={setLocationValue}
               label="Location"
+              onOpen={onLocationPickerOpen}
+              zIndex={3000}
+              zIndexInverse={1000}
             />
           )}
           name="location_id"
@@ -193,6 +189,9 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             selectedItem={colorValue}
             setSelectedItem={setColorValue}
             label="Color"
+            onOpen={onColorPickerOpen}
+            zIndex={2000}
+            zIndexInverse={2000}
           />
           )}
           name="color"
@@ -210,6 +209,9 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               selectedItem={difficultyValue}
               setSelectedItem={setDifficultyValue}
               label="Difficulty"
+              onOpen={onDifficultyPickerOpen}
+              zIndex={1000}
+              zIndexInverse={3000}
             />
           )}
           name="difficulty"

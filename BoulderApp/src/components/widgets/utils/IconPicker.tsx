@@ -16,11 +16,13 @@ interface IconPickerProps {
   setSelectedItem: any;
   isOpen: boolean;
   setIsOpen: any;
-
+  onOpen: any;
+  zIndex: any;
+  zIndexInverse: any
 }
 
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
-  const {items,label,containerStyle, selectedItem, setSelectedItem, isOpen, setIsOpen, style} = props
+  const {items,label,containerStyle, selectedItem, setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
   const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
   return (
     <View style={[containerStyle
@@ -32,6 +34,7 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
     ]}>
         {label ? <BLabel label={label}/> : <></>}
         <DropDownPicker
+          onOpen={onOpen}
           items={ItemPickerItems}
           value={selectedItem}
           setValue={setSelectedItem}
@@ -43,23 +46,10 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
               justifyContent: 'flex-start', 
           }}
           dropDownContainerStyle={{backgroundColor: '#fafafa'}}
+          zIndex={zIndex}
+          zIndexInverse={zIndexInverse}
         />
-        {/* <DropDownPicker
-            open={isOpen}
-            setOpen={setIsOpen}
-            setValue={setValue}
-            items={ItemPickerItems}
-            placeholder={placeholder}
-            value={selectedItem}
-            containerStyle={[{height: 40}]}
-            style={[{backgroundColor: '#fafafa'},style]}
-            labelStyle={{
-                justifyContent: 'flex-start', 
-            }}
-            dropDownContainerStyle={{backgroundColor: '#fafafa'}}
-            onChangeValue={(item:any) => handleChange(item)}
-            
-        /> */}
+
     </View>
     
   );
