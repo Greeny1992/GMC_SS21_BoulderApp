@@ -14,7 +14,6 @@ import { getData } from "../../data/store/store";
 export default function NewsScreen(){
     const [news, setNews] = useState<INews[]>()
     const authContext = useContext(AuthContext);
-
     useEffect(() => {
         if(!news){
             setNews(NEWS_DATA)
@@ -23,7 +22,6 @@ export default function NewsScreen(){
     const onPressLogin = () => {
         getData('user').then(user => {
             if(user && user.userId) {
-                console.log("test")
                 authContext.login(true);
                 authContext.verify(true);
             } else {

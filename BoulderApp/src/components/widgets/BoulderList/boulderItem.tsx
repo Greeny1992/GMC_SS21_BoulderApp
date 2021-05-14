@@ -21,7 +21,7 @@ const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemP
           <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
         </View>
         <View style={BoulderListStyle.itemsgroupdate}>
-          <BText style={BoulderListStyle.date}>{item.created.toDateString()}</BText>
+          <BText style={BoulderListStyle.date}>{item.created}</BText>
         </View>    
 
         <View style={BoulderListStyle.itemsgroup}>
