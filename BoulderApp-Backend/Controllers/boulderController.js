@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     }
 
     // Save Boulder in the database
-    Boulder.create(req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.creatorId, (err, status, data) => {
+    Boulder.create(req.body.name, req.body.colour, req.body.difficulty, req.body.locationId, req.body.creatorId, (err, status, data) => {
         if (err)
             res.status(500).json({
                 message:
@@ -44,7 +44,7 @@ exports.update = (req, res) => {
 
     console.log(req.body);
 
-    Boulder.updateById(req.params.boulderId,req.body.name, req.body.colour, req.body.difficulty, req.body.photo, req.body.locationId, req.body.changeUserId, (err, status, data) => {
+    Boulder.updateById(req.params.boulderId,req.body.name, req.body.colour, req.body.difficulty, req.body.locationId, req.body.userId, (err, status, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
