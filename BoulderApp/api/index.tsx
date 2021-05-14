@@ -24,3 +24,15 @@ export class BoulderApi {
         })
     }
 }
+
+export class BoulderInteractionApi {
+    getBoulderInteractions(boulderId?: number){
+        return fetch(baseUrl + "/boulderInteraction/" + boulderId, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+}
