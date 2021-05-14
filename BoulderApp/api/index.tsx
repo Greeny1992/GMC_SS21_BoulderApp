@@ -1,4 +1,4 @@
-import { IBoulder, INewBoulder } from "../src/data/entities/Boulder";
+import { IBoulder, IEditBoulder, INewBoulder } from "../src/data/entities/Boulder";
 
 const baseUrl = "http://localhost:3000";
 export class UserApi {
@@ -39,11 +39,11 @@ export class BoulderApi {
             
         }).then(console.log)
     }
-    updateBoulder(updateBoulder:INewBoulder,boulderID:number){
+    updateBoulder(updateBoulder:IEditBoulder,boulderID:number){
         console.log('updateBoulder')
         console.log(updateBoulder)
         return fetch(`${baseUrl}/boulder/${boulderID}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'

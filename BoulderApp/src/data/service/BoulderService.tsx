@@ -29,7 +29,6 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
 export const getBoulderData = async (userId?: number) => {
   let test;
   getData("connected").then(console.log)
-      console.log("connected")
     const api = new BoulderApi();
     test = await api.getBoulderList(userId).then(res => {
       return res.json().then(json => {
@@ -61,18 +60,25 @@ export const getBoulderDetails = (id: string) => {
 };
 export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:number):void=>{
     const api = new BoulderApi();
-    const boulderData = {
-      creatorId:   Number(userID),
-      name:         formData.title,
-      colour:       formData.color,
-      difficulty:   formData.difficulty,
-      locationId:  Number(formData.location_id)
-    };
-    console.log("store DATA")
-    console.log(boulderData);
+  
     if(boulderID){
+      console.log("UPDATE "+boulderID)
+      const boulderData = {
+        userId:   Number(userID),
+        name:         formData.title,
+        colour:       formData.color,
+        difficulty:   formData.difficulty,
+        locationId:  Number(formData.location_id)
+      };
       api.updateBoulder(boulderData,boulderID)
     }else{
+      const boulderData = {
+        creatorId:   Number(userID),
+        name:         formData.title,
+        colour:       formData.color,
+        difficulty:   formData.difficulty,
+        locationId:  Number(formData.location_id)
+      };
       api.createBoulder(boulderData)
     }
         

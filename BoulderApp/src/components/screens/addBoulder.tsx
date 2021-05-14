@@ -167,7 +167,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           )}
           name="location_id"
           // rules={{required: true}}
-          defaultValue={1}
+          defaultValue={currentBoulder?.location_id}
         />
 
         <Controller
@@ -187,7 +187,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           )}
           name="color"
           // rules={{required: true}}
-          defaultValue={1}
+          defaultValue={currentBoulder?.color}
         />
 
         <Controller
@@ -210,38 +210,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           defaultValue={1}
         />
 
-        <Controller
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <View style={styles.formrow}>
-              <CheckBox
-                value={value}
-                onValueChange={onChange}
-                style={styles.checkbox}
-              />
-              <BText>Boulder has been topped</BText>
-            </View>
-          )}
-          name="topped"
-          rules={{required: true}}
-          defaultValue={1}
-        />
-        <Controller
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-            <View style={styles.formrow}>
-              <CheckBox
-                value={value}
-                onValueChange={onChange}
-                style={styles.checkbox}
-              />
-              <BText>Like this boulder</BText>
-            </View>
-          )}
-          name="like"
-          rules={{required: true}}
-          defaultValue={1}
-        />
+   
 
         <View style={[LayoutStyle.containerRowSpace, {marginTop: 10}]}>
           <BExtendedButton

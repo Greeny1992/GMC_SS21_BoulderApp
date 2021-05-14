@@ -28,6 +28,13 @@ export interface INewBoulder {
         difficulty: number,
         locationId: number
 }
+export interface IEditBoulder {
+        userId:number,
+        name:string,
+        colour:number,
+        difficulty: number,
+        locationId: number
+}
 export class Boulder implements IBoulder{
         id:string;
         title:string;

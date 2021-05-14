@@ -30,6 +30,7 @@ content-type: application/json
     "changeUserId": 5 
 }
 
+
 ###
 
 GET http://localhost:3000/boulder/5

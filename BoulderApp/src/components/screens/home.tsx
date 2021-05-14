@@ -28,8 +28,12 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
-    const update = route?.params;
+    const {update} = route?.params;
+    console.log(update)
+    console.log(route?.params)
     if(update){
+      navigation.setParams({update:false})
+      
       getBoulderData(userId).then((val: any) => {
         setFilteredDataSource(val);
       }) 
@@ -49,9 +53,8 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     }, [userId])
 
     useEffect(() => {
+      console.log("filteredDataSource")
       if(!masterDataSource){
-
-        console.log("filteredDataSource")
         console.log(filteredDataSource)
         setMasterDataSource(filteredDataSource)
       }
@@ -70,6 +73,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
         });
       const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
+      console.log("filteredBoulder---------------------")
       console.log(filteredBoulder)
       setFilteredDataSource(filteredBoulder);
     }
