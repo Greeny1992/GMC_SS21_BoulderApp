@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, ScrollView, Text, TextInput, View}from 'react-native'
 import {Overlay } from 'react-native-elements';
 import { BoulderInteraction, IBoulderInteraction,BoulderInteractionFormData } from '../../../data/entities/BoulderInteraction';
@@ -24,10 +24,15 @@ interface BoulderInteractionModalProps {
 
 const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: BoulderInteractionModalProps) => {
    const {showModal, handleHideModal,handleSaveInteraction,currentAction, boulderID} = props
+   const [statusPickerOpen, setStatusPickerOpen] = useState(false);
+   const [statusValue, setStatusValue] = useState(1);
+
    const { control, handleSubmit, formState: { errors },setValue } = useForm<BoulderInteractionFormData>();
       React.useEffect(()=>{
          setDefaultForm()
       }, [showModal])
+
+ 
    const onSubmit = (data: BoulderInteractionFormData) => {
       handleSaveInteraction(data)
       handleHideModal()
@@ -48,6 +53,8 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
       }
    }
    const statusValues = getAllStatus();
+   console.log("statusValues")
+   console.log(statusValues)
    const closeForm=()=>{
       handleHideModal()
       clearForm()
@@ -83,6 +90,27 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                      <Controller 
                         control={control}
                         render={({field:{onChange,onBlur,value}})=>(
+                           // <IconPicker items={statusValues} placeholder="Select Status" containerStyle={{zIndex:200, width:250}} onChange={onChange} defaultSelectedItem={1} label="Status"/> 
+                        
+                           <IconPicker
+                              isOpen={statusPickerOpen}
+                              setIsOpen={setStatusPickerOpen}
+                              items={statusValues}
+                              selectedItem={statusValue}
+                              setSelectedItem={setStatusValue}
+                              label="Status"
+                              zIndex={1000}
+                              zIndexInverse={3000}
+                              containerStyle={{zIndex:200, width:250}} 
+                              />        
+                           )}
+                        name='status'
+                        rules={{required:true}}
+                        defaultValue={1}
+                     />
+                     <Controller 
+                        control={control}
+                        render={({field:{onChange,onBlur,value}})=>(
                            <BInput label="Comment" multiline={true}  value={value} onChangeText={(value: string)=>onChange(value)} placeholder="the first few moves, are really hard but after them, this is the rock to go"/>
                            
                         )}
@@ -92,15 +120,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                      />
                      {errors.comment && <Text>This is required.</Text>}
 
-                     <Controller 
-                        control={control}
-                        render={({field:{onChange,onBlur,value}})=>(
-                           <IconPicker items={statusValues} placeholder="Select Status" containerStyle={{zIndex:200}} onChange={onChange} defaultSelectedItem={1} label="Status"/> 
-                        )}
-                        name='status'
-                        rules={{required:true}}
-                        defaultValue={1}
-                     />
+                 
    
                      <View style={[LayoutStyle.containerRowSpace,{marginTop:30}]}>
 

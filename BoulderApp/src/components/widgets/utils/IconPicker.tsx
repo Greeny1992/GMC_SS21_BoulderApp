@@ -18,23 +18,23 @@ interface IconPickerProps {
   setIsOpen: any;
   onOpen?: any;
   zIndex: any;
-  zIndexInverse: any
+  zIndexInverse: any,
+  placeholder?:string
 }
 
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
-  const {items,label,containerStyle, selectedItem, setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
+  const {items,label,containerStyle, selectedItem, placeholder,setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
   const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
+  console.log("ItemPickerItems");
+  console.log(ItemPickerItems);
+
+  
   return (
-    <View style={[containerStyle
-    //   ,{
-    //   ...(Platform.OS !== 'android' && {
-    //     zIndex: 10
-    // })
-    // }
-    ]}>
+    <View style={[containerStyle]}>
         {label ? <BLabel label={label}/> : <></>}
         <DropDownPicker
           onOpen={onOpen}
+          placeholder={placeholder}
           items={ItemPickerItems}
           value={selectedItem}
           setValue={setSelectedItem}
