@@ -31,6 +31,8 @@ import {ILocation} from '../../data/entities/boulderDetailValues';
 import BIcon from '../widgets/utils/icon';
 import ColorTheme from '../../styles/theme/Color';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { storeBoulder } from '../../data/service/BoulderService';
+import { getData } from '../../data/store/store';
 
 enum colourScale {
   black = 'black',
@@ -62,6 +64,7 @@ interface AddBoulderProps {
 }
 const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const {navigation, route} = props;
+  const [userId, setUserId] = useState('');
   const currentBoulder = route.params.boulder as IBoulder;
   const [locationPickerOpen, setLocationPickerOpen] = useState(false);
   const [locationValue, setLocationValue] = useState(null);
@@ -69,7 +72,11 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [difficultyValue, setDifficultyValue] = useState(null);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
   const [colorValue, setColorValue] = useState(null);
-
+  getData('user').then(user => {
+    setUserId(user.userId);  
+  }).catch(err => 
+    console.error(err)
+  )
   let formTitle = 'Add new boulder';
   const {
     control,
@@ -80,7 +87,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
 
   const onSubmit: SubmitHandler<BoulderFormData> = data => {
     console.log('SAVE: ', data);
-
+    storeBoulder(data,userId);
   };
 
   const onLocationPickerOpen = useCallback(() => {

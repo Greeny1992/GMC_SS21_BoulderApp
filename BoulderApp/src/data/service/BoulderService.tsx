@@ -14,7 +14,9 @@ export const getBoulderDetails =(id:string):IBoulder | undefined=>{
     return getBoulderData().find(boulder => boulder.id === id)
 }
 
-export const storeBoulderInteraction = (formData:BoulderFormData, boulderID:string,userID:string):void=>{
+export const storeBoulder = (formData:BoulderFormData,userID:string):void=>{
+    console.log("store DATA")
+    console.log(formData);
     if(formData.id ===''){
         BOULDER_DATA.push(
                 {
