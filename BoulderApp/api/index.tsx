@@ -53,4 +53,28 @@ export class BoulderApi {
             
         }).then(console.log)
     }
+    likeBoulder(boulderID:number, userId:number){
+        console.log("LIKE")
+        console.log(boulderID, userId)
+        return fetch(`${baseUrl}/like/${boulderID}`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({userId:userId})
+        }).then(console.log)
+    }
+    disLikeBoulder(boulderID:number, userId:number){
+        console.log("DIS-LIKE")
+        console.log(boulderID, userId)
+        return fetch(`${baseUrl}/like/${boulderID}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({userId:userId})
+        }).then(console.log)
+    }
 }

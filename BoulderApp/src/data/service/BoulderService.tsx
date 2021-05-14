@@ -80,7 +80,14 @@ export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:n
         locationId:  Number(formData.location_id)
       };
       api.createBoulder(boulderData)
-    }
-        
-    
+    }  
+}
+
+export const updateLike = (boulderId:number, userId:number,like:boolean) =>{
+  const api = new BoulderApi();
+  if(like){
+    api.disLikeBoulder(boulderId,userId)
+  }else{
+    api.likeBoulder(boulderId,userId)
+  }
 }
