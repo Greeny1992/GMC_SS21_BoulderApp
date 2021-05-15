@@ -21,7 +21,7 @@ interface BoulderMetaProps {
 
 const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
   const { boulder, handleLikeClick, handleEditClick} = props;
-  let formattedDate = (moment(boulder.created)).format('DD.MM.YYYY')
+  let formattedDate = boulder.created ? (moment(boulder.created)).format('DD.MM.YYYY') : "";
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
   const boulderImage = require('../../assets/images/boulder.jpeg');

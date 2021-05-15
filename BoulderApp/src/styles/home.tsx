@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import ColorTheme from "./theme/Color";
 
 const Home = StyleSheet.create({
     userRow:{
@@ -11,10 +12,12 @@ const Home = StyleSheet.create({
         width:'30%',
         textAlign:'right',
         position:'absolute',
-        right:50
+        right:50,
+        color: ColorTheme.primary_light,
     },
     userIcon:{
-        position:'absolute'
+        position:'absolute',
+        color: ColorTheme.primary_light,
     }
 });
 

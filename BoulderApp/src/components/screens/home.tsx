@@ -25,50 +25,36 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const route = useRoute();
-
     const {navigation } = props;
     const [searchText, setSearchText] = useState('');
-    const [userId, setUserId] = useState();
+    const [user, setUser] = useState();
     const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
     const {update} = route?.params;
-    console.log(update)
-    console.log(route?.params)
+
     if(update){
       navigation.setParams({update:false})
       
-      getBoulderData(userId).then((val: any) => {
+      getBoulderData(user?.userId).then((val: any) => {
         setFilteredDataSource(val);
       }) 
     }
  
     useEffect(() => {
-      if(!userId){
+      if(!user){
         getData('user').then(user => {
-          setUserId(user.userId); 
+          setUser(user); 
           getBoulderData(user.userId).then((val: any) => {
+            setMasterDataSource(val)
             setFilteredDataSource(val);
           }) 
         }).catch(err => 
           console.error(err)
         )
       }
-    }, [userId])
-
-    useEffect(() => {
-      console.log("filteredDataSource")
-      if(!masterDataSource){
-        console.log(filteredDataSource)
-        setMasterDataSource(filteredDataSource)
-      }
-    }, [filteredDataSource])
-
-    // useEffect(() => {
-    //   if(!masterDataSource)
-    //     setMasterDataSource(filteredDataSource)
-    // }, [masterDataSource])
+    }, [user])
 
     const handleFilter =(value:string,type:string)=>{
       const filteredLocation = getAllLocations().filter( (item) =>{
@@ -81,11 +67,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     
       setFilteredDataSource(filteredBoulder);
     }
-    const handleAddBoulder = () => {
-        navigation.navigate('AddBoulderScreen', {
-        boulderID: -1,
-        });
-    };
+  
     const handleBoulderSelect = (boulder:IBoulder) => {
         navigation.navigate('DetailBoulderScreen', {
             boulder:boulder,
@@ -100,37 +82,33 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
         else {
           setSearchText('');
-          resetBoulderList();
+          refresh();
         }
         
     }
     const refresh =()=>{
-      getBoulderData(userId).then((val: any) => {
+      getBoulderData(user?.userId).then((val: any) => {
         setFilteredDataSource(val);
       }) 
     }
-    //Searching for Boulders
     const searchBoulderList: any = (input: string) => {
         if (input) {
+          
             const filteredData = masterDataSource.filter( (item) =>{
                 const itemData = item.title? item.title.toUpperCase() : '';
                 const textData = input.toUpperCase();
-                console.log(textData);
                 return itemData.indexOf(textData,0) > -1;
             });
             setFilteredDataSource(filteredData);
         }
     };
 
-    const resetBoulderList: any = () => {
-      setFilteredDataSource(masterDataSource);
-    };
 
   return (
     <View>
       <View >
         <View style={[LayoutStyle.containerRow, styles.userRow]}>
-          <BText style={[styles.userDetail]}>{userId}</BText>
+          <BText style={[styles.userDetail]}>{user?.userName}</BText>
           <BIcon style={[styles.userIcon]} icon="account-circle" size={20} color={ColorTheme.primary}/> 
         </View>
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>

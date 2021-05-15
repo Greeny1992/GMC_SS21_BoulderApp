@@ -30,7 +30,8 @@ export default function Login({ loggedInHandler }: any) {
           console.log(json.user);
           const user = {
             'userId': json.user.ID,
-            'userEmail': json.user.email
+            'userEmail': json.user.email,
+            'userName':json.user.Name
           }
           storeData('user', user)
           authContext.verify(true);

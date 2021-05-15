@@ -3,8 +3,8 @@ import {View,FlatList,SectionList} from "react-native";
 import { IBoulder } from "../../../data/entities/Boulder";
 import BoulderListItem from "./boulderItem";
 import BoulderSectionListHeader from "./boulderSectionListHeader";
-import {LOCATION_DATA} from "../../../data/fakeData/Location";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
+import { location } from "../../../data/lookupValues/boulderDetailValues";
 interface BoulderMetaProps {
   style?: any;
   navigation: any;
@@ -28,7 +28,7 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
    */
   const getSectionLocations = () => {
     let retArray = [];
-    for(let locationItem of LOCATION_DATA) {
+    for(let locationItem of location()) {
       for(let boulderItem of items) {
         if (boulderItem.location_id == locationItem.id)
         {
@@ -40,6 +40,7 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
         }
       }
     }
+    
     return retArray;
   }
   
