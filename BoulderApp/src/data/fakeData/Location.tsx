@@ -3,28 +3,24 @@ import { ILocation } from "../entities/Location";
 export const LOCATION_DATA : ILocation[] =[
 
     {
-        id:'-1',
+        id:-1,
         country:'Undefined',
-        region:'Undefined',
-        city:'Undefined'
+        region:'Undefined'
     },
     {
-        id:'1',
+        id:1,
         country:'Austria',
-        region:'Styria',
-        city:'Graz'
+        region:'Styria'
     },
     {
-        id:'2',
+        id:2,
         country:'Austria',
-        region:'Vienna',
-        city:'Deutschlandsberg'
+        region:'Vienna'
     },
     {
-        id:'3',
+        id:3,
         country:'Austria',
-        region:'Carinthia',
-        city:'Wolfsberg'
+        region:'Carinthia'
     }
 ]
 

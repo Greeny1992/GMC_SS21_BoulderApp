@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { View, Image, Text } from "react-native";
 import { Badge } from "react-native-elements";
 import BText, { BTitle } from "./utils/text";
 import LayoutStyle from "../../styles/utils/layout";
@@ -9,6 +9,7 @@ import { getColor, getDifficulty } from "../../data/lookupValues/boulderDetailVa
 import getLocation from "../../data/service/LocationService";
 import BIcon from "./utils/icon";
 import ColorTheme from "../../styles/theme/Color";
+import moment from "moment";
 
 interface BoulderMetaProps {
   style?: any;
@@ -20,11 +21,10 @@ interface BoulderMetaProps {
 
 const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
   const { boulder, handleLikeClick, handleEditClick} = props;
+  let formattedDate = (moment(boulder.created)).format('DD.MM.YYYY')
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
   const boulderImage = require('../../assets/images/boulder.jpeg');
-
-  
 
 
   return (
@@ -58,16 +58,19 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
                 <BText style={[styles.row]}>Difficulty: </BText>
                 <BText style={[styles.row]}>Country: </BText>
                 <BText style={[styles.row]}>Region: </BText>
-                <BText style={[styles.row]}>City: </BText>
+                <BText style={[styles.row]}>Created: </BText>
               </View>
               <View style={styles.column}>
                 <BText style={[styles.row]}>{difficulty.name}</BText>
                 <BText style={[styles.row]}>{location.country}</BText>
                 <BText style={[styles.row]}>{location.region}</BText>
+                <BText style={[styles.row]}>{formattedDate}</BText>
               </View>
             </View>
+            
 
           </View>
+
           
       
          </View>
