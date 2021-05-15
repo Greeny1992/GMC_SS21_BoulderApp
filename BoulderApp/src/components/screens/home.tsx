@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import styles from '../../styles/home';
+
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
@@ -10,6 +12,10 @@ import BBottomSheet from '../widgets/BoulderList/boulderFilter';
 import { getAllLocations, getDistinctLocations } from '../../data/service/LocationService';
 import { ILocationFilterValues } from '../../data/entities/Location';
 import { useRoute } from '@react-navigation/native';
+import BIcon from '../widgets/utils/icon';
+import LayoutStyle from '../../styles/utils/layout';
+
+import ColorTheme from '../../styles/theme/store/ColorMainTheme';
 
 interface HomeProps {
   style?: any;
@@ -123,7 +129,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
   return (
     <View>
       <View >
-        {<BText>UserId: {userId}</BText> }
+        <View style={[LayoutStyle.containerRow, styles.userRow]}>
+          <BText style={[styles.userDetail]}>{userId}</BText>
+          <BIcon style={[styles.userIcon]} icon="account-circle" size={20} color={ColorTheme.primary}/> 
+        </View>
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>

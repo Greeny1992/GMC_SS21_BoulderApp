@@ -36,7 +36,7 @@ interface BoulderSearchProps {
                 onChangeText={(text) => searchBoulderList(text)}
                 onClear ={() => searchBoulderList('')}
                 value={searchText}
-                placeholder="Enter a name..."
+                placeholder="Enter a bouldername..."
                 />
               </View>
               <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>

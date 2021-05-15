@@ -1,21 +1,4 @@
 
-// import { BOULDER_DATA } from "../fakeData/Boulder";
-
-// export const toggleLike =(boulder: IBoulder):IBoulder =>{
-    //     const tempBoulder = boulder;
-    //     tempBoulder.like =!boulder.like
-    //     return tempBoulder
-    //   }
-    // export const getBoulderData = ():IBoulder[] =>{
-        //     return BOULDER_DATA
-        // }
-        // export const getBoulderDetails =(id:string):IBoulder | undefined=>{
-            //     return getBoulderData().find(boulder => boulder.id === id)
-            // }
-            
-            
-            
-import { Guid } from "../../utils/CreateGuid";
 import {BoulderApi} from '../../../api';
 import {BOULDER_DATA} from '../fakeData/Boulder';
 import {getData, storeData} from '../store/store';
