@@ -30,8 +30,8 @@ export class BoulderApi {
 
 
     createBoulder(newBoulder:INewBoulder){
-        console.log('createBoulder')
-        console.log(newBoulder)
+        // console.log('createBoulder')
+        // console.log(newBoulder)
         return fetch(baseUrl + "/boulder/", {
             method: 'POST',
             headers: {
@@ -44,8 +44,8 @@ export class BoulderApi {
         }).then(console.log)
     }
     updateBoulder(updateBoulder:IEditBoulder,boulderID:number){
-        console.log('updateBoulder')
-        console.log(updateBoulder)
+        // console.log('updateBoulder')
+        // console.log(updateBoulder)
         return fetch(`${baseUrl}/boulder/${boulderID}`, {
             method: 'PUT',
             headers: {

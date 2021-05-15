@@ -1,5 +1,5 @@
 import { BottomSheet } from 'react-native-btr';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
 
 // import all the components we are going to use
@@ -28,7 +28,10 @@ const BBottomSheet: React.FC<BBottomSheetProps> = (props: BBottomSheetProps) => 
     const toggleBottomNavigationView =()=>{hide()}
     const ItemPickerItems = locations?.map((location )=> {return(   <Picker.Item key={location} label={location} value={location}  />)})
     const [selectedItem, setSelectedItem ] = useState();
-  
+    useEffect(() => {
+      toggleBottomNavigationView();
+      handleFilter(selectedItem)
+    }, [selectedItem])
     return (
           <BottomSheet
             visible={visible}

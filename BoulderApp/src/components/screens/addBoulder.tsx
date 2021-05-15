@@ -86,9 +86,6 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   } = useForm<BoulderFormData>();
 
   const onSubmit: SubmitHandler<BoulderFormData> = data => {
-    console.log('---')
-    console.log('SAVE: ', data);
- 
     storeBoulder(data,userId,Number(currentBoulder?.id));
    
     navigation.navigate('HomeScreen',
@@ -163,8 +160,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="location_id"
-          // rules={{required: true}}
-          defaultValue={currentBoulder?.location_id}
+          rules={{required: true}}
+          defaultValue={currentBoulder?.location_id ?? 2}
         />
 
         <Controller
@@ -183,8 +180,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="color"
-          // rules={{required: true}}
-          defaultValue={currentBoulder?.color}
+          rules={{required: true}}
+          defaultValue={currentBoulder?.color ?? 2}
         />
 
         <Controller
@@ -203,8 +200,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
             />
           )}
           name="difficulty"
-          // rules={{required: true}}
-          defaultValue={1}
+          rules={{required: true}}
+          defaultValue={currentBoulder?.difficulty ?? 2}
         />
 
    

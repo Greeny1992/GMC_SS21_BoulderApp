@@ -28,13 +28,16 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
    */
   const getSectionLocations = () => {
     let retArray = [];
+
     for(let locationItem of location()) {
       for(let boulderItem of items) {
-        if (boulderItem.location_id == locationItem.id)
+    
+        if (boulderItem.location_id === locationItem.id)
         {
+       
           retArray.push({
             title: locationItem.region,
-            data: [...items.filter(item => item.location_id == locationItem.id) ]
+            data: [...items.filter(item => item.location_id === locationItem.id) ]
           })
           break;
         }

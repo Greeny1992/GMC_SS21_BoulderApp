@@ -12,11 +12,12 @@ interface BoulderSearchProps {
     searchText:string;
     navigation: any;
     showFilterDialog: Function;
+    clearSearch: Function;
+    showReset:boolean
   }
   const BoulderSearch: React.FC<BoulderSearchProps> = (props: BoulderSearchProps) => {
 
-    const {searchBoulderList,searchText, navigation,showFilterDialog} = props;
-
+    const {searchBoulderList,searchText, navigation,showFilterDialog, clearSearch,showReset} = props;
 
     const handleFilter =()=>{
       showFilterDialog(true)  }
@@ -36,12 +37,13 @@ interface BoulderSearchProps {
                 onChangeText={(text) => searchBoulderList(text)}
                 onClear ={() => searchBoulderList('')}
                 value={searchText}
-                placeholder="Enter a bouldername..."
+                placeholder="Search for boulder"
                 />
               </View>
               <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>
-                <BIcon icon="filter-alt" onPress={handleFilter}/>
-                <BIcon icon="add" onPress={handleAddBoulder}/>
+                {showReset ? <BIcon icon="clear" style={[BoulderListStyle.icon]} onPress={clearSearch}/> : <></> } 
+                <BIcon icon="filter-alt" style={[BoulderListStyle.icon]}  onPress={handleFilter}/>
+                <BIcon icon="add"  style={[BoulderListStyle.icon]}  onPress={handleAddBoulder}/>
               </View>  
             </View>
     )       

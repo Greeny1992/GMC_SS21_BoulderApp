@@ -57,9 +57,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
       clearForm()
    }
 
-   
-   console.log("currentAction")
-   console.log(currentAction)
+
    return ( 
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}

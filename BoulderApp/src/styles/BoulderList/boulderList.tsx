@@ -11,10 +11,9 @@ const BoulderListStyle = StyleSheet.create({
         width: '100%',
       },
       item: {
-        flexDirection: 'row',
         width: '100%',
         // backgroundColor: "#c0e6ff",
-        padding: 20,
+        padding: 8,
         marginVertical: 0,
         marginHorizontal: 0,
         borderWidth:0.5,
@@ -24,16 +23,24 @@ const BoulderListStyle = StyleSheet.create({
       title: {
         textAlign: 'left',
         fontSize: FontSizes.normal,
-        width: '50%'
+        width: '90%',
+      },
+      detailRow:{
+        width:'100%',
+        marginTop:2,
+        alignContent: 'space-between',
+      },
+      details:{
+        fontSize:FontSizes.small,
+        color:ColorTheme.primary_light,
+
       },
       difficulty: {
-        textAlign: 'center',
-        fontSize: FontSizes.normal,
-        justifyContent: 'center',
+        textAlign: 'left',
+        width:'40%'
+
       },
       badge: {
-        textAlign: 'center',
-        flexDirection: "column",
       },
       date: {
         flexDirection: "column",
@@ -48,6 +55,7 @@ const BoulderListStyle = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      
       itemsgroupdate: {
         display: 'flex',
         flexDirection: 'column',
@@ -62,17 +70,22 @@ const BoulderListStyle = StyleSheet.create({
       headerSearch: {
         flexDirection: 'row',
         height:60,
+        width:"100%",
+        backgroundColor:'white'
      
       },
       textInputStyle: {
         height: 30,
-        paddingLeft: 20,
+        paddingLeft: 0,
         margin: 5,
         color:'#ffffff',
         paddingVertical: 0,
         backgroundColor: '#ffffff',
         borderColor: ColorTheme.primary,
         borderWidth:1,
+      },
+      icon:{
+        width:30
       },
       textInputContainerStyle: {
         borderWidth: 0,
@@ -89,14 +102,14 @@ const BoulderListStyle = StyleSheet.create({
         height: '10%',
       },
       searchbox: {
-        width: '80%',
+        width: '70%',
         height: '80%',
         color:'#ffffff',
         backgroundColor:'green'
 
       },
       btnbox: {
-        width: '20%',
+        width: '30%',
         height: '100%',
         backgroundColor: 'white',      
       },

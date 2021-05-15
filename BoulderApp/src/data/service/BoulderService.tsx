@@ -11,7 +11,6 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
 };
 export const getBoulderData = async (userId?: number) => {
   let test;
-  getData("connected").then(console.log)
     const api = new BoulderApi();
     test = await api.getBoulderList(userId).then(res => {
       return res.json().then(json => {
@@ -45,7 +44,6 @@ export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:n
     const api = new BoulderApi();
   
     if(boulderID){
-      console.log("UPDATE "+boulderID)
       const boulderData = {
         userId:   Number(userID),
         name:         formData.title,

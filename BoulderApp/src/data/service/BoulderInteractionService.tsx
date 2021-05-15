@@ -7,8 +7,6 @@ const getCurrentBoulderInteraction= async (boulder_id:any)=>{
         return result.json().then(json => {
             const mapedJson = json.map(
                 (action: any): BoulderInteraction => {
-                    console.log("action")
-                    console.log(action)
                   return new BoulderInteraction(boulder_id, action.userId, action.userName, action.title, action.status, action.comment, action.createDate ,action.ID);
                 })
       

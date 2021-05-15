@@ -32,11 +32,11 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
+    const [showReset, setShowReset] = useState(false);
     const {update} = route?.params;
 
     if(update){
       navigation.setParams({update:false})
-      
       getBoulderData(user?.userId).then((val: any) => {
         setFilteredDataSource(val);
       }) 
@@ -55,17 +55,17 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         )
       }
     }, [user])
-
-    const handleFilter =(value:string,type:string)=>{
-      const filteredLocation = getAllLocations().filter( (item) =>{
-        switch(type){
-          case "country": item.country===value; break;
-          case "region" : item.region === value; break;
-        }
-        });
-      const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
+   
+    const handleFilter =(value:string)=>{
     
-      setFilteredDataSource(filteredBoulder);
+      const filteredLocation = getAllLocations().filter( (item) => item.region === value);
+      if(filteredLocation){
+        setShowReset(true)
+        const filteredBoulder = masterDataSource.filter( (item) =>filteredLocation[0].id === item?.location_id);
+        setFilteredDataSource(filteredBoulder);
+
+      }
+    
     }
   
     const handleBoulderSelect = (boulder:IBoulder) => {
@@ -76,7 +76,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
     const handleSearchInput = (input:string)=> {
         let inputLength = input? input.length : 0;
-        if(inputLength != 0) {
+        if(inputLength >= 0) {
           setSearchText(input);
           searchBoulderList(input);
         }
@@ -87,13 +87,14 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         
     }
     const refresh =()=>{
-      getBoulderData(user?.userId).then((val: any) => {
-        setFilteredDataSource(val);
-      }) 
+      setShowReset(false)
+      setSearchText('')
+      setFilteredDataSource(masterDataSource)
+     
     }
     const searchBoulderList: any = (input: string) => {
         if (input) {
-          
+          setShowReset(true)
             const filteredData = masterDataSource.filter( (item) =>{
                 const itemData = item.title? item.title.toUpperCase() : '';
                 const textData = input.toUpperCase();
@@ -111,7 +112,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
           <BText style={[styles.userDetail]}>{user?.userName}</BText>
           <BIcon style={[styles.userIcon]} icon="account-circle" size={20} color={ColorTheme.primary}/> 
         </View>
-        <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
+        <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible} clearSearch={refresh} showReset={showReset}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
       </View>

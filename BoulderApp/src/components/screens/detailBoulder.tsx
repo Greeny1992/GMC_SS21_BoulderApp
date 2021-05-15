@@ -54,7 +54,6 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     handleBoulderSearch = (id:string) => getBoulderDetails(id); 
 
     handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
-        console.log("formData.asdfjasldfjlajs")
         storeBoulderInteraction(data,this.state.boulder.id,this.state.user_id)
         getCurrentBoulderInteraction(this.state.boulder.id).then((val: any) => this.setState({boulderInteractions:val}))
     }

@@ -25,8 +25,7 @@ interface IconPickerProps {
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
   const {items,label,containerStyle, selectedItem, placeholder,setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
   const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
-  console.log("ItemPickerItems");
-  console.log(ItemPickerItems);
+  
 
   
   return (
