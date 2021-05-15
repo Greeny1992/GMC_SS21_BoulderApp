@@ -46,8 +46,6 @@ export function difficulty(){
 }
 export function getDifficulty(difficulty_id:number|string):IDifficulty{
     const id = typeof difficulty_id === 'string'? parseInt(difficulty_id) : difficulty_id;
-    console.log("GETDIFFICULTSY")
-    console.log(id)
     const difficulty = _difficulty.filter((difficulty:IDifficulty) => difficulty.id === id )?.[0];
     return  difficulty;
 }
