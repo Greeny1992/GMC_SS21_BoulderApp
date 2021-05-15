@@ -68,11 +68,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [userId, setUserId] = useState('');
   const currentBoulder = route.params.boulder as IBoulder;
   const [locationPickerOpen, setLocationPickerOpen] = useState(false);
-  const [locationValue, setLocationValue] = useState(null);
   const [difficultyPickerOpen, setDifficultyPickerOpen] = useState(false);
-  const [difficultyValue, setDifficultyValue] = useState(null);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
-  const [colorValue, setColorValue] = useState(null);
 
 
   getData('user').then(user => {
@@ -157,8 +154,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               isOpen={locationPickerOpen}
               setIsOpen={setLocationPickerOpen}
               items={regionValues}
-              selectedItem={locationValue}
-              setSelectedItem={setLocationValue}
+              selectedItem={value}
+              setSelectedItem={onChange}
               label="Location"
               onOpen={onLocationPickerOpen}
               zIndex={3000}
@@ -177,8 +174,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               isOpen={colorPickerOpen}
               setIsOpen={setColorPickerOpen}
               items={colorValues}
-              selectedItem={colorValue}
-              setSelectedItem={setColorValue}
+              selectedItem={value}
+              setSelectedItem={onChange}
               label="Color"
               onOpen={onColorPickerOpen}
               zIndex={2000}
@@ -197,8 +194,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               isOpen={difficultyPickerOpen}
               setIsOpen={setDifficultyPickerOpen}
               items={difficultyValues}
-              selectedItem={difficultyValue}
-              setSelectedItem={setDifficultyValue}
+              selectedItem={value}
+              setSelectedItem={onChange}
               label="Difficulty"
               onOpen={onDifficultyPickerOpen}
               zIndex={1000}

@@ -32,11 +32,12 @@ interface BoulderSearchProps {
             <View style={BoulderListStyle.headerSearch}>
               <View style={BoulderListStyle.searchbox}>
                 <SearchBar inputContainerStyle={BoulderListStyle.textInputStyle}
-                containerStyle={BoulderListStyle.textInputContainerStyle} round searchIcon={{ size: 24 }}
+                containerStyle={BoulderListStyle.textInputContainerStyle} round searchIcon={{ size: 30 }}
                 onChangeText={(text) => searchBoulderList(text)}
                 onClear ={() => searchBoulderList('')}
                 value={searchText}
-                placeholder="Enter a name..."/>
+                placeholder="Enter a name..."
+                />
               </View>
               <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>
                 <BIcon icon="filter-alt" onPress={handleFilter}/>

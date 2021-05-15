@@ -12,10 +12,11 @@ const BoulderInteractionListStyle = StyleSheet.create({
         justifyContent: 'flex-start',
         flex: 1,
         position: 'relative',
-        backgroundColor: ColorTheme.primary_light,
-        borderRadius: 10,
+         backgroundColor: "rgba(244,244,244,.5)",
+        borderRadius: 5,
         borderWidth: 1,
-        borderColor: ColorTheme.highlight,
+        borderColor: "rgba(244,244,244,.5)",
+
       },
       owneditem: {
         flexWrap: 'wrap',
@@ -23,17 +24,17 @@ const BoulderInteractionListStyle = StyleSheet.create({
         justifyContent: 'flex-start',
         flex: 1,
         position: 'relative',
-        backgroundColor: ColorTheme.primary_light,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: ColorTheme.like,
+        backgroundColor: "rgba(244,244,244,.5)",
+        borderRadius: 5,
+        borderWidth: .5,
+        borderColor: "rgba(244,244,244,.5)",
       },
       box: {
         justifyContent: 'center',
         alignItems: 'center',
         width: '98%',
         margin: 1,
-        backgroundColor: 'blue',
+        borderColor: 'white', 
       },
 
 
@@ -42,12 +43,12 @@ const BoulderInteractionListStyle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        paddingLeft: '10%',
+        paddingLeft: '5%',
         paddingTop: 5,
         paddingBottom: 5,
         flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        borderBottomColor: 'white',
+        borderBottomWidth: 1,
+        borderColor: 'white', 
       },
       titleinnerbox: {      
         justifyContent: 'center',
@@ -60,8 +61,9 @@ const BoulderInteractionListStyle = StyleSheet.create({
       },
       title: {      
         justifyContent: 'center',
-        fontSize: FontSizes.medium,
+        fontSize: FontSizes.normal,
         fontWeight: 'bold',
+        width:"90%",
         color: ColorTheme.default,
         
       },
@@ -79,7 +81,7 @@ const BoulderInteractionListStyle = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         width: '100%',
-        paddingLeft: '10%',
+        paddingLeft: '8%',
         paddingTop: 5,
         paddingBottom: 5,
         flexDirection: 'row',
@@ -98,6 +100,8 @@ const BoulderInteractionListStyle = StyleSheet.create({
         fontSize: FontSizes.small,
         width: '80%',
         textAlign: 'left',
+        paddingLeft: 10,
+        marginBottom: 5,
         color: ColorTheme.default,
       },
 
@@ -106,7 +110,7 @@ const BoulderInteractionListStyle = StyleSheet.create({
       boxcomment: {
         justifyContent: 'center',
         width: '100%',
-        paddingLeft: '10%',
+        paddingLeft: '5%',
         paddingRight: '10%',
         paddingTop: 5,
         paddingBottom: 5,
@@ -133,15 +137,23 @@ const BoulderInteractionListStyle = StyleSheet.create({
         paddingLeft: '2%',
         paddingTop: 5,
         paddingBottom: 5,
-        borderTopColor: 'white',
+        borderColor: 'white', 
         borderTopWidth: 0.5,
       },
       authordetails: {
         width: '50%',
         fontSize: FontSizes.tiny,
-        textAlign: 'center',
-        color: ColorTheme.default,
+        paddingRight: '3%',
+        textAlign: 'right',
+        color: ColorTheme.primary_light,
       },
+      datedetails:{
+        width: '50%',
+        fontSize: FontSizes.tiny,
+        paddingLeft: '3%',
+        textAlign: 'left',
+        color: ColorTheme.primary_light,
+      }
 });
 
 export default BoulderInteractionListStyle;

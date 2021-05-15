@@ -22,7 +22,8 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
   const { boulder, handleLikeClick, handleEditClick} = props;
   const location = getLocation(boulder.location_id);
   const difficulty = getDifficulty(boulder.difficulty);
-  
+  const boulderImage = require('../../assets/images/boulder.jpeg');
+
   
 
 
@@ -41,7 +42,7 @@ const BoulderMetadata: React.FC<BoulderMetaProps> = (props: any) => {
       
         <View style={[LayoutStyle.containerRow]}>
           <View>
-            <Image source={{ uri: boulder.img }} style={[styles.image]}></Image>
+            <Image source={ boulderImage} style={[styles.image]}></Image>
             <View style={styles.badgeContainer}>
               <Badge
                 badgeStyle={[

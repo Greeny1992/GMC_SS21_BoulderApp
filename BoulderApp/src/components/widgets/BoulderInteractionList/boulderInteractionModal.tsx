@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
-import { Button, ScrollView, Text, TextInput, View}from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, View}from 'react-native'
 import {Overlay } from 'react-native-elements';
-import { BoulderInteraction, IBoulderInteraction,BoulderInteractionFormData } from '../../../data/entities/BoulderInteraction';
+import { BoulderInteraction,BoulderInteractionFormData } from '../../../data/entities/BoulderInteraction';
 import { getAllStatus } from '../../../data/lookupValues/BoulderInteractionValues';
 import LayoutStyle from '../../../styles/utils/layout';
 import styles from '../../../styles/widgets/boulderInteractionModal';
@@ -9,9 +9,8 @@ import { BExtendedButton } from '../utils/button';
 import BIcon from '../utils/icon';
 import IconPicker from '../utils/IconPicker';
 import BInput from '../utils/Input';
-import BText, { BTitle } from '../utils/text';
+import { BTitle } from '../utils/text';
 import { useForm, Controller } from "react-hook-form";
-import InputStyle from '../../../styles/utils/Input';
 
 interface BoulderInteractionModalProps {
    style?:any,
@@ -23,20 +22,20 @@ interface BoulderInteractionModalProps {
 }
 
 const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: BoulderInteractionModalProps) => {
-   const {showModal, handleHideModal,handleSaveInteraction,currentAction, boulderID} = props
+   const {showModal, handleHideModal,handleSaveInteraction, boulderID} = props
+   let  {currentAction} = props
    const [statusPickerOpen, setStatusPickerOpen] = useState(false);
-   const [statusValue, setStatusValue] = useState(1);
-
+   const statusValues = getAllStatus();  
    const { control, handleSubmit, formState: { errors },setValue } = useForm<BoulderInteractionFormData>();
-      React.useEffect(()=>{
-         setDefaultForm()
-      }, [showModal])
+   useEffect(()=>{
+      setDefaultForm()
+   }, [showModal])
 
- 
    const onSubmit = (data: BoulderInteractionFormData) => {
-      console.log("SUBMITT")
+   
       handleSaveInteraction(data)
-      handleHideModal()
+      currentAction=undefined
+      handleHideModal(true)
       clearForm()
    };
    const clearForm= ()=>{
@@ -53,16 +52,14 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
          setValue('status',currentAction.status)
       }
    }
-   const statusValues = getAllStatus();
-   console.log("statusValues")
-   console.log(statusValues)
    const closeForm=()=>{
       handleHideModal()
       clearForm()
    }
 
    
-   
+   console.log("currentAction")
+   console.log(currentAction)
    return ( 
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}
@@ -97,8 +94,8 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                               isOpen={statusPickerOpen}
                               setIsOpen={setStatusPickerOpen}
                               items={statusValues}
-                              selectedItem={statusValue}
-                              setSelectedItem={setStatusValue}
+                              selectedItem={value}
+                              setSelectedItem={onChange}
                               label="Status"
                               zIndex={1000}
                               zIndexInverse={3000}
@@ -107,7 +104,6 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                            )}
                         name='status'
                         rules={{required:true}}
-                        defaultValue={1}
                      />
                      <Controller 
                         control={control}
@@ -117,7 +113,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                         )}
                         name='comment'
                         rules={{required:true}}
-                        defaultValue=""
+                        defaultValue={currentAction?.comment}
                      />
                      {errors.comment && <Text>This is required.</Text>}
 

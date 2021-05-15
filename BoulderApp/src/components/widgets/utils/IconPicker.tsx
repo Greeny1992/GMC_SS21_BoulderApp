@@ -48,6 +48,7 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
           dropDownContainerStyle={{backgroundColor: '#fafafa'}}
           zIndex={zIndex}
           zIndexInverse={zIndexInverse}
+          
         />
 
     </View>

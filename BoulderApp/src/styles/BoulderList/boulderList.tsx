@@ -13,7 +13,7 @@ const BoulderListStyle = StyleSheet.create({
       item: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: "#c0e6ff",
+        // backgroundColor: "#c0e6ff",
         padding: 20,
         marginVertical: 0,
         marginHorizontal: 0,
@@ -22,7 +22,7 @@ const BoulderListStyle = StyleSheet.create({
         alignItems: 'center',
       },
       title: {
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: FontSizes.normal,
         width: '50%'
       },
@@ -66,13 +66,14 @@ const BoulderListStyle = StyleSheet.create({
         minHeight: 79,
       },
       textInputStyle: {
-        height: 40,
-        borderWidth: 0,
+        height: 35,
         paddingLeft: 20,
         margin: 10,
-        borderColor: '#ffffff',
-        backgroundColor: '#e0ffff',
+        color:'#ffffff',
         paddingVertical: 0,
+        backgroundColor: '#ffffff',
+        borderColor: ColorTheme.primary,
+        borderWidth:1,
       },
       textInputContainerStyle: {
         borderWidth: 0,
@@ -92,6 +93,8 @@ const BoulderListStyle = StyleSheet.create({
       searchbox: {
         width: '80%',
         height: '100%',
+        color:'#ffffff',
+
       },
       btnbox: {
         width: '20%',
@@ -113,14 +116,14 @@ const BoulderListStyle = StyleSheet.create({
       sectionheader: {
         flexDirection: 'row',
         width: '100%',
-        backgroundColor: ColorTheme.highlight,
+        backgroundColor: '#999999',
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,
       },
       textsectionheader: {
         fontSize: FontSizes.large,
-        color: ColorTheme.highlightContrast,
+        color: '#ffffff',
       }
 });
 

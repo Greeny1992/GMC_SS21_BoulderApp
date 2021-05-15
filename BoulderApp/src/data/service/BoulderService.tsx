@@ -68,7 +68,8 @@ export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:n
         name:         formData.title,
         colour:       formData.color,
         difficulty:   formData.difficulty,
-        locationId:  Number(formData.location_id)
+        locationId:  formData.location_id,
+        force:        true
       };
       api.updateBoulder(boulderData,boulderID)
     }else{

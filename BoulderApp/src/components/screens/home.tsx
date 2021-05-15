@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
 import { getBoulderData } from '../../data/service/BoulderService';
@@ -10,7 +10,6 @@ import BBottomSheet from '../widgets/BoulderList/boulderFilter';
 import { getAllLocations, getDistinctLocations } from '../../data/service/LocationService';
 import { ILocationFilterValues } from '../../data/entities/Location';
 import { useRoute } from '@react-navigation/native';
-import BButton from '../widgets/utils/button';
 
 interface HomeProps {
   style?: any;
@@ -73,8 +72,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
         });
       const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
-      console.log("filteredBoulder---------------------")
-      console.log(filteredBoulder)
+    
       setFilteredDataSource(filteredBoulder);
     }
     const handleAddBoulder = () => {
@@ -101,11 +99,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         
     }
     const refresh =()=>{
-      console.log("RELOAD-1");
-
       getBoulderData(userId).then((val: any) => {
-        console.log("RELOAD-2");
-        console.log(val)
         setFilteredDataSource(val);
       }) 
     }
@@ -128,7 +122,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
   return (
     <View>
-      <Button onPress={refresh} title="Title" />
       <View >
         {<BText>UserId: {userId}</BText> }
         <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>

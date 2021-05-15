@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { GestureResponderEvent, Image, TouchableOpacity, View } from "react-native";
 import { Badge } from "react-native-elements";
@@ -13,6 +14,8 @@ interface BoulderListItemProps {
   }
 const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemProps) => {
     const {style,item,onPress} = props;
+    let formattedDate = item.created ? (moment(item.created)).format('DD.MM') :"";
+
     return (
       <TouchableOpacity onPress={onPress} style={[BoulderListStyle.item, style]}>
         <BText style={BoulderListStyle.title}>{item.title}</BText>
@@ -21,7 +24,7 @@ const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemP
           <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
         </View>
         <View style={BoulderListStyle.itemsgroupdate}>
-          <BText style={BoulderListStyle.date}>{item.created}</BText>
+          <BText style={BoulderListStyle.date}>{formattedDate}</BText>
         </View>    
 
         <View style={BoulderListStyle.itemsgroup}>

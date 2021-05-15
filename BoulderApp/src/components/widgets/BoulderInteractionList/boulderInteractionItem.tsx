@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { BoulderInteraction, IBoulderInteraction } from '../../../data/entities/BoulderInteraction';
+import React from "react";
+import { BoulderInteraction } from '../../../data/entities/BoulderInteraction';
 import { View, Text, Image } from "react-native";
 import { Icon, ListItem } from 'react-native-elements';
 import BoulderInteractionListStyle from  '../../../styles/widgets/boulderInteractionList';
 import BIcon from "../utils/icon";
-import {FontSizes} from "../../../constants/ui";
+import { getStatus } from "../../../data/lookupValues/BoulderInteractionValues";
+import ColorTheme from "../../../styles/theme/Color";
+import moment from 'moment';
 const userImage = require('../../../../../BoulderApp/src/assets/images/user.png')
 interface BoulderInteractionItemProps {
     style?: any;
@@ -14,8 +16,10 @@ interface BoulderInteractionItemProps {
 }
 
 const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: BoulderInteractionItemProps) => {
-
     const {interaction, style,handleEdit,editAble} = props;
+    const currentStatus =getStatus(interaction.status);
+    let formattedDate = (moment(interaction.created)).format('DD.MM.YYYY')
+
     return (
         <View style={BoulderInteractionListStyle.listinteractions}>
             {               
@@ -33,15 +37,16 @@ const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: Bo
                         </View>
                         <View style={BoulderInteractionListStyle.statecomment}>
                             <Text style={BoulderInteractionListStyle.stateHeader}>{'State: '}</Text>
-                            <Text style={BoulderInteractionListStyle.state}>{'Probiert ' + interaction.status}</Text>
+                            <Icon name={currentStatus.icon} size={18} color={ColorTheme.highlight} />
+                            <Text style={BoulderInteractionListStyle.state}>{  currentStatus.name}</Text>
                         </View>
                         <View style={BoulderInteractionListStyle.boxcomment}>
                         <Text style={BoulderInteractionListStyle.commentHeader}>{'Comment:'}</Text>
                             <Text style={BoulderInteractionListStyle.comment}>{interaction.comment}</Text>
                         </View>
                         <View style={BoulderInteractionListStyle.boxauthor}>
-                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.created}</Text>
-                        <Text style={BoulderInteractionListStyle.authordetails}>{interaction.userName}</Text>
+                            <Text style={BoulderInteractionListStyle.datedetails}>{formattedDate}</Text>
+                            <Text style={BoulderInteractionListStyle.authordetails}>{interaction.userName}</Text>
                         </View>                          
                     </View>
                 </ListItem>
@@ -54,7 +59,7 @@ const BoulderInteractionItem: React.FC<BoulderInteractionItemProps> = (props: Bo
 
 export default BoulderInteractionItem;
 
-<Image style={BoulderInteractionListStyle.icon} source={userImage}></Image>
+{/* <Image style={BoulderInteractionListStyle.icon} source={userImage}></Image> */}
 
 /**
  * 

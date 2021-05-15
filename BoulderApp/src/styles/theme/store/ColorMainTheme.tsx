@@ -5,7 +5,7 @@ const ColorTheme: IColor = {
     highlightContrast: '#ffffff',
     primary:'#222222',
     primary_dark:'#064780',
-    primary_light:'#CDEFFF',
+    primary_light:'#898989',
     secondary:'#000000',
     background: '#d77079',
     warning:'#df4040',

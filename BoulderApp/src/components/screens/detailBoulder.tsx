@@ -65,7 +65,12 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         })
     }
 
-    hideModal = ():void=>{ this.handleShowVisibility(false)}
+    hideModal = (changed?:boolean):void=>{ 
+        this.handleShowVisibility(false)
+        if(changed){
+            getCurrentBoulderInteraction(this.state.boulder.id).then((val: any) => this.setState({boulderInteractions:val}))
+        }
+    }
     showModal = ():void=>{this.handleShowVisibility(true)}
 
     toggleLike = (state:BoulderState)=>{

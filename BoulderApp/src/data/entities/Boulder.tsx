@@ -8,18 +8,20 @@ export interface IBoulder{
         created:Date,
         creator_id:string,
         like:boolean,
-        topped?:boolean
+        topped?:boolean,
+        lastEdited?:Date,
+        lastEditor_id?:string,
 }
 export type BoulderFormData = {
         title: string;
         color: number,
         difficulty: number,
         img:string,
-        location_id:string,
-        boulder_id:string;
+        location_id:number,
+        boulder_id:number;
         topped:boolean;
         like:boolean;
-        id:string;
+        id:number;
 }
 export interface INewBoulder {
         creatorId:number,
@@ -33,7 +35,10 @@ export interface IEditBoulder {
         name:string,
         colour:number,
         difficulty: number,
-        locationId: number
+        locationId: number,
+        force:boolean,
+        lastEdited?:Date,
+        lastEditor_id?:string,
 }
 export class Boulder implements IBoulder{
         id:string;
