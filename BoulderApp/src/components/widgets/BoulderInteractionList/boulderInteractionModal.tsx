@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {Platform, ScrollView, Text, View} from 'react-native';
 import {Overlay} from 'react-native-elements';
 import {
   BoulderInteraction,
@@ -100,7 +100,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (
             control={control}
             render={({field: {onChange, onBlur, value}}) => (
               <IconPicker
-               containerStyle={{marginBottom: 20}}
+               containerStyle={[{marginBottom: 20}, Platform.OS === 'ios' && {zIndex: 200}]}
                 isOpen={statusPickerOpen}
                 setIsOpen={setStatusPickerOpen}
                 items={statusValues}

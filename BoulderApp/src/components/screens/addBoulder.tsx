@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {View,Text,ImageBackground,} from 'react-native';
+import {View,Text,ImageBackground, Platform,} from 'react-native';
 import styles from '../../styles/addBoulder';
 import  {BTitle} from '../widgets/utils/text';
 import {useForm, Controller, set, SubmitHandler} from 'react-hook-form';
@@ -115,6 +115,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <IconPicker
+              containerStyle={[Platform.OS === 'ios' && {zIndex: 200}]}
               isOpen={locationPickerOpen}
               setIsOpen={setLocationPickerOpen}
               items={regionValues}
@@ -135,6 +136,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <IconPicker
+              containerStyle={[Platform.OS === 'ios' && {zIndex: 200}]}
               isOpen={colorPickerOpen}
               setIsOpen={setColorPickerOpen}
               items={colorValues}
@@ -155,6 +157,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
           control={control}
           render={({field: {onChange, onBlur, value}}) => (
             <IconPicker
+              containerStyle={[Platform.OS === 'ios' && {zIndex: 200}]}
               isOpen={difficultyPickerOpen}
               setIsOpen={setDifficultyPickerOpen}
               items={difficultyValues}
