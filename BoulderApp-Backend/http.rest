@@ -19,15 +19,17 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:3000/boulder/59
+PUT http://localhost:3000/boulder/63
 content-type: application/json
 
 {
-    "name": "Awesome Boulder",
+    "name": "Awesome Bould",
     "colour": 1,
-    "difficulty": 1,
+    "difficulty": 2,
     "locationId": 1,
-    "changeUserId": 5 
+    "userId": 5,
+    "force": true,
+    "lastChangeDate": "2021-05-14T17:37:32.000Z"
 }
 
 
