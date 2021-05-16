@@ -24,8 +24,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [locationPickerOpen, setLocationPickerOpen] = useState(false);
   const [difficultyPickerOpen, setDifficultyPickerOpen] = useState(false);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
-  console.log("currentBoulder")
-  console.log(currentBoulder)
+  // console.log("currentBoulder")
+  // console.log(currentBoulder)
 
   getData('user').then(user => {
     setUserId(user.userId);  
@@ -41,7 +41,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   } = useForm<BoulderFormData>();
 
   const onSubmit: SubmitHandler<BoulderFormData> = async data => {
-    console.log("onSubmit",currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor )
+    // console.log("onSubmit",currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor )
     const s = await storeBoulder(data,userId,currentBoulder?.id, currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor)
     navigation.navigate('HomeScreen',
       {update:true}
