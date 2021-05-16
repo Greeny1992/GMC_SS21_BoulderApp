@@ -54,6 +54,7 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
         renderItem={({ item }) => <BoulderListItem item={item} onPress={()=>handleSelectBoulder(item)}/>}
         renderSectionHeader={({ section: { title } }) => <BoulderSectionListHeader title={title}/>}
       />
+      <View style={{height: 40}}></View>
     </View>
   );
   

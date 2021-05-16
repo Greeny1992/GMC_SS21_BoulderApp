@@ -127,7 +127,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
 
   return (
-    <View>
       <View >
         <View style={[LayoutStyle.containerRow, styles.userRow]}>
           <BText style={[styles.userDetail]}>{user.userName}</BText>
@@ -137,7 +136,6 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
         <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
       </View>
-    </View>
   );
 };
 
