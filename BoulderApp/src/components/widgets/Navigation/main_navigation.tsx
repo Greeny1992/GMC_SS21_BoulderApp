@@ -34,7 +34,7 @@ const MainNavigation = () => {
                   </TouchableOpacity>
                 
                 ),
-                title: ""}} 
+                title: "Change the world on a boulder!"}} 
                 initialParams={{ update: false }}
                 />
             <MainStack.Screen name="ListScreen" component={Home} options={{title: ""}}/>
