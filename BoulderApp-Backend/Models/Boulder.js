@@ -26,7 +26,7 @@ Boulder.create = async (
       .promise()
       .query(
         "INSERT INTO boulder (bezeichnung, farbe, schwierigkeit, ID_Location, ID_Ersteller, Letzte_Bearbeiter) VALUES (?,?,?,?,?,?); ",
-        [name, colour, difficulty, locationId, creatorId,creatorId]
+        [name, colour, difficulty, locationId, creatorId, creatorId]
       );
     boulderId = data[0].insertId;
     result(null, 200, boulderId);
@@ -64,30 +64,58 @@ Boulder.updateById = async (
   difficulty,
   locationId,
   userId,
+  force,
+  lastChangeDate,
   result
 ) => {
-  await sql
+  if (!force) {
+    const oldData = await sql
+      .promise()
+      .query(
+        "SELECT b.Letzte_Bearbeitung as Letzte_Bearbeitung, u.Name as UserName FROM boulder as b JOIN user as u ON b.Letzte_Bearbeiter = u.ID WHERE b.ID = ?",
+        [id],
+        (err, res) => {
+          if (err) {
+            console.log("error: ", err);
+            result(err, null, null);
+            return;
+          }
+          return res;
+        }
+      );
+    const oldDataLastChange = oldData[0][0].Letzte_Bearbeitung;
+    const oldDataLastEditor = oldData[0][0].UserName;
+    if(oldDataLastChange.toISOString() != lastChangeDate) {
+      console.log("not same date");
+      result(null, 409, {
+        id: id,
+        name: name,
+        colour: colour,
+        difficulty: difficulty,
+        locationId: locationId,
+        userId: userId,
+        lastChangeDate: oldDataLastChange,
+        lastChangeEditor: oldDataLastEditor
+      })
+      return;
+    }
+  }
+
+  const res = await sql
     .promise()
     .query(
       "UPDATE boulder SET bezeichnung = ?, farbe = ?, schwierigkeit = ?, ID_Location = ?, Letzte_Bearbeiter = ?, Letzte_Bearbeitung = ? WHERE ID = ?",
-      [name, colour, difficulty, locationId, userId, new Date().toISOString().slice(0, 19).replace('T', ' '), id],
-      (err, res) => {
-        if (err) {
-          console.log("error: ", err);
-          result(null, err);
-          return;
-        }
-
-        if (res.affectedRows == 0) {
-          // not found Boulder with the id
-          result({ kind: "not_found" }, null);
-          return;
-        }
-
-        console.log("updated boulder: ", { id: id });
-        result(null, { id: id });
-      }
+      [
+        name,
+        colour,
+        difficulty,
+        locationId,
+        userId,
+        new Date().toISOString().slice(0, 19).replace("T", " "),
+        id,
+      ]
     );
+  result(null, 200, res);
 };
 
 module.exports = Boulder;
