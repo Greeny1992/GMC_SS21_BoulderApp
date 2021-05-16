@@ -78,6 +78,7 @@ const BoulderListStyle = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderColor: ColorTheme.primary,
     borderWidth: 1,
+    borderBottomWidth: 1
   },
   icon: {
     width: 30,
@@ -99,8 +100,7 @@ const BoulderListStyle = StyleSheet.create({
   searchbox: {
     width: '70%',
     height: '80%',
-    color: '#ffffff',
-    backgroundColor: 'green',
+    color: '#ffffff'
   },
   btnbox: {
     width: '30%',
