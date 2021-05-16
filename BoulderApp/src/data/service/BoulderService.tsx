@@ -8,7 +8,6 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
   return tempBoulder;
 };
 
-
 export const getBoulderData = async (userId: number) => {
   let boulderData;
   const connected = getData('connected');
@@ -48,61 +47,96 @@ export const getBoulderData = async (userId: number) => {
   return boulderData;
 };
 
-export const localBoulderToSynch= async ()=>{
-  const dataToSynch = await getData('BOULDER_DATA_TO_UPDATE')
-  return dataToSynch 
-}
+export const localBoulderToSynch = async () => {
+  // console.log("localBoulderToSynch")
+  const dataToSynch = await getData(
+    'BOULDER_DATA_TO_UPDATE',
+  ).then((data: IEditBoulder[]) =>
+    data?.filter((data: IEditBoulder) => data !== null),
+  );
+  return dataToSynch;
+};
+export const isThereDataToSynch = async (): Promise<boolean> => {
+  const dataToSynch = await getData(
+    'BOULDER_DATA_TO_UPDATE',
+  ).then((data: IEditBoulder[]) =>
+    data?.filter((data: IEditBoulder) => data && data !== null),
+  );
+
+  return (
+    dataToSynch !== undefined && dataToSynch !== null && dataToSynch.length > 0
+  );
+};
 export const getBoulderDetails = (id: string) => {
   return getData('BoulderList').then(res => {
     return res.find((boulder: any) => boulder.id === id);
   });
 };
 
-export const synchLocalUpdates = async (userID:number)=>{
+export const synchLocalUpdates = async (userID: number) => {
   const api = new BoulderApi();
-  const dataToUpdate = await getData('BOULDER_DATA_TO_UPDATE')
-  console.log('dataToUpdate',dataToUpdate)
-  if(dataToUpdate?.length){
-     dataToUpdate.map((item:IEditBoulder) => api.updateBoulder(item)).then((data:any)=>{
-       console.log("map update", data)
-
-     })
-  }else{
-    api.updateBoulder(dataToUpdate)
+  const dataToUpdate = await getData('BOULDER_DATA_TO_UPDATE');
+  // console.log('dataToUpdate', dataToUpdate);
+  if (dataToUpdate?.length) {
+    dataToUpdate
+      .map((item: IEditBoulder) => api.updateBoulder(item))
+      .then((data: any) => {
+        console.log('map update', data);
+      });
+  } else {
+    api.updateBoulder(dataToUpdate);
   }
-  return dataToUpdate
-}
-export const forceUpdateBoulder = (boulder: IEditBoulder) =>{
-  console.log("forceUpdateBoulder", boulder)
+  return dataToUpdate;
+};
+export const forceUpdateBoulder = async (boulder: IEditBoulder) :Promise<any>=> {
   const api = new BoulderApi();
-  boulder.force = true
-  api.updateBoulder(boulder).then(
-    result => {
-      console.log("result: " , result.status)
-      if(result.status === 200){
-
-      }
+  boulder.force = true;
+  // console.log('forceUpdateBoulder', boulder);
+ api.updateBoulder(boulder).then(result => {
+    // console.log('result: ', result.status);
+    if (result.status === 200) {
+      return   removeLocalUpdate(boulder);
     }
-  );
-}
+  });
+};
 
-const removeLocalUpdate = (boulder: IEditBoulder)=>{
-  getData('BOULDER_DATA_TO_UPDATE').then(data => {
-    data.filter((item: IEditBoulder) => item.boulderId !== boulder.boulderId)
-  })
-}
+const removeLocalUpdate = async (boulder: IEditBoulder) :Promise<any> => {
+  return await getData('BOULDER_DATA_TO_UPDATE')
+    .then((data: IEditBoulder[]) =>
+      data?.filter(
+        item => item !== null && item !== undefined && item?.length !== 0,
+      ),
+    )
+    .then(async data => {
+      const updatedData = await data.filter(
+        (item: IEditBoulder) => item.boulderId !== boulder.boulderId,
+      );
+      // console.log('updatedData -DELETE ', updatedData);
+      if (
+        updatedData !== undefined &&
+        updatedData !== null &&
+        updatedData.length > 0
+      ) {
+        return storeData('BOULDER_DATA_TO_UPDATE', updatedData);
+      } else {
+        // console.log("ELSE")
+       return storeData('BOULDER_DATA_TO_UPDATE', null);
+      }
+    });
+};
 export const storeBoulder = async (
   formData: BoulderFormData,
   userID: string,
   boulderID?: number,
-  lastChangeTimestamp?:Date,
-  lastEditor?:string
+  lastChangeTimestamp?: Date,
+  lastEditor?: string,
 ) => {
   const connected = getData('connected');
+  // const connected = false;
   const api = new BoulderApi();
-  console.log('storeBoulders');
-  console.log(formData, userID,lastChangeTimestamp, lastEditor);
-  // EDIT 
+  // console.log('storeBoulders');
+  // console.log(formData, userID, lastChangeTimestamp, lastEditor);
+  // EDIT
   if (boulderID) {
     const boulderData = {
       userId: Number(userID),
@@ -111,7 +145,7 @@ export const storeBoulder = async (
       difficulty: formData.difficulty,
       locationId: formData.location_id,
       lastChangeTimestamp: lastChangeTimestamp,
-      lastEditor:lastEditor,
+      lastEditor: lastEditor,
       force: false,
       boulderId: boulderID,
     };
@@ -120,8 +154,8 @@ export const storeBoulder = async (
       // api.updateBoulder(boulderData, boulderID);
       api.updateBoulder(boulderData);
     } else {
-      let BOULDER_DATA_TO_UPDATE = getData('BOULDER_DATA_TO_UPDATE',).then((data: any)=>
-        {
+      let BOULDER_DATA_TO_UPDATE = getData('BOULDER_DATA_TO_UPDATE').then(
+        (data: any) => {
           // console.log("data");
           // console.log(data);
           const boulderToUpdateList = data;
@@ -129,41 +163,39 @@ export const storeBoulder = async (
           // console.log(boulderToUpdateList)
           updateLocalBoulder(boulderData);
           if (boulderToUpdateList) {
-            let updateArray = []
+            let updateArray = [];
             if (boulderToUpdateList?.length) {
-              let updated= false;
-              for( let i=0; i< boulderToUpdateList.length;i++){
+              let updated = false;
+              for (let i = 0; i < boulderToUpdateList.length; i++) {
                 if (
                   boulderToUpdateList[i] &&
                   boulderData &&
                   boulderToUpdateList[i]?.boulderId === boulderData?.boulderId
                 ) {
-                  updated=true;
+                  updated = true;
                   boulderToUpdateList[i].name = boulderData.name;
                   boulderToUpdateList[i].difficulty = boulderData.difficulty;
                   boulderToUpdateList[i].colour = boulderData.colour;
                   boulderToUpdateList[i].locationId = boulderData.locationId;
                 }
-                
               }
               updateArray = [...boulderToUpdateList];
-              if(!updated){
+              if (!updated) {
                 updateArray.push(boulderData);
               }
-            }else{
+            } else {
               updateArray = [boulderToUpdateList];
             }
-            
+
             storeData('BOULDER_DATA_TO_UPDATE', updateArray);
           } else {
             storeData('BOULDER_DATA_TO_UPDATE', [boulderData]);
           }
-          getData('BOULDER_DATA_TO_UPDATE').then(udata => console.log('DATA-u', udata))
-        }
-    
-      )
+          
+        },
+      );
     }
-  //NEW
+    //NEW
   } else {
     const boulderData = {
       creatorId: Number(userID),
@@ -178,8 +210,8 @@ export const storeBoulder = async (
 
 const updateLocalBoulder = (boulder: IEditBoulder) => {
   getData('BOULDER_DATA')
-    .then((data:IBoulder[]) => {
-      if(data?.length){
+    .then((data: IBoulder[]) => {
+      if (data?.length) {
         let d = data.map((localBoulder: IBoulder) => {
           if (
             localBoulder &&
@@ -191,12 +223,11 @@ const updateLocalBoulder = (boulder: IEditBoulder) => {
             localBoulder.color = boulder.colour;
             localBoulder.location_id = boulder.locationId;
           }
-          return localBoulder
+          return localBoulder;
         });
         return d;
-
-      }else{
-        return boulder
+      } else {
+        return boulder;
       }
     })
     .then(updatedData => {

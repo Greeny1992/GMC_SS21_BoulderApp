@@ -4,7 +4,7 @@ import styles from '../../styles/home';
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
-import { getBoulderData, localBoulderToSynch } from '../../data/service/BoulderService';
+import { getBoulderData, isThereDataToSynch, localBoulderToSynch } from '../../data/service/BoulderService';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
@@ -36,18 +36,14 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const {update} = route?.params;
 
     const connected = getData('connected')
-    console.log("connected", connected)
+    // console.log("connected", connected)
     if(connected){
-      const needToSynchLocalData =  localBoulderToSynch()
+      const needToSynchLocalData =  isThereDataToSynch()
       needToSynchLocalData.then(
         needToSynch =>{
             console.log("needToSynch", needToSynch)
-            if(needToSynch){
-              navigation.navigate('SynchScreen', 
-              {
-                synchItems : needToSynch
-              }
-              )
+            if(needToSynch && needToSynch !== null){
+              navigation.navigate('SynchScreen')
             }
           }
       )

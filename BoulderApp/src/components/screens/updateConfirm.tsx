@@ -4,11 +4,12 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react
 import BText, { BTitle } from '../widgets/utils/text';
 import { useRoute } from '@react-navigation/native';
 import { getData } from '../../data/store/store';
-import { forceUpdateBoulder, synchLocalUpdates } from '../../data/service/BoulderService';
+import { forceUpdateBoulder, localBoulderToSynch, synchLocalUpdates } from '../../data/service/BoulderService';
 import { IEditBoulder } from '../../data/entities/Boulder';
 import ColorTheme from '../../styles/theme/store/ColorMainTheme';
 import LayoutStyle from '../../styles/utils/layout';
 import BButton from '../widgets/utils/button';
+import { set } from 'react-native-reanimated';
 
 
 interface SynchScreenProps {
@@ -21,45 +22,77 @@ const SynchScreen: React.FC<SynchScreenProps> = (props: SynchScreenProps) => {
     const route = useRoute();
     const {navigation } = props;
     const [user, setUser] = useState();
-    const [updateItems, setUpdateItems] = useState();
-    const {synchItems} = route?.params;
+    const [updateItems, setUpdateItems] = useState<IEditBoulder[]>();
 
-    
-      console.log("synchItems", synchItems)
-    
+    useEffect(() => {
+      localBoulderToSynch().then(
+        data=>{
+          // console.log("localBoulderToSynch -DATA ", data)
+          if(data !== undefined && data !== null && data.length>0) {
+            setUpdateItems(data)
+          }else{
+            navigation.navigate('HomeScreen')
+          }
+        }
+      )
+    }, [updateItems])
+
 
     useEffect(() => {
       if(!user){
         getData('user').then(user => {
           setUser(user); 
-          
-          setUpdateItems(synchItems)
-        
-
         }).catch(err => 
           console.error(err)
         )
       }
     }, [user])
-    useEffect(() => {
-      console.log("updateItems: ", updateItems)
-    }, [updateItems])
+
+    // useEffect(() => {
+    //   console.log("updateItems: ", updateItems)
+    // }, [updateItems])
    
 
-    const handleForceUpdate = (boulder: IEditBoulder)=>{
-      console.log("FORCE: ", boulder);
-      forceUpdateBoulder(boulder)
+    const handleForceUpdate =  async(boulder: IEditBoulder)=>{
+      // console.log("FORCE: ", boulder);
+      const result = await forceUpdateBoulder(boulder)
+      setUpdateItems(undefined)
+      // console.log(result)
+      // result.then(
+      //   async (d)=>{
+      //    return await localBoulderToSynch()
+      //     .then(
+      //       (data: IEditBoulder[]) =>{
+      //           if(data && data.length>0){
+      //             console.log("DATA AFTER FORCE : ", data)
+      //             setUpdateItems(data)
+      //           }else{
+      //             navigation.navigate('HomeScreen')
+
+      //           }
+      //       }
+      //     )
+
+      //   }
+      // )
     }
  
-    const renderItem = (boulder: IEditBoulder) => (
-      <Item boulder={boulder} key={boulder.boulderId} forceUpdate={handleForceUpdate}/>
-    );
+    const renderItem = (boulder: IEditBoulder) => {
+      // console.log("renderItem: ", renderItem)
+      return (
+        <Item boulder={boulder} key={boulder.boulderId} forceUpdate={handleForceUpdate}/>
+
+      )
+
+    }
+  
   
   return (
     <View>
       <BTitle label="Synch data" />
-      <BText>Items to synchronize: {synchItems?.length}</BText>
-      {updateItems?.map((item:IEditBoulder) => renderItem(item))}
+      <BText>Items to synchronize: {updateItems?.length}</BText>
+      
+      {updateItems && updateItems.length>0  && updateItems?.map((item:IEditBoulder) => renderItem(item))}
        
     </View>
   );

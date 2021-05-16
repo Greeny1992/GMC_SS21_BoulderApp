@@ -53,7 +53,7 @@ const _location :ILocation[] = [
     {id:2,key:2, country:'Austria',region:'Vienna'},
     {id:3,key:3, country:'Austria',region:'Carinthia'},
     {id:4,key:4, country:'Austria',region:'Salzburg'},
-    {id:4,key:5, country:'Austria',region:'Tyrolia'},
+    {id:5,key:5, country:'Austria',region:'Tyrol'},
     
 ]
 
