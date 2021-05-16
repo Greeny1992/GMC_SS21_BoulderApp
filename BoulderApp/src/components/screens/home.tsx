@@ -4,7 +4,7 @@ import styles from '../../styles/home';
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
-import { getBoulderData, isThereDataToSynch, localBoulderToSynch } from '../../data/service/BoulderService';
+import { getBoulderData, isThereDataToStore, isThereDataToSynch, localBoulderToSynch, synchLocalCreates } from '../../data/service/BoulderService';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
@@ -35,28 +35,49 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [showReset, setShowReset] = useState(false);
     const {update} = route?.params;
 
-    const connected = getData('connected')
-    // console.log("connected", connected)
-    if(connected){
-      const needToSynchLocalData =  isThereDataToSynch()
-      needToSynchLocalData.then(
-        needToSynch =>{
-            console.log("needToSynch", needToSynch)
-            if(needToSynch && needToSynch !== null){
-              navigation.navigate('SynchScreen')
-            }
-          }
-      )
-    }
-      
+ 
     
-   
+    useEffect(() => {
+      
+        
+    }, [])
 
     if(update){
+      console.log("update")
       navigation.setParams({update:false})
       getBoulderData(user?.userId).then((val: any) => {
         setFilteredDataSource(val);
+        setMasterDataSource(val)
       }) 
+      const connected = getData('connected')
+      // console.log("connected", connected)
+      if(connected){
+        const needToSynchLocalData =  isThereDataToSynch()
+        needToSynchLocalData.then(
+          needToSynch =>{
+              // console.log("needToSynch", needToSynch)
+              if(needToSynch && needToSynch !== null){
+                navigation.navigate('SynchScreen')
+              }
+            }
+        )
+        isThereDataToStore().then(
+          needToStoreLocalData =>{
+            if(needToStoreLocalData){
+              synchLocalCreates().then(
+                ()=>{
+                  console.log("GETTTTTT")
+                  getBoulderData(user?.userId).then((val: any) => {
+                    setFilteredDataSource(val);
+                    setMasterDataSource(val)
+                  }) 
+                }
+              )
+            }
+            console.log("needToStoreLocalData", needToStoreLocalData)
+          }
+        )
+      }
     }
     
     useEffect(() => {

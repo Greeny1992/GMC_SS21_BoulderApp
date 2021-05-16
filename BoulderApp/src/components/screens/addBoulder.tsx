@@ -42,11 +42,14 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
 
   const onSubmit: SubmitHandler<BoulderFormData> = async data => {
     // console.log("onSubmit",currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor )
-    const s = await storeBoulder(data,userId,currentBoulder?.id, currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor)
-    navigation.navigate('HomeScreen',
+    const s = await storeBoulder(data,userId,currentBoulder?.id, currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor).then(()=>{
+      console.log("NAVIGATE")
+      navigation.navigate('HomeScreen',
       {update:true}
-    );
-   
+    )
+    }
+    )
+  
     
   };
 
