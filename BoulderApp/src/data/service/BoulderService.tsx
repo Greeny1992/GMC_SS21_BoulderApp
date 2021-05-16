@@ -72,7 +72,25 @@ export const synchLocalUpdates = async (userID:number)=>{
   }
   return dataToUpdate
 }
+export const forceUpdateBoulder = (boulder: IEditBoulder) =>{
+  console.log("forceUpdateBoulder", boulder)
+  const api = new BoulderApi();
+  boulder.force = true
+  api.updateBoulder(boulder).then(
+    result => {
+      console.log("result: " , result.status)
+      if(result.status === 200){
 
+      }
+    }
+  );
+}
+
+const removeLocalUpdate = (boulder: IEditBoulder)=>{
+  getData('BOULDER_DATA_TO_UPDATE').then(data => {
+    data.filter((item: IEditBoulder) => item.boulderId !== boulder.boulderId)
+  })
+}
 export const storeBoulder = async (
   formData: BoulderFormData,
   userID: string,

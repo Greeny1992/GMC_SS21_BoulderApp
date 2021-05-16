@@ -4,7 +4,7 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react
 import BText, { BTitle } from '../widgets/utils/text';
 import { useRoute } from '@react-navigation/native';
 import { getData } from '../../data/store/store';
-import { synchLocalUpdates } from '../../data/service/BoulderService';
+import { forceUpdateBoulder, synchLocalUpdates } from '../../data/service/BoulderService';
 import { IEditBoulder } from '../../data/entities/Boulder';
 import ColorTheme from '../../styles/theme/store/ColorMainTheme';
 import LayoutStyle from '../../styles/utils/layout';
@@ -32,20 +32,23 @@ const SynchScreen: React.FC<SynchScreenProps> = (props: SynchScreenProps) => {
       if(!user){
         getData('user').then(user => {
           setUser(user); 
-          synchLocalUpdates(user.userId).then(
-            items =>{
-              console.log("items",items)
-              setUpdateItems(items)
-            }
-          );
+          
+          setUpdateItems(synchItems)
+        
+
         }).catch(err => 
           console.error(err)
         )
       }
     }, [user])
+    useEffect(() => {
+      console.log("updateItems: ", updateItems)
+    }, [updateItems])
    
+
     const handleForceUpdate = (boulder: IEditBoulder)=>{
-      console.log("FORCE: ", boulder)
+      console.log("FORCE: ", boulder);
+      forceUpdateBoulder(boulder)
     }
  
     const renderItem = (boulder: IEditBoulder) => (
@@ -56,7 +59,7 @@ const SynchScreen: React.FC<SynchScreenProps> = (props: SynchScreenProps) => {
     <View>
       <BTitle label="Synch data" />
       <BText>Items to synchronize: {synchItems?.length}</BText>
-      {synchItems.map((item:IEditBoulder) => renderItem(item))}
+      {updateItems?.map((item:IEditBoulder) => renderItem(item))}
        
     </View>
   );
@@ -76,7 +79,7 @@ const Item: React.FC<ItemProps> = ( props:ItemProps ) => {
           <BText style={styles.title}>Updated title: {boulder.name}</BText>
         </View>
         <View style={[styles.actions]}>
-          <BButton onPress={(boulder:IEditBoulder)=> forceUpdate(boulder)}><Text>Force Update</Text></BButton>
+          <BButton onPress={()=> forceUpdate(boulder)}><Text>Force Update</Text></BButton>
         </View>
       </View>
     </View>
