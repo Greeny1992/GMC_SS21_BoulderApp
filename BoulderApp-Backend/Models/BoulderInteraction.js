@@ -29,8 +29,6 @@ BoulderInteraction.create = async (boulderId, userId, title,comment, status, res
                 result(err, null);
                 return;
             }
-    
-            console.log("created interaction: ", { id: res.insertId });
             result(null, { id: res.insertId });
         });
     } catch (error) {
@@ -45,7 +43,6 @@ BoulderInteraction.updateById = async (id, boulderInteraction, result) => {
         await sql.promise().query(
             "UPDATE boulderinteraction_user_assigned SET kommentar = ?, status = ?, title = ? WHERE id = ?",
             [boulderInteraction.comment, boulderInteraction.status,boulderInteraction.title, id]);
-        console.log("updated interaction: ", { id: id, ...boulderInteraction });
         result(null, 200);
         
     } catch (error) {

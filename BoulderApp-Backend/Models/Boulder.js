@@ -85,8 +85,9 @@ Boulder.updateById = async (
       );
     const oldDataLastChange = oldData[0][0].Letzte_Bearbeitung;
     const oldDataLastEditor = oldData[0][0].UserName;
+    console.log(oldDataLastChange.toISOString())
+    console.log(lastChangeDate)
     if(oldDataLastChange.toISOString() != lastChangeDate) {
-      console.log("not same date");
       result(null, 409, {
         id: id,
         name: name,

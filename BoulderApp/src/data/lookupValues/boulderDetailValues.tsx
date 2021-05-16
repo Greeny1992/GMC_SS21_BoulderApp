@@ -7,8 +7,8 @@ const _colors: IColor[]=[
     {id:4, key:5,name:'orange',value:'#FFA500'},
     {id:5, key:6,name:'pink',value:'#FFC0CB'},
     {id:6, key:7,name:'blue',value:'#0000ff'},
-    {id:7, key:8,name:'violet',value:'##EE82EE'},
-    {id:8, key:9,name:'turquoise',value:'##58bdb3'},
+    {id:7, key:8,name:'violet',value:'#EE82EE'},
+    {id:8, key:9,name:'turquoise',value:'#58bdb3'},
     {id:9, key:10,name:'white',value:'#ffffff'},
     {id:10,key:11, name:'grey',value:'#808080'},
     {id:11,key:12, name:'black',value:'#000000'}

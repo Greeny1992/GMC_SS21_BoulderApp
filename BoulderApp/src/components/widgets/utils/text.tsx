@@ -10,7 +10,7 @@ interface BTextProps {
 }
 
 const BText: React.FC<BTextProps> = (props: any) => {
-    return <Text style={[styles.font, props.style, {color:props.color}]} numberOfLines={props.numberOfLines}>{props.children}</Text>
+    return <Text style={[styles.font, props.style, {color:props.color ?? "black"}]} numberOfLines={props.numberOfLines}>{props.children}</Text>
 }
 interface BTitleProps {
     style?: any,

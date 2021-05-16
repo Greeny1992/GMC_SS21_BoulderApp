@@ -49,9 +49,6 @@ exports.update = (req, res) => {
       message: "Content can not be empty!",
     });
   }
-
-  console.log(req.body);
-
   Boulder.updateById(
     req.params.boulderId,
     req.body.name,
@@ -60,7 +57,7 @@ exports.update = (req, res) => {
     req.body.locationId,
     req.body.userId,
     req.body.force,
-    req.body.lastChangeDate,
+    req.body.lastChangeTimestamp,
     (err, status, data) => {
       if (err) {
         if (err.kind === "not_found") {

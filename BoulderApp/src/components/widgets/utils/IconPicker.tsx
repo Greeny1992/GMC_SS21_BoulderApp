@@ -30,7 +30,7 @@ const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
   
   return (
     <View style={[containerStyle]}>
-        {label ? <BLabel label={label}/> : <></>}
+        {label ? <BLabel label={label} style={{paddingTop: 20, paddingLeft: 10, paddingBottom: 10 }}/> : <></>}
         <DropDownPicker
           onOpen={onOpen}
           placeholder={placeholder}
