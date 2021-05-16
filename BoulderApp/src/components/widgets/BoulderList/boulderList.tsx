@@ -51,7 +51,6 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
     <View style={BoulderListStyle.sectionLi}>
       <SectionList
         sections={getSectionLocations()}
-        keyExtractor={(item, index) => item.id + index}
         renderItem={({ item }) => <BoulderListItem item={item} onPress={()=>handleSelectBoulder(item)}/>}
         renderSectionHeader={({ section: { title } }) => <BoulderSectionListHeader title={title}/>}
       />
