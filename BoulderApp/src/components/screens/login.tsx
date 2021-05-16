@@ -25,7 +25,7 @@ export default function Login({ loggedInHandler }: any) {
     };
     api.loginUser(body).then((response) => {
       if(response.status >= 200 && response.status < 300){
-        console.log(response)
+        // console.log(response)
         response.json().then(json => {
           const user = {
             'userId': json.user.ID,
