@@ -8,7 +8,6 @@ exports.create = (req, res) => {
       message: "Content can not be empty!",
     });
   }
-
   // Save Boulder in the database
   Boulder.create(
     req.body.name,
