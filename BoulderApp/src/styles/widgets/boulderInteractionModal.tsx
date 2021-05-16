@@ -6,11 +6,10 @@ const styles = StyleSheet.create ({
        flexDirection:'column',
        justifyContent:'center',
        alignItems: 'center',
-       marginTop:'40%',
-       marginBottom:'40%',
        padding:30,
-        width:'80%',
-        height:400
+       marginTop: '5%',
+       marginBottom: '5%',
+       width: '90%'
     },
     text: {
        color: '#3f2949',
