@@ -7,6 +7,8 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
   tempBoulder.like = !boulder.like;
   return tempBoulder;
 };
+
+
 export const getBoulderData = async (userId: number) => {
   let boulderData;
   const connected = getData('connected');
@@ -96,7 +98,7 @@ export const storeBoulder = async (
       boulderId: boulderID,
     };
     //console.log(boulderData, boulderID);
-    if (false) {
+    if (connected) {
       // api.updateBoulder(boulderData, boulderID);
       api.updateBoulder(boulderData);
     } else {
@@ -155,6 +157,7 @@ export const storeBoulder = async (
     api.createBoulder(boulderData);
   }
 };
+
 const updateLocalBoulder = (boulder: IEditBoulder) => {
   getData('BOULDER_DATA')
     .then((data:IBoulder[]) => {
