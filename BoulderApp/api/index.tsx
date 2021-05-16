@@ -45,8 +45,9 @@ export class BoulderApi {
     }
     // updateBoulder(updateBoulder:IEditBoulder,boulderID:number){
     updateBoulder(updateBoulder:IEditBoulder){
-        // console.log('updateBoulder')
-        // console.log(`${this.entityURL}${boulderID}`)
+        console.log('updateBoulder')
+        console.log(updateBoulder)
+        console.log(`${this.entityURL}${updateBoulder.boulderId}`)
         return fetch(`${this.entityURL}${updateBoulder.boulderId}`, {
             method: 'PUT',
             headers: {

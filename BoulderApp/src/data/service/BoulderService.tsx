@@ -7,6 +7,8 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
   tempBoulder.like = !boulder.like;
   return tempBoulder;
 };
+
+
 export const getBoulderData = async (userId: number) => {
   let boulderData;
   const connected = getData('connected');
@@ -70,7 +72,25 @@ export const synchLocalUpdates = async (userID:number)=>{
   }
   return dataToUpdate
 }
+export const forceUpdateBoulder = (boulder: IEditBoulder) =>{
+  console.log("forceUpdateBoulder", boulder)
+  const api = new BoulderApi();
+  boulder.force = true
+  api.updateBoulder(boulder).then(
+    result => {
+      console.log("result: " , result.status)
+      if(result.status === 200){
 
+      }
+    }
+  );
+}
+
+const removeLocalUpdate = (boulder: IEditBoulder)=>{
+  getData('BOULDER_DATA_TO_UPDATE').then(data => {
+    data.filter((item: IEditBoulder) => item.boulderId !== boulder.boulderId)
+  })
+}
 export const storeBoulder = async (
   formData: BoulderFormData,
   userID: string,
@@ -96,7 +116,7 @@ export const storeBoulder = async (
       boulderId: boulderID,
     };
     //console.log(boulderData, boulderID);
-    if (false) {
+    if (connected) {
       // api.updateBoulder(boulderData, boulderID);
       api.updateBoulder(boulderData);
     } else {
@@ -155,6 +175,7 @@ export const storeBoulder = async (
     api.createBoulder(boulderData);
   }
 };
+
 const updateLocalBoulder = (boulder: IEditBoulder) => {
   getData('BOULDER_DATA')
     .then((data:IBoulder[]) => {
