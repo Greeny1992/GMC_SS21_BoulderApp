@@ -1,10 +1,10 @@
 import { IStatus } from "../entities/BoulderInteractionValues";
 
 const _status :IStatus[] = [
-    {id:0, name:'idea',icon:'lightbulb'},
-    {id:1, name:'tried',icon:'looks-one'},
-    {id:2, name:'training for',icon:'construction'},
-    {id:3, name:'topped',icon:'emoji-events'},
+    {id:0, key:1,name:'idea',icon:'lightbulb'},
+    {id:1, key:2,name:'tried',icon:'looks-one'},
+    {id:2, key:3,name:'training for',icon:'construction'},
+    {id:3, key:4,name:'topped',icon:'emoji-events'},
 ]
 
 export function getAllStatus(){

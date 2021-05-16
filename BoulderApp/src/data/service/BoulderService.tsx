@@ -1,6 +1,5 @@
 
 import {BoulderApi} from '../../../api';
-import {BOULDER_DATA} from '../fakeData/Boulder';
 import {getData, storeData} from '../store/store';
 import { BoulderFormData, IBoulder } from "../entities/Boulder";
 
@@ -9,7 +8,7 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
   tempBoulder.like = !boulder.like;
   return tempBoulder;
 };
-export const getBoulderData = async (userId?: number) => {
+export const getBoulderData = async (userId: number) => {
   let test;
     const api = new BoulderApi();
     test = await api.getBoulderList(userId).then(res => {
@@ -21,11 +20,11 @@ export const getBoulderData = async (userId?: number) => {
               title: boulder.name,
               color: boulder.colour,
               difficulty: boulder.difficulty,
-              img: boulder.photo,
               location_id: boulder.locationId,
-              created: boulder.lastChangeTimestamp,
-              creator_id: boulder.lastChangeUserName,
+              lastChangeTimestamp: boulder.lastChangeTimestamp,
+              lastEditor:boulder.lastChangeUserName,
               like: boulder.isLikeAssigned,
+
             };
           },
         );
@@ -42,7 +41,8 @@ export const getBoulderDetails = (id: string) => {
 };
 export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:number):void=>{
     const api = new BoulderApi();
-  
+    // console.log('storeBoulders')
+    // console.log(formData,userID)
     if(boulderID){
       const boulderData = {
         userId:   Number(userID),
@@ -50,8 +50,10 @@ export const storeBoulder = (formData:BoulderFormData,userID:string,boulderID?:n
         colour:       formData.color,
         difficulty:   formData.difficulty,
         locationId:  formData.location_id,
+        lastChangeTimestamp: formData.lastChangeTimestamp,
         force:        true
       };
+      console.log(boulderData,boulderID)
       api.updateBoulder(boulderData,boulderID)
     }else{
       const boulderData = {

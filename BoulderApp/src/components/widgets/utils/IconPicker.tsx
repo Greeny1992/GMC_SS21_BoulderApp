@@ -19,12 +19,12 @@ interface IconPickerProps {
   onOpen?: any;
   zIndex: any;
   zIndexInverse: any,
-  placeholder?:string
+  placeholder?:string,
 }
 
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
   const {items,label,containerStyle, selectedItem, placeholder,setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
-  const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
+  const ItemPickerItems = items.map((item )=> {return {label: item.name, key:item.key, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight}  key={item.key}/>}})
   
 
   

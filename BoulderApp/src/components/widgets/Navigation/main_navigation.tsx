@@ -25,7 +25,7 @@ const MainNavigation = () => {
     return(
     <NavigationContainer>
           <MainStack.Navigator initialRouteName="HomeScreen">
-            <MainStack.Screen name="HomeScreen" component={Main} 
+            <MainStack.Screen name="HomeScreen" component={Home} 
               options= {{
                 headerRight: () => (
                   <TouchableOpacity onPress={onPressLogout} style={{padding: ScreenSizes.layout_distance}}>

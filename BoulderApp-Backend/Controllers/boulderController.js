@@ -42,8 +42,6 @@ exports.update = (req, res) => {
         });
     }
 
-    console.log(req.body);
-
     Boulder.updateById(req.params.boulderId,req.body.name, req.body.colour, req.body.difficulty, req.body.locationId, req.body.userId, (err, status, data) => {
         if (err) {
             if (err.kind === "not_found") {
