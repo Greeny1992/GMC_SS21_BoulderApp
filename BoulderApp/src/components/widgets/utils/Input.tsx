@@ -13,16 +13,17 @@ interface BInputProps {
     placeholder:string,
     value?:string,
     multiline?:boolean,
+    labelStyle?: any
 }
 export const BInput: React.FC<BInputProps> = (props: BInputProps) => {
-    const {onChangeText,label,placeholder, style,multiline, value}=props
+    const {onChangeText,label,placeholder, style, labelStyle ,multiline, value}=props
     const styling = multiline ? styles.multiline : styles.input ;
     
     return (
             <View >
-                <BLabel label={label}/>
+                <BLabel label={label} style={labelStyle}/>
                 <TextInput
-                    style={[styling]}
+                    style={[styling, style]}
                     placeholder={ placeholder ?? "Placeholder"}
                     placeholderTextColor="#adadad"
                     numberOfLines={multiline ? 8 : 1}

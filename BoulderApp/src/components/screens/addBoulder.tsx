@@ -103,6 +103,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
               placeholder="First trial and I did it"
               value={value}
               onChangeText={(value: string) => onChange(value)}
+              labelStyle={{marginBottom: -10}}
             />
           )}
           name="title"
