@@ -1,6 +1,6 @@
 import {BoulderApi} from '../../../api';
 import {clearData, getData, storeData} from '../store/store';
-import {BoulderFormData, IBoulder, IEditBoulder} from '../entities/Boulder';
+import {BoulderFormData, IBoulder, IEditBoulder, INewBoulder} from '../entities/Boulder';
 
 export const toggleLike = (boulder: IBoulder): IBoulder => {
   const tempBoulder = boulder;
@@ -38,6 +38,7 @@ export const getBoulderData = async (userId: number) => {
     boulderData = await getData('BoulderList').then(boulder => {
       return boulder;
     });
+    console.log("boulderData", boulderData)
     storeData('BOULDER_DATA', boulderData);
   } else {
     console.log('OFFLINE');
@@ -67,6 +68,33 @@ export const isThereDataToSynch = async (): Promise<boolean> => {
     dataToSynch !== undefined && dataToSynch !== null && dataToSynch.length > 0
   );
 };
+export const isThereDataToStore = async (): Promise<boolean> => {
+  const dataToSynch = await getData(
+    'BOULDER_DATA_TO_CREATE',
+  ).then((data: INewBoulder[]) =>
+    data?.filter((data: INewBoulder) => data && data !== null),
+  );
+
+  return (
+    dataToSynch !== undefined && dataToSynch !== null && dataToSynch.length > 0
+  );
+};
+
+export const synchLocalCreates = async () => {
+  const api = new BoulderApi();
+  const dataToCreate = await getData('BOULDER_DATA_TO_CREATE');
+   console.log('dataToCreate', dataToCreate);
+  if (dataToCreate?.length) {
+    dataToCreate
+      .map((item: INewBoulder) => api.createBoulder(item))
+      
+  } else {
+    api.createBoulder(dataToCreate);
+  }
+  storeData('BOULDER_DATA_TO_CREATE',null)
+  return getData('BOULDER_DATA_TO_CREATE').then(d=> console.log("DATA AFTER DELETE ", d))
+}
+
 export const getBoulderDetails = (id: string) => {
   return getData('BoulderList').then(res => {
     return res.find((boulder: any) => boulder.id === id);
@@ -124,6 +152,42 @@ const removeLocalUpdate = async (boulder: IEditBoulder) :Promise<any> => {
       }
     });
 };
+const addLocalUpdate = async (boulder: IEditBoulder) :Promise<any> => {
+  // console.log("addLocalUpdate", boulder)
+  return await getData('BOULDER_DATA_TO_UPDATE')
+                  .then((data: IEditBoulder[]) =>
+                      data?.filter(
+                      item => item !== null && item !== undefined && item?.length !== 0,
+                    )
+                  ).then((data:IEditBoulder[]) =>{
+                      // console.log("AFTER FILTER ", data)
+                      if(data && data !== undefined && data !== null ){
+                        storeData('BOULDER_DATA_TO_UPDATE',[...data,boulder])
+                      }else{
+                        storeData('BOULDER_DATA_TO_UPDATE',[boulder])
+                      }
+                    } 
+                    )
+
+}
+const addLocalCreate = async (boulder: INewBoulder) :Promise<any> => {
+  console.log("addLocalCreate", boulder)
+  return await getData('BOULDER_DATA_TO_CREATE')
+                  .then((data: INewBoulder[]) =>
+                      data?.filter(
+                      item => item !== null && item !== undefined && item?.length !== 0,
+                    )
+                  ).then((data:INewBoulder[]) =>{
+                      console.log("AFTER FILTER ", data)
+                      if(data && data !== undefined && data !== null ){
+                        storeData('BOULDER_DATA_TO_CREATE',[...data,boulder])
+                      }else{
+                        storeData('BOULDER_DATA_TO_CREATE',[boulder])
+                      }
+                    } 
+                    )
+
+}
 export const storeBoulder = async (
   formData: BoulderFormData,
   userID: string,
@@ -131,6 +195,7 @@ export const storeBoulder = async (
   lastChangeTimestamp?: Date,
   lastEditor?: string,
 ) => {
+  console.log("storeBoulder", formData)
   const connected = getData('connected');
   // const connected = false;
   const api = new BoulderApi();
@@ -152,7 +217,14 @@ export const storeBoulder = async (
     //console.log(boulderData, boulderID);
     if (connected) {
       // api.updateBoulder(boulderData, boulderID);
-      api.updateBoulder(boulderData);
+      return api.updateBoulder(boulderData).then(
+        data=>{
+          // console.log("DATA", data, data.status);
+          if(data?.status === 200){
+            addLocalUpdate(boulderData)
+          }
+        }
+      );
     } else {
       let BOULDER_DATA_TO_UPDATE = getData('BOULDER_DATA_TO_UPDATE').then(
         (data: any) => {
@@ -204,7 +276,11 @@ export const storeBoulder = async (
       difficulty: formData.difficulty,
       locationId: Number(formData.location_id),
     };
-    api.createBoulder(boulderData);
+    if(connected){
+      return api.createBoulder(boulderData);
+    } else{
+      addLocalCreate(boulderData)
+    }
   }
 };
 
