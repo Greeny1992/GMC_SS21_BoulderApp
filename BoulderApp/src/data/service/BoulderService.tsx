@@ -10,7 +10,7 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
 export const getBoulderData = async (userId: number) => {
   let boulderData;
   const connected = getData('connected');
-  if (false) {
+  if (connected) {
     console.log('ONLINE');
 
     const api = new BoulderApi();
@@ -48,28 +48,23 @@ export const getBoulderData = async (userId: number) => {
 
 export const localBoulderToSynch= async ()=>{
   const dataToSynch = await getData('BOULDER_DATA_TO_UPDATE')
-  return dataToSynch !== undefined
+  return dataToSynch 
 }
 export const getBoulderDetails = (id: string) => {
   return getData('BoulderList').then(res => {
     return res.find((boulder: any) => boulder.id === id);
   });
 };
-function promisedParseJSON(json:string) {
-  return new Promise((resolve, reject) => {
-      try {
-          resolve(JSON.parse(json))
-      } catch (e) {
-          reject(e)
-      }
-  })
-}
+
 export const synchLocalUpdates = async (userID:number)=>{
   const api = new BoulderApi();
   const dataToUpdate = await getData('BOULDER_DATA_TO_UPDATE')
+  console.log('dataToUpdate',dataToUpdate)
   if(dataToUpdate?.length){
-    const returnValue= await dataToUpdate.map((item:IEditBoulder) => api.updateBoulder(item))
-    console.log("returnValue", returnValue)
+     dataToUpdate.map((item:IEditBoulder) => api.updateBoulder(item)).then((data:any)=>{
+       console.log("map update", data)
+
+     })
   }else{
     api.updateBoulder(dataToUpdate)
   }
@@ -141,7 +136,7 @@ export const storeBoulder = async (
             
             storeData('BOULDER_DATA_TO_UPDATE', updateArray);
           } else {
-            storeData('BOULDER_DATA_TO_UPDATE', boulderData);
+            storeData('BOULDER_DATA_TO_UPDATE', [boulderData]);
           }
           getData('BOULDER_DATA_TO_UPDATE').then(udata => console.log('DATA-u', udata))
         }

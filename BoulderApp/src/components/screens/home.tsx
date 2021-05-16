@@ -35,20 +35,25 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [showReset, setShowReset] = useState(false);
     const {update} = route?.params;
 
-    getData('connected').then(
-      connected => {
-        if(connected){
-          const needToSynchLocalData =  localBoulderToSynch()
-          needToSynchLocalData.then(
-              needToSynch =>{
-                if(needToSynch){
-                  navigation.navigate('SynchScreen', )
-                }
+    const connected = getData('connected')
+    console.log("connected", connected)
+    if(connected){
+      const needToSynchLocalData =  localBoulderToSynch()
+      needToSynchLocalData.then(
+        needToSynch =>{
+            console.log("needToSynch", needToSynch)
+            if(needToSynch){
+              navigation.navigate('SynchScreen', 
+              {
+                synchItems : needToSynch
               }
-          )
-        }
-      }
-    )
+              )
+            }
+          }
+      )
+    }
+      
+    
    
 
     if(update){
