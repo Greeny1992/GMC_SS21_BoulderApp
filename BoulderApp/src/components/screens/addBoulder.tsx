@@ -24,8 +24,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [locationPickerOpen, setLocationPickerOpen] = useState(false);
   const [difficultyPickerOpen, setDifficultyPickerOpen] = useState(false);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
-  // console.log("currentBoulder")
-  // console.log(currentBoulder)
+  console.log("currentBoulder")
+  console.log(currentBoulder)
 
   getData('user').then(user => {
     setUserId(user.userId);  
@@ -40,12 +40,14 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     setValue,
   } = useForm<BoulderFormData>();
 
-  const onSubmit: SubmitHandler<BoulderFormData> = data => {
-    storeBoulder(data,userId,Number(currentBoulder?.id));
-   
+  const onSubmit: SubmitHandler<BoulderFormData> = async data => {
+    console.log("onSubmit",currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor )
+    const s = await storeBoulder(data,userId,currentBoulder?.id, currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor)
     navigation.navigate('HomeScreen',
       {update:true}
     );
+   
+    
   };
 
   const onLocationPickerOpen = useCallback(() => {
@@ -83,26 +85,6 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     <ImageBackground source={bg} style={styles.background}>
       <View style={{flex: 1, width: '80%'}}>
         <BTitle label={formTitle} color="white" />
-        <Controller
-          //HIDDEN Field for the boulder id
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-           <></>
-          )}
-          name="lastChangeTimestamp"
-          // rules={{required: true}}
-          defaultValue={currentBoulder?.lastEditor}
-        />
-        <Controller
-          //HIDDEN Field for the boulder id
-          control={control}
-          render={({field: {onChange, onBlur, value}}) => (
-           <></>
-          )}
-          name="lastChangeTimestamp"
-          // rules={{required: true}}
-          defaultValue={currentBoulder?.lastChangeTimestamp}
-        />
         <Controller
           //HIDDEN Field for the boulder id
           control={control}

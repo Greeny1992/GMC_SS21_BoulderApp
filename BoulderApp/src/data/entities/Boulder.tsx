@@ -34,7 +34,8 @@ export interface IEditBoulder {
         difficulty: number,
         locationId: number,
         force:boolean,
-        lastChangeTimestamp?:Date,
+        boulderId:number,
+        lastChangeTimestamp?:Date ,
         lastEditor?:string,
 }
 export class Boulder implements IBoulder{
@@ -63,7 +64,7 @@ export class Boulder implements IBoulder{
                 this.location_id=location_id;
                 this.like       =like;
                 this.lastEditor = lastEditor
-                this.lastChangeTimestamp= lastChangeTimestamp|| undefined;
+                this.lastChangeTimestamp= lastChangeTimestamp;
         }
         
 }

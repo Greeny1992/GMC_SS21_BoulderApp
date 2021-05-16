@@ -4,7 +4,7 @@ import styles from '../../styles/home';
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
-import { getBoulderData } from '../../data/service/BoulderService';
+import { getBoulderData, localBoulderToSynch } from '../../data/service/BoulderService';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
@@ -35,13 +35,29 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [showReset, setShowReset] = useState(false);
     const {update} = route?.params;
 
+    getData('connected').then(
+      connected => {
+        if(connected){
+          const needToSynchLocalData =  localBoulderToSynch()
+          needToSynchLocalData.then(
+              needToSynch =>{
+                if(needToSynch){
+                  navigation.navigate('SynchScreen', )
+                }
+              }
+          )
+        }
+      }
+    )
+   
+
     if(update){
       navigation.setParams({update:false})
       getBoulderData(user?.userId).then((val: any) => {
         setFilteredDataSource(val);
       }) 
     }
- 
+    
     useEffect(() => {
       if(!user){
         getData('user').then(user => {
@@ -89,7 +105,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const refresh =()=>{
       setShowReset(false)
       setSearchText('')
-      setFilteredDataSource(masterDataSource)
+      getBoulderData(user?.userId).then((val: any) => {
+        setFilteredDataSource(val);
+        setMasterDataSource(val);
+      }) 
      
     }
     const searchBoulderList: any = (input: string) => {

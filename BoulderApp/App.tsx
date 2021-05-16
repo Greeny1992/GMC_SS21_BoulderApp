@@ -13,7 +13,6 @@ export default function App() {
   useEffect(() => {
     storeData("connected", netInfo.isConnected)
   }, [netInfo])
-
   const [state, dispatch] = React.useReducer(
     (prevState: any, action: any) => {
         switch (action.type) {

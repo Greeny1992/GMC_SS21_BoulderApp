@@ -34,3 +34,11 @@ export const clearData = async () => {
 
   console.log('Done.')
 }
+export const mergeData = async (key: string, value:string)=> {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.mergeItem(key, jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+}

@@ -11,6 +11,7 @@ import AddBoulder from "../../screens/addBoulder";
 import DetailBoulder from "../../screens/detailBoulder";
 import Home from "../../screens/home";
 import Main from "../../screens/main";
+import SynchScreen from "../../screens/updateConfirm";
 import BText from "../utils/text";
 
 
@@ -35,6 +36,7 @@ const MainNavigation = () => {
                 initialParams={{ update: false }}
                 />
             <MainStack.Screen name="ListScreen" component={Home} />
+            <MainStack.Screen name="SynchScreen" component={SynchScreen} />
             <MainStack.Screen name="AddBoulderScreen" component={AddBoulder} />
             <MainStack.Screen name="DetailBoulderScreen" component={DetailBoulder} />
           </MainStack.Navigator>
