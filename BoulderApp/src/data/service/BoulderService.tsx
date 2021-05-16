@@ -276,7 +276,7 @@ export const storeBoulder = async (
       difficulty: formData.difficulty,
       locationId: Number(formData.location_id),
     };
-    if(false){
+    if(connected){
       return api.createBoulder(boulderData);
     } else{
       addLocalCreate(boulderData)
