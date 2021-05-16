@@ -6,8 +6,6 @@ const LabelStyle = StyleSheet.create({
     label: {
         color: ColorTheme.primary,
         fontWeight: 'bold',
-        marginTop: 10,
-        marginBottom:10
     }
  }
 )
