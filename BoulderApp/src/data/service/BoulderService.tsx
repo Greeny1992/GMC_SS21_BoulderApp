@@ -12,7 +12,7 @@ export const getBoulderData = async (userId: number) => {
   let boulderData;
   const connected = getData('connected');
   if (connected) {
-    console.log('ONLINE');
+    // console.log('ONLINE');
 
     const api = new BoulderApi();
     boulderData = await api.getBoulderList(userId).then(res => {
@@ -38,11 +38,12 @@ export const getBoulderData = async (userId: number) => {
     boulderData = await getData('BoulderList').then(boulder => {
       return boulder;
     });
-    console.log("boulderData", boulderData)
+    // console.log("boulderData", boulderData)
     storeData('BOULDER_DATA', boulderData);
   } else {
-    console.log('OFFLINE');
+    // console.log('OFFLINE');
     boulderData = await getData('BOULDER_DATA');
+    // console.log("DATA AMOUNT ", boulderData.length)
   }
 
   return boulderData;
@@ -83,7 +84,7 @@ export const isThereDataToStore = async (): Promise<boolean> => {
 export const synchLocalCreates = async () => {
   const api = new BoulderApi();
   const dataToCreate = await getData('BOULDER_DATA_TO_CREATE');
-   console.log('dataToCreate', dataToCreate);
+  //  console.log('dataToCreate', dataToCreate);
   if (dataToCreate?.length) {
     dataToCreate
       .map((item: INewBoulder) => api.createBoulder(item))
@@ -92,7 +93,7 @@ export const synchLocalCreates = async () => {
     api.createBoulder(dataToCreate);
   }
   storeData('BOULDER_DATA_TO_CREATE',null)
-  return getData('BOULDER_DATA_TO_CREATE').then(d=> console.log("DATA AFTER DELETE ", d))
+  return getData('BOULDER_DATA_TO_CREATE')
 }
 
 export const getBoulderDetails = (id: string) => {
@@ -108,9 +109,7 @@ export const synchLocalUpdates = async (userID: number) => {
   if (dataToUpdate?.length) {
     dataToUpdate
       .map((item: IEditBoulder) => api.updateBoulder(item))
-      .then((data: any) => {
-        console.log('map update', data);
-      });
+    
   } else {
     api.updateBoulder(dataToUpdate);
   }
@@ -171,14 +170,15 @@ const addLocalUpdate = async (boulder: IEditBoulder) :Promise<any> => {
 
 }
 const addLocalCreate = async (boulder: INewBoulder) :Promise<any> => {
-  console.log("addLocalCreate", boulder)
+  // console.log("addLocalCreate", boulder);
+
   return await getData('BOULDER_DATA_TO_CREATE')
                   .then((data: INewBoulder[]) =>
                       data?.filter(
                       item => item !== null && item !== undefined && item?.length !== 0,
                     )
                   ).then((data:INewBoulder[]) =>{
-                      console.log("AFTER FILTER ", data)
+                      // console.log("AFTER FILTER ", data)
                       if(data && data !== undefined && data !== null ){
                         storeData('BOULDER_DATA_TO_CREATE',[...data,boulder])
                       }else{
@@ -195,7 +195,7 @@ export const storeBoulder = async (
   lastChangeTimestamp?: Date,
   lastEditor?: string,
 ) => {
-  console.log("storeBoulder", formData)
+  // console.log("storeBoulder", formData)
   const connected = getData('connected');
   // const connected = false;
   const api = new BoulderApi();
@@ -279,11 +279,31 @@ export const storeBoulder = async (
     if(connected){
       return api.createBoulder(boulderData);
     } else{
-      addLocalCreate(boulderData)
+      addCreatedBoulderToLocalBoulder(boulderData);
+      return addLocalCreate(boulderData)
     }
   }
 };
+const addCreatedBoulderToLocalBoulder = (boulder: INewBoulder) => {
+  getData('BOULDER_DATA')
+    .then((data: IBoulder[]) => {
+      // console.log("addCreatedBoulderToLocalBoulder", data, data.length)
+      let newData; 
+      if (data?.length) {
+          newData= [...data,boulder]
+        }
+        else{
+          newData= [boulder]
 
+        }
+        // console.log("NEW LENGHT ",newData, newData.length)
+        return newData
+    })
+    .then(updatedData => {
+      //  console.log("updateLocalBoulder UPDATED" , updatedData,  updatedData.length)
+      storeData('BOULDER_DATA', updatedData);
+    });
+};
 const updateLocalBoulder = (boulder: IEditBoulder) => {
   getData('BOULDER_DATA')
     .then((data: IBoulder[]) => {

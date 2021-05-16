@@ -67,20 +67,25 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
             if(needToStoreLocalData){
               synchLocalCreates().then(
                 ()=>{
-                  console.log("GETTTTTT")
                   getBoulderData(user?.userId).then((val: any) => {
-                    setFilteredDataSource(val);
+                    // console.log("HOME ",val,val.length)
                     setMasterDataSource(val)
+                    setFilteredDataSource(val);
                   }) 
                 }
               )
             }
-            console.log("needToStoreLocalData", needToStoreLocalData)
+            // console.log("needToStoreLocalData", needToStoreLocalData)
           }
         )
       }
     }
-    
+    useEffect(() => {
+    //  console.log("MASTER " , masterDataSource, masterDataSource.length)
+    }, [masterDataSource])
+    useEffect(() => {
+    //  console.log("filteredDataSource " , filteredDataSource, filteredDataSource.length)
+    }, [filteredDataSource])
     useEffect(() => {
       if(user.userId === -1){
         getData('user').then(user => {
@@ -146,7 +151,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
 
-
+    console.log("AMOUNT BEFORE ",filteredDataSource.length )
   return (
       <View >
         <View style={[LayoutStyle.containerRow, styles.userRow]}>
@@ -161,3 +166,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 };
 
 export default Home;
+function getAllKeys(): any {
+  throw new Error('Function not implemented.');
+}
+
