@@ -41,7 +41,7 @@ interface BoulderSearchProps {
                 />
               </View>
               <View style={[BoulderListStyle.btnbox, LayoutStyle.containerRow ,{alignItems:'center'}]}>
-                {showReset ? <BIcon icon="clear" style={[BoulderListStyle.icon]} onPress={clearSearch}/> : <></> } 
+                {showReset && showReset ===true ? <BIcon icon="clear" style={[BoulderListStyle.icon]} onPress={clearSearch}/> : <></> } 
                 <BIcon icon="filter-alt" style={[BoulderListStyle.icon]}  onPress={handleFilter}/>
                 <BIcon icon="add"  style={[BoulderListStyle.icon]}  onPress={handleAddBoulder}/>
               </View>  

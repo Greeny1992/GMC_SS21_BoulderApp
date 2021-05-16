@@ -3,25 +3,22 @@ export interface IBoulder{
         title:string,
         color: number,
         difficulty: number,
-        img:string,
         location_id:number,
-        created:Date,
-        creator_id:number,
         like:boolean,
-        topped?:boolean,
-        lastEdited?:Date,
-        lastEditor_id?:string,
+        lastChangeTimestamp:Date;
+        lastEditor:string;
 }
 export type BoulderFormData = {
         title: string;
         color: number,
         difficulty: number,
-        img:string,
         location_id:number,
         boulder_id:number;
-        topped:boolean;
         like:boolean;
         id:number;
+        lastChangeTimestamp:Date;
+        lastEditor:string;
+
 }
 export interface INewBoulder {
         creatorId:number,
@@ -37,42 +34,36 @@ export interface IEditBoulder {
         difficulty: number,
         locationId: number,
         force:boolean,
-        lastEdited?:Date,
-        lastEditor_id?:string,
+        lastChangeTimestamp?:Date,
+        lastEditor?:string,
 }
 export class Boulder implements IBoulder{
-        id:string;
+        id:number;
         title:string;
         color: number;
         difficulty: number;
-        img:string;
-        location_id:string;
-        created:Date;
-        creator_id:string;
+        location_id:number;
         like:boolean;
-        topped?:boolean;
+        lastChangeTimestamp:Date;
+        lastEditor:string;
         constructor(
-                id:string,
+                id:number,
                 title:string,
                 color: number,
                 difficulty: number,
-                img:string,
-                location_id:string,
-                created:Date,
-                creator_id:string,
+                location_id:number,
                 like:boolean,
-                topped?:boolean
+                lastChangeTimestamp:Date,
+                lastEditor:string,
         ){
                 this.id=id,
                 this.title      =title;
                 this.color      = color;
                 this.difficulty = difficulty;
-                this.img        =img;
                 this.location_id=location_id;
-                this.created    =created,
-                this.creator_id =creator_id;
                 this.like       =like;
-                this.topped    =topped ?? false;
+                this.lastEditor = lastEditor
+                this.lastChangeTimestamp= lastChangeTimestamp|| undefined;
         }
         
 }

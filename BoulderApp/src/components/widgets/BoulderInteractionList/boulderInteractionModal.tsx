@@ -57,7 +57,6 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
       clearForm()
    }
 
-
    return ( 
             <Overlay animationType = {"slide"} transparent = {true}
                isVisible = {showModal}
@@ -80,7 +79,7 @@ const BoulderInteractionModal: React.FC<BoulderInteractionModalProps> = (props: 
                         )}
                         name='title'
                         rules={{required:true}}
-                        defaultValue={control.defaultValuesRef}
+                        defaultValue={currentAction?.title}
                      />
                      {errors.title && <Text>This is required.</Text>}
                      <Controller 

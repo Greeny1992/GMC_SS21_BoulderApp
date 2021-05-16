@@ -1,18 +1,7 @@
 import { BottomSheet } from 'react-native-btr';
 import React, {useEffect, useState} from 'react';
 import {Picker} from '@react-native-picker/picker';
-
-// import all the components we are going to use
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Button
-} from 'react-native';
-import { Icon, SocialIcon } from 'react-native-elements';
-import DropDownPicker from 'react-native-dropdown-picker';
-import { ILocation } from '../../../data/entities/Location';
+import { StyleSheet, View,} from 'react-native';
 import { BTitle } from '../utils/text';
 interface BBottomSheetProps{
     style?:any,

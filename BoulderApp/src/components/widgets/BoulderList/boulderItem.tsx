@@ -15,7 +15,7 @@ interface BoulderListItemProps {
   }
 const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemProps) => {
     const {style,item,onPress} = props;
-    let formattedDate = item.created ? (moment(item.created)).format('DD.MM.YYYY') :"";
+    let formattedDate = item.lastChangeTimestamp ? (moment(item.lastChangeTimestamp)).format('DD.MM.YYYY') :"";
     const difficulty = getDifficulty(item.difficulty)?.name
     return (
       <TouchableOpacity onPress={onPress} style={[BoulderListStyle.item, style]}>

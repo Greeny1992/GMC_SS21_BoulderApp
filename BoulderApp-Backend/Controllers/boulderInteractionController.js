@@ -44,7 +44,6 @@ exports.update = (req, res) => {
         });
     }
 
-    console.log(req.body);
 
     BoulderInteraction.updateById(
         req.params.interactionId,

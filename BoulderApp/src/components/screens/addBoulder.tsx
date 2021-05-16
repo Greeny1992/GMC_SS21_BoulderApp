@@ -1,62 +1,16 @@
 import React, {useCallback, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  ImageBackground,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import {View,Text,ImageBackground,} from 'react-native';
 import styles from '../../styles/addBoulder';
-import BText, {BTitle} from '../widgets/utils/text';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {ScreenSizes} from '../../constants/ui';
-import img from '../../assets/images/base64-climbing-wall';
+import  {BTitle} from '../widgets/utils/text';
 import {useForm, Controller, set, SubmitHandler} from 'react-hook-form';
 import {BoulderFormData, IBoulder} from '../../data/entities/Boulder';
-import BButton, {BExtendedButton} from '../widgets/utils/button';
+import  {BExtendedButton} from '../widgets/utils/button';
 import LayoutStyle from '../../styles/utils/layout';
 import BInput from '../widgets/utils/Input';
 import IconPicker from '../widgets/utils/IconPicker';
-import {
-  colors,
-  difficulty,
-  location,
-  regions,
-} from '../../data/lookupValues/boulderDetailValues';
-import {ILocation} from '../../data/entities/boulderDetailValues';
-import BIcon from '../widgets/utils/icon';
-import ColorTheme from '../../styles/theme/Color';
-import DropDownPicker from 'react-native-dropdown-picker';
+import {colors,difficulty,regions,} from '../../data/lookupValues/boulderDetailValues';
 import { storeBoulder } from '../../data/service/BoulderService';
 import { getData } from '../../data/store/store';
-
-enum colourScale {
-  black = 'black',
-  white = 'white',
-  yellow = 'yellow',
-  red = 'red',
-  blue = 'blue',
-  green = 'green',
-  turquoise = 'turquoise',
-  orange = 'orange',
-  violet = 'violet',
-  pink = 'pink',
-  grey = 'grey',
-  none = '',
-}
-
-export interface Boulder {
-  name: string;
-  location: string;
-  difficulty: string;
-  colour: colourScale;
-  image: string;
-  isTopped: boolean;
-}
 interface AddBoulderProps {
   style?: any;
   navigation: any;
@@ -70,7 +24,8 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
   const [locationPickerOpen, setLocationPickerOpen] = useState(false);
   const [difficultyPickerOpen, setDifficultyPickerOpen] = useState(false);
   const [colorPickerOpen, setColorPickerOpen] = useState(false);
-
+  // console.log("currentBoulder")
+  // console.log(currentBoulder)
 
   getData('user').then(user => {
     setUserId(user.userId);  
@@ -128,7 +83,36 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     <ImageBackground source={bg} style={styles.background}>
       <View style={{flex: 1, width: '80%'}}>
         <BTitle label={formTitle} color="white" />
-
+        <Controller
+          //HIDDEN Field for the boulder id
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+           <></>
+          )}
+          name="lastChangeTimestamp"
+          // rules={{required: true}}
+          defaultValue={currentBoulder?.lastEditor}
+        />
+        <Controller
+          //HIDDEN Field for the boulder id
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+           <></>
+          )}
+          name="lastChangeTimestamp"
+          // rules={{required: true}}
+          defaultValue={currentBoulder?.lastChangeTimestamp}
+        />
+        <Controller
+          //HIDDEN Field for the boulder id
+          control={control}
+          render={({field: {onChange, onBlur, value}}) => (
+           <></>
+          )}
+          name="boulder_id"
+          // rules={{required: true}}
+          defaultValue={currentBoulder?.id}
+        />
         <Controller
           control={control}
           render={({field: {onChange, onBlur, value}}) => (

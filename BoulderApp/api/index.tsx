@@ -7,7 +7,7 @@ export class UserApi {
         return fetch(baseUrl + "/user", {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
@@ -16,12 +16,12 @@ export class UserApi {
 }
 
 export class BoulderApi {
-
-    getBoulderList(userID?: number){
-        return fetch(baseUrl + "/boulder/" + userID, {
+    entityURL = `${baseUrl}/boulder/`
+    getBoulderList(userID: number){
+        return fetch(`${this.entityURL}${userID}`, {
             method: 'GET',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
@@ -32,95 +32,91 @@ export class BoulderApi {
     createBoulder(newBoulder:INewBoulder){
         // console.log('createBoulder')
         // console.log(newBoulder)
-        return fetch(baseUrl + "/boulder/", {
+        return fetch(this.entityURL, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(newBoulder)
 
             
-        }).then(console.log)
+        })
     }
     updateBoulder(updateBoulder:IEditBoulder,boulderID:number){
         // console.log('updateBoulder')
-        // console.log(updateBoulder)
-        return fetch(`${baseUrl}/boulder/${boulderID}`, {
+        // console.log(`${this.entityURL}${boulderID}`)
+        return fetch(`${this.entityURL}${boulderID}`, {
             method: 'PUT',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(updateBoulder)
 
             
-        }).then(console.log)
+        })
     }
     likeBoulder(boulderID:number, userId:number){
-        console.log("LIKE")
-        console.log(boulderID, userId)
+        // console.log("LIKE")
+        // console.log(boulderID, userId)
         return fetch(`${baseUrl}/like/${boulderID}`, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify({userId:userId})
-        }).then(console.log)
+        })
     }
     disLikeBoulder(boulderID:number, userId:number){
-        console.log("DIS-LIKE")
-        console.log(boulderID, userId)
+        // console.log("DIS-LIKE")
+        // console.log(boulderID, userId)
         return fetch(`${baseUrl}/like/${boulderID}`, {
             method: 'DELETE',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify({userId:userId})
-        }).then(console.log)
+        })
     }
 }
 
 export class BoulderInteractionApi {
-    entityURL = "/boulderInteraction"
+    entityURL = `${baseUrl}/boulderInteraction`
     getBoulderInteractions(boulderId?: number) {
-        return fetch(baseUrl + this.entityURL +"/"+ boulderId, {
+        return fetch( this.entityURL +"/"+ boulderId, {
             method: 'GET',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
     }
     createAction(newAction:INewBoulderInteraction){
-        
-        console.log('createAction')
-        console.log(newAction)
-        console.log(baseUrl + this.entityURL)
-        return fetch(baseUrl + this.entityURL , {
+        return fetch(this.entityURL , {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(newAction)
 
             
-        }).then(console.log)
+        })
     }
     updateAction(updateAction:IUpdateBoulderInteraction){
-        return fetch(baseUrl + this.entityURL +"/"+updateAction.interactionId, {
+        return fetch(this.entityURL +"/"+updateAction.interactionId, {
             method: 'PUT',
             headers: {
-                Accept: 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(updateAction)
 
             
-        }).then(console.log)
+        })
     }
 }
 

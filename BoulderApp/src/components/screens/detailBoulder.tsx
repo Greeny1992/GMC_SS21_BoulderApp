@@ -83,7 +83,9 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         }
     }
 
-    handleEditBoulder = (id: string) => {
+    handleEditBoulder = () => {
+        // console.log('this.state.boulder')
+        // console.log(this.state.boulder)
         this.props.navigation.navigate("AddBoulderScreen", {
           boulder: this.state.boulder,
         });
