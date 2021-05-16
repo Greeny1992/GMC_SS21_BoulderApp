@@ -16,7 +16,6 @@ exports.logIn = async (req, res) => {
     ]);
     if(dbResult[0].length > 0){
         const user = dbResult[0][0]
-        console.log(user)
         res.status(200).json({
             user,
           });

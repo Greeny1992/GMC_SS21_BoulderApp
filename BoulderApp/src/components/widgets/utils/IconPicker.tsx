@@ -11,41 +11,45 @@ interface IconPickerProps {
   style?:any;
   containerStyle?:any;
   items: any[];
-  placeholder:string;
   label: string;
-  onChange: Function;
-  defaultSelectedItem?:number;
+  selectedItem: any;
+  setSelectedItem: any;
+  isOpen: boolean;
+  setIsOpen: any;
+  onOpen?: any;
+  zIndex: any;
+  zIndexInverse: any,
+  placeholder?:string,
 }
 
 const IconPicker: React.FC<IconPickerProps> = (props: IconPickerProps) => {
-  const {items,placeholder,style,label,containerStyle, defaultSelectedItem,onChange} = props
-  const ItemPickerItems = items.map((item )=> {return {label: item.name, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight} />}})
+  const {items,label,containerStyle, selectedItem, placeholder,setSelectedItem, isOpen, setIsOpen, style, onOpen, zIndex, zIndexInverse} = props
+  const ItemPickerItems = items.map((item )=> {return {label: item.name, key:item.key, value:item.id,icon: () => <Icon name={item.icon} size={18} color={ColorTheme.highlight}  key={item.key}/>}})
+  
 
-  const [selectedItem, setSelectedItem ] = useState(defaultSelectedItem ?? 1);
-  const handleChange = (item:any)=>{
-      setSelectedItem(item);
-      onChange(item)
-  }
+  
   return (
-    <View style={[containerStyle,{
-      ...(Platform.OS !== 'android' && {
-        zIndex: 10
-    })
-    }]}>
-        {label ? <BLabel label={label}/> : <></>}
+    <View style={[containerStyle]}>
+        {label ? <BLabel label={label} style={{paddingTop: 20, paddingLeft: 10, paddingBottom: 10 }}/> : <></>}
         <DropDownPicker
-            items={ItemPickerItems}
-            placeholder={placeholder}
-            defaultValue={selectedItem}
-            containerStyle={[{height: 40}]}
-            style={[{backgroundColor: '#fafafa'},style]}
-            itemStyle={{
-                justifyContent: 'flex-start', 
-            }}
-            dropDownStyle={{backgroundColor: '#fafafa'}}
-            onChangeItem={(item:any, index:number) => handleChange (index)
-            }
+          onOpen={onOpen}
+          placeholder={placeholder}
+          items={ItemPickerItems}
+          value={selectedItem}
+          setValue={setSelectedItem}
+          open={isOpen}
+          setOpen={setIsOpen}
+          containerStyle={[{height: 40}]}
+          style={[{backgroundColor: '#fafafa'},style]}
+          labelStyle={{
+              justifyContent: 'flex-start', 
+          }}
+          dropDownContainerStyle={{backgroundColor: '#fafafa'}}
+          zIndex={zIndex}
+          zIndexInverse={zIndexInverse}
+          
         />
+
     </View>
     
   );

@@ -6,7 +6,7 @@ import LayoutStyle from '../../styles/utils/layout';
 import {  Divider } from 'react-native-elements';
 import BoulderInteractionList from '../widgets/BoulderInteractionList/boulderInteractionList';
 import BoulderMetadata from '../widgets/boulderMetadata';
-import { getBoulderDetails } from '../../data/service/BoulderService';
+import { getBoulderDetails, updateLike } from '../../data/service/BoulderService';
 import BoulderInteractionModal from '../widgets/BoulderInteractionList/boulderInteractionModal';
 import { BoulderInteraction, BoulderInteractionFormData } from '../../data/entities/BoulderInteraction';
 import getCurrentBoulderInteraction, { storeBoulderInteraction } from '../../data/service/BoulderInteractionService';
@@ -15,28 +15,29 @@ import { getAllStatus } from '../../data/lookupValues/BoulderInteractionValues';
 import { getData } from '../../data/store/store';
 interface DetailBoulderProps {
     navigation: any,
-    route:Route
-    style:any
+    route:Route,
+    style:any,
+    boulder:IBoulder
 }
 interface BoulderState {
-    boulder:IBoulder ,
+    boulder:any ,
     showModal:boolean,
     selectedInteraction:BoulderInteraction|undefined,
     boulderInteractions:BoulderInteraction[],
     user_id:string,
 }
 class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
-    tempBoulder : IBoulder | undefined;
+    tempBoulder;
     statusValues = getAllStatus();
 
     constructor(props: DetailBoulderProps) {
         super(props);
-        this.tempBoulder = this.handleBoulderSearch(this.props.route.params.boulderID ) as IBoulder
+        this.tempBoulder = this.props.route.params.boulder
         this.state ={
             boulder: this.tempBoulder,
             showModal:false,
             selectedInteraction:undefined,
-            boulderInteractions:getCurrentBoulderInteraction(this.tempBoulder?.id??''),
+            boulderInteractions:[] ,
             user_id:''
         }
      
@@ -47,11 +48,14 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
             (error)=> console.error(error)
         )
     }
-  
-    handleBoulderSearch = (id:string):IBoulder | undefined => getBoulderDetails(id); 
+    componentDidMount(){
+        getCurrentBoulderInteraction(this.tempBoulder.id).then((val: any) => this.setState({boulderInteractions:val}))
+    }
+    handleBoulderSearch = (id:string) => getBoulderDetails(id); 
+
     handleSaveBoulderInteraction= (data:BoulderInteractionFormData):void=>{
         storeBoulderInteraction(data,this.state.boulder.id,this.state.user_id)
-        this.setState({boulderInteractions:getCurrentBoulderInteraction(this.state.boulder?.id)})
+        getCurrentBoulderInteraction(this.state.boulder.id).then((val: any) => this.setState({boulderInteractions:val}))
     }
     
     handleShowVisibility=(value:boolean):void=>{
@@ -60,12 +64,18 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         })
     }
 
-    hideModal = ():void=>{ this.handleShowVisibility(false)}
+    hideModal = (changed?:boolean):void=>{ 
+        this.handleShowVisibility(false)
+        if(changed){
+            getCurrentBoulderInteraction(this.state.boulder.id).then((val: any) => this.setState({boulderInteractions:val}))
+        }
+    }
     showModal = ():void=>{this.handleShowVisibility(true)}
 
     toggleLike = (state:BoulderState)=>{
         const t = this.state.boulder;
         if(t){
+            updateLike(t.id, Number(this.state.user_id),t.like)
             t.like=!t.like ;
             this.setState({
                 boulder : t
@@ -73,7 +83,9 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
         }
     }
 
-    handleEditBoulder = (id: string) => {
+    handleEditBoulder = () => {
+        // console.log('this.state.boulder')
+        // console.log(this.state.boulder)
         this.props.navigation.navigate("AddBoulderScreen", {
           boulder: this.state.boulder,
         });
@@ -88,7 +100,7 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
 
     handleNewInteraction = () =>{
         this.setState({
-            selectedInteraction: new BoulderInteraction(this.state.boulder?.id ?? '','')
+            selectedInteraction: new BoulderInteraction(this.state.boulder?.id ?? '',Number(this.state.user_id),"")
         })
         this.showModal();
     }
@@ -123,3 +135,4 @@ class DetailBoulder extends Component<DetailBoulderProps,BoulderState> {
     
 }
 export default DetailBoulder;
+

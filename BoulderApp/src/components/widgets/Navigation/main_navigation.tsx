@@ -11,6 +11,7 @@ import AddBoulder from "../../screens/addBoulder";
 import DetailBoulder from "../../screens/detailBoulder";
 import Home from "../../screens/home";
 import Main from "../../screens/main";
+import SynchScreen from "../../screens/updateConfirm";
 import BText from "../utils/text";
 
 
@@ -25,16 +26,21 @@ const MainNavigation = () => {
     return(
     <NavigationContainer>
           <MainStack.Navigator initialRouteName="HomeScreen">
-            <MainStack.Screen name="HomeScreen" component={Main} 
+            <MainStack.Screen name="HomeScreen" component={Home} 
               options= {{
                 headerRight: () => (
                   <TouchableOpacity onPress={onPressLogout} style={{padding: ScreenSizes.layout_distance}}>
                     <Icon  name="logout" color="#df4040"/>
                   </TouchableOpacity>
-                )}} />
-            <MainStack.Screen name="ListScreen" component={Home} />
-            <MainStack.Screen name="AddBoulderScreen" component={AddBoulder} />
-            <MainStack.Screen name="DetailBoulderScreen" component={DetailBoulder} />
+                
+                ),
+                title: "Change the world on a boulder!"}} 
+                initialParams={{ update: false }}
+                />
+            <MainStack.Screen name="ListScreen" component={Home} options={{title: ""}}/>
+            <MainStack.Screen name="SynchScreen" component={SynchScreen} options={{title: ""}}/>
+            <MainStack.Screen name="AddBoulderScreen" component={AddBoulder} options={{title: ""}}/>
+            <MainStack.Screen name="DetailBoulderScreen" component={DetailBoulder} options={{title: ""}}/>
           </MainStack.Navigator>
     </NavigationContainer>
     )

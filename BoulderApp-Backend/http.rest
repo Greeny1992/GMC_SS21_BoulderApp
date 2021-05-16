@@ -19,39 +19,33 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:3000/boulder/53
+PUT http://localhost:3000/boulder/63
 content-type: application/json
 
 {
-    "name": "Testersdfsdfsdf",
+    "name": "Awesome Bould",
     "colour": 1,
-    "difficulty": 1,
+    "difficulty": 2,
     "locationId": 1,
-    "changeUserId": 5 
+    "userId": 5,
+    "force": true,
+    "lastChangeDate": "2021-05-14T17:37:32.000Z"
 }
+
 
 ###
 
-GET http://localhost:3000/boulder
-content-type: application/json
+GET http://localhost:3000/boulder/5
 
-{
-    "userId": "5"
-}
 
 ###
 POST http://localhost:3000/boulderInteraction
 content-type: application/json
 
-{
-    "boulderId": 53, 
-    "userId": 2,
-    "comment": "Testkommentar",
-    "status": 1
-}
+{"boulderId": 53, "comment": "Asdf", "status": 1, "title": "Asdf", "userId": 1}
 
 ###
-GET http://localhost:3000/boulderInteraction/53
+GET http://localhost:3000/boulderInteraction/59
 
 ###
 PUT http://localhost:3000/boulderInteraction/1
@@ -77,5 +71,7 @@ content-type: application/json
 {
     "userId": 2
 }
+
+
 
 ###

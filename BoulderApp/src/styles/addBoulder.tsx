@@ -62,9 +62,15 @@ const AddBoulderStyle = StyleSheet.create({
     },
     checkbox: {
         alignSelf: "center",
+        marginRight:15
     },
-    checkboxText: {
-        margin: 65
+  
+    formrow:{
+        flexDirection:'row',
+        justifyContent:'flex-start',
+        alignItems:'center',
+        marginTop:30
+        
     }
 });
 

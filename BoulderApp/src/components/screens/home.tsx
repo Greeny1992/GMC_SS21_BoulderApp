@@ -1,96 +1,172 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import styles from '../../styles/home';
+
 import { View } from 'react-native';
 import BoulderList from '../widgets/BoulderList/boulderList';
 import BoulderSearch from '../widgets/BoulderList/boulderSearch';
-import { getBoulderData } from '../../data/service/BoulderService';
+import { getBoulderData, isThereDataToStore, isThereDataToSynch, localBoulderToSynch, synchLocalCreates } from '../../data/service/BoulderService';
 import { IBoulder } from '../../data/entities/Boulder';
 import BText from "../widgets/utils/text";
 import { getData } from "../../data/store/store";
 import BBottomSheet from '../widgets/BoulderList/boulderFilter';
 import { getAllLocations, getDistinctLocations } from '../../data/service/LocationService';
 import { ILocationFilterValues } from '../../data/entities/Location';
+import { useRoute } from '@react-navigation/native';
+import BIcon from '../widgets/utils/icon';
+import LayoutStyle from '../../styles/utils/layout';
+
+import ColorTheme from '../../styles/theme/store/ColorMainTheme';
+import { IUser } from "../../data/entities/User";
 
 interface HomeProps {
   style?: any;
   navigation: any;
+  route:any
 }
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
+    const route = useRoute();
     const {navigation } = props;
     const [searchText, setSearchText] = useState('');
-    const [userId, setUserId] = useState('');
-    const [filteredDataSource, setFilteredDataSource] = useState(getBoulderData());
-    const [masterDataSource, setMasterDataSource] = useState(filteredDataSource);
+    const [user, setUser] = useState<IUser>({userId: -1, userName:'default', userEmail:'default'});
+    const [filteredDataSource, setFilteredDataSource] = useState<any>([]);
+    const [masterDataSource, setMasterDataSource] = useState([]);
     const [visibleFilter, setVisible] = useState(false);
     const locations :ILocationFilterValues = getDistinctLocations()
-  
-    getData('user').then(user => {
-      setUserId(user.userId);  
-    }).catch(err => 
-      console.error(err)
-    )
-    const handleFilter =(value:string,type:string)=>{
-      const filteredLocation = getAllLocations().filter( (item) =>{
-        switch(type){
-          case "country": item.country===value; break;
-          case "region" : item.region === value; break;
-          case "city"   : item.city   === value; break;
-        }
-        });
-      const filteredBoulder = masterDataSource.filter( (item) =>{ filteredLocation.findIndex((value, index, array) => {value.id === item.location_id}) !== -1 });
-      console.log(filteredBoulder)
-      setFilteredDataSource(filteredBoulder);
+    const [showReset, setShowReset] = useState(false);
+    const {update} = route?.params;
+
+ 
+    
+    useEffect(() => {
+      
+        
+    }, [])
+
+    if(update){
+      console.log("update")
+      navigation.setParams({update:false})
+      getBoulderData(user.userId).then((val: any) => {
+        setFilteredDataSource(val);
+        setMasterDataSource(val)
+      }) 
+      const connected = getData('connected')
+      // console.log("connected", connected)
+      if(connected){
+        const needToSynchLocalData =  isThereDataToSynch()
+        needToSynchLocalData.then(
+          needToSynch =>{
+              // console.log("needToSynch", needToSynch)
+              if(needToSynch && needToSynch !== null){
+                navigation.navigate('SynchScreen')
+              }
+            }
+        )
+        isThereDataToStore().then(
+          needToStoreLocalData =>{
+            if(needToStoreLocalData){
+              synchLocalCreates().then(
+                ()=>{
+                  getBoulderData(user?.userId).then((val: any) => {
+                    // console.log("HOME ",val,val.length)
+                    setMasterDataSource(val)
+                    setFilteredDataSource(val);
+                  }) 
+                }
+              )
+            }
+            // console.log("needToStoreLocalData", needToStoreLocalData)
+          }
+        )
+      }
     }
-    const handleAddBoulder = () => {
-        navigation.navigate('AddBoulderScreen', {
-        boulderID: -1,
-        });
-    };
-    const handleBoulderSelect = (id:string) => {
+    useEffect(() => {
+    //  console.log("MASTER " , masterDataSource, masterDataSource.length)
+    }, [masterDataSource])
+    useEffect(() => {
+    //  console.log("filteredDataSource " , filteredDataSource, filteredDataSource.length)
+    }, [filteredDataSource])
+    useEffect(() => {
+      if(user.userId === -1){
+        getData('user').then(user => {
+          setUser(user); 
+          getBoulderData(user.userId).then((val: any) => {
+            setMasterDataSource(val)
+            setFilteredDataSource(val);
+          }) 
+        }).catch(err => 
+          console.error(err)
+        )
+      }
+    }, [user])
+   
+    const handleFilter =(value:string)=>{
+    
+      const filteredLocation = getAllLocations().filter( (item) => item.region === value);
+      if(filteredLocation){
+        setShowReset(true)
+        const filteredBoulder = masterDataSource.filter( (item: any) =>filteredLocation[0].id === item?.location_id);
+        setFilteredDataSource(filteredBoulder);
+
+      }
+    
+    }
+  
+    const handleBoulderSelect = (boulder:IBoulder) => {
         navigation.navigate('DetailBoulderScreen', {
-            boulderID:id,
+            boulder:boulder,
         })
     }
 
     const handleSearchInput = (input:string)=> {
         let inputLength = input? input.length : 0;
-        if(inputLength != 0) {
+        if(inputLength >= 0) {
           setSearchText(input);
           searchBoulderList(input);
         }
         else {
           setSearchText('');
-          resetBoulderList();
+          refresh();
         }
         
     }
-    //Searching for Boulders
+    const refresh =()=>{
+      setShowReset(false)
+      setSearchText('')
+      getBoulderData(user.userId).then((val: any) => {
+        setFilteredDataSource(val);
+        setMasterDataSource(val);
+      }) 
+     
+    }
     const searchBoulderList: any = (input: string) => {
         if (input) {
-            const filteredData = masterDataSource.filter( (item) =>{
-                const itemData = item.title? item.title.toUpperCase() : '';
+          setShowReset(true)
+            const filteredData = masterDataSource.filter( (item: any) =>{
+                const itemData = item.title ? item.title.toUpperCase() : '';
                 const textData = input.toUpperCase();
-                console.log(textData);
                 return itemData.indexOf(textData,0) > -1;
             });
             setFilteredDataSource(filteredData);
         }
     };
 
-    const resetBoulderList: any = () => {
-      setFilteredDataSource(masterDataSource);
-    };
-
+    console.log("AMOUNT BEFORE ",filteredDataSource.length )
   return (
-    <View>
       <View >
-        {/* <BText>UserId: {userId}</BText> */}
-        <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible}/>
+        <View style={[LayoutStyle.containerRow, styles.userRow]}>
+          <BText style={[styles.userDetail]}>{user.userName}</BText>
+          <BIcon style={[styles.userIcon]} icon="account-circle" size={20} color={ColorTheme.primary}/> 
+        </View>
+        <BoulderSearch searchBoulderList={handleSearchInput} navigation={navigation} searchText={searchText} showFilterDialog={setVisible} clearSearch={refresh} showReset={showReset}/>
         <BoulderList navigation={navigation} searchText={searchText} handleSelectBoulder={handleBoulderSelect} locations={locations.region} items={filteredDataSource}/>
-        <BBottomSheet visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
+        <BBottomSheet  visible={visibleFilter} title={"Filter by region"} hide={setVisible} locations={locations.region} handleFilter={handleFilter}/>
       </View>
-    </View>
   );
 };
 
 export default Home;
+function getAllKeys(): any {
+  throw new Error('Function not implemented.');
+}
+

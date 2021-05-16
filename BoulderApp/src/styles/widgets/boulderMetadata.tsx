@@ -1,5 +1,7 @@
 import BoulderMetadata from "../../components/widgets/boulderMetadata";
 import {StyleSheet} from "react-native";
+import { FontSizes } from "../../constants/ui";
+import ColorTheme from "../theme/Color";
 
 const BoulderMetadataStyle = StyleSheet.create({
    btn: {
@@ -27,8 +29,19 @@ const BoulderMetadataStyle = StyleSheet.create({
   column:{
       marginLeft: 15,
   },
+  date:{
+    marginTop:20,
+    width: '100%',
+    fontSize: FontSizes.tiny,
+    paddingRight: '3%',
+    textAlign: 'left',
+    color: ColorTheme.primary_light,
+  },
   row:{
       marginTop:5
+  },
+  creationDetails:{
+     
   },
   badgeContainer:{
       position: "absolute",

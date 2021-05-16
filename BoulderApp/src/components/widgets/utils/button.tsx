@@ -30,7 +30,6 @@ export const BExtendedButton: React.FC<BExtendedButtonProps> = (props: BExtended
                 <BText style={[styles.buttonText, {fontSize:FontSizes.normal}]}>
                     {title}
                 </BText>
-
             </TouchableOpacity>
             
         </View>
@@ -45,7 +44,7 @@ interface BIconButtonProps extends BIconProps {
 export const BIconButton: React.FC<BIconButtonProps> = (props: BIconButtonProps) => {
     const {onPress, style, icon,color,size,label}=props
     return (
-        <TouchableOpacity onPress={onPress} style={[style, styles.btn,styles.iconButton,{justifyContent:'center'}]}>
+        <TouchableOpacity onPress={onPress} style={[style, styles.btn,{justifyContent:'center'}]}>
             <Icon  name={icon} color={ColorTheme.highlightContrast} size={28} />
             <BText style={{marginLeft:8, color:ColorTheme.highlightContrast}}>{label}</BText>
         </TouchableOpacity>

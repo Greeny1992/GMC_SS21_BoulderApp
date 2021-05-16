@@ -1,13 +1,18 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AuthContext } from "./src/contexts/auth_context";
 import NewsNavigation from "./src/components/widgets/Navigation/news_navigation";
 import MainNavigation from "./src/components/widgets/Navigation/main_navigation";
 import LoginNavigation from "./src/components/widgets/Navigation/login_navigation";
-
+import { useNetInfo } from "@react-native-community/netinfo";
+import { storeData } from "./src/data/store/store";
 
 export default function App() {
+  const netInfo = useNetInfo();
+  useEffect(() => {
+    storeData("connected", netInfo.isConnected)
+  }, [netInfo])
   const [state, dispatch] = React.useReducer(
     (prevState: any, action: any) => {
         switch (action.type) {

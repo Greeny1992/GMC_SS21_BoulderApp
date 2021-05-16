@@ -5,20 +5,22 @@ import TextStyle from '../../../styles/utils/text'
 interface BTextProps {
     style?: any,
     numberOfLines?: number,
-    children?:any
+    children?:any,
+    color?:string
 }
 
 const BText: React.FC<BTextProps> = (props: any) => {
-    return <Text style={[styles.font, props.style]} numberOfLines={props.numberOfLines}>{props.children}</Text>
+    return <Text style={[styles.font, props.style, {color:props.color ?? "black"}]} numberOfLines={props.numberOfLines}>{props.children}</Text>
 }
 interface BTitleProps {
     style?: any,
     label:string
+    color?:string
 }
 
 export const BTitle: React.FC<BTitleProps> = (props: BTitleProps) => {
-    const {style,  label} = props;
-    return <BText style={[styles.font, style,TextStyle.title]} >{label}</BText>
+    const {style,  label, color} = props;
+    return <BText style={[styles.font, style,TextStyle.title]} color={color} >{label}</BText>
 }
 
 export const BSubTitle: React.FC<BTitleProps> = (props: BTitleProps) => {

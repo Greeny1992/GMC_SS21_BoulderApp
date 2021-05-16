@@ -25,12 +25,12 @@ export default function Login({ loggedInHandler }: any) {
     };
     api.loginUser(body).then((response) => {
       if(response.status >= 200 && response.status < 300){
-        console.log(response)
+        // console.log(response)
         response.json().then(json => {
-          console.log(json.user);
           const user = {
             'userId': json.user.ID,
-            'userEmail': json.user.email
+            'userEmail': json.user.email,
+            'userName':json.user.Name
           }
           storeData('user', user)
           authContext.verify(true);

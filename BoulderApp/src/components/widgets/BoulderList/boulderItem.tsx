@@ -1,9 +1,11 @@
+import moment from "moment";
 import React from "react";
-import { GestureResponderEvent, Image, TouchableOpacity, View } from "react-native";
+import { GestureResponderEvent, Image, Text, TouchableOpacity, View } from "react-native";
 import { Badge } from "react-native-elements";
 import { IBoulder } from "../../../data/entities/Boulder";
-import { getColor } from "../../../data/lookupValues/boulderDetailValues";
+import { getColor, getDifficulty } from "../../../data/lookupValues/boulderDetailValues";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
+import LayoutStyle from "../../../styles/utils/layout";
 import BText from "../utils/text";
 
 interface BoulderListItemProps {
@@ -13,21 +15,22 @@ interface BoulderListItemProps {
   }
 const BoulderListItem: React.FC<BoulderListItemProps> = (props: BoulderListItemProps) => {
     const {style,item,onPress} = props;
+    let formattedDate = item.lastChangeTimestamp ? (moment(item.lastChangeTimestamp)).format('DD.MM.YYYY') :"";
+    const difficulty = getDifficulty(item.difficulty)?.name
     return (
       <TouchableOpacity onPress={onPress} style={[BoulderListStyle.item, style]}>
-        <BText style={BoulderListStyle.title}>{item.title}</BText>
-
-        <View style={BoulderListStyle.itemsgroup}>
-          <BText style={BoulderListStyle.difficulty}>{item.difficulty}</BText>
-        </View>
-        <View style={BoulderListStyle.itemsgroupdate}>
-          <BText style={BoulderListStyle.date}>{item.created.toDateString()}</BText>
-        </View>    
-
-        <View style={BoulderListStyle.itemsgroup}>
-          <View style={BoulderListStyle.badge}>
-            <Badge badgeStyle={{width:25,height:25,borderRadius:25, backgroundColor:getColor(item.color).value, alignItems: 'center',}}/>
+        <View style={[LayoutStyle.containerRow]}>
+          <BText style={BoulderListStyle.title}>{item.title}</BText>
+          <View style={BoulderListStyle.itemsgroup}>
+            <View style={BoulderListStyle.badge}>
+              <Badge badgeStyle={{width:25,height:25,borderRadius:25, backgroundColor:getColor(item.color).value, alignItems: 'center',}}/>
+            </View>
           </View>
+
+        </View>
+        <View style={[LayoutStyle.containerRow, BoulderListStyle.detailRow]}>
+          <Text style={[BoulderListStyle.details,BoulderListStyle.difficulty]}>Difficulty: {difficulty}</Text>
+          <Text style={[BoulderListStyle.details,BoulderListStyle.date]}>{formattedDate}</Text>
         </View>
         
       </TouchableOpacity>

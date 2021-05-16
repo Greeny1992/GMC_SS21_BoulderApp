@@ -1,99 +1,122 @@
 const sql = require("../database");
 
 // constructor
-const Boulder = function(boulder) {
-    this.name = boulder.name;
-    this.colour = boulder.colour;
-    this.difficulty = boulder.difficulty;
-    this.photo = boulder.photo;
-    this.locationId = boulder.locationId;
-    this.creatorName = boulder.creatorName;
-    this.lastChangeUserName = boulder.lastChangeUserName;
-    this.lastChangeTimestamp = boulder.lastChangeTimestamp;
+const Boulder = function (boulder) {
+  this.name = boulder.name;
+  this.colour = boulder.colour;
+  this.difficulty = boulder.difficulty;
+  this.photo = boulder.photo;
+  this.locationId = boulder.locationId;
+  this.creatorName = boulder.creatorName;
+  this.lastChangeUserName = boulder.lastChangeUserName;
+  this.lastChangeTimestamp = boulder.lastChangeTimestamp;
 };
 
-Boulder.create = async (name, colour, difficulty, photo, locationId, creatorId, result) => {
-    let boulderId;
-    try {
-        const data = await sql.promise().query("INSERT INTO boulder (bezeichnung, farbe, schwierigkeit, foto, ID_Location, ID_Ersteller) VALUES (?,?,?,?,?,?); ", [name, colour, difficulty, photo, locationId, creatorId]);
-        boulderId = data[0].insertId;
-        await sql.promise().query(
-            "INSERT INTO bouldereditor_user_assigned (ID_boulder, ID_User) VALUES (?,?)",
-            [boulderId, creatorId],
-            (err, res) => {
-                if (err) {
-                    console.log("error: ", err);
-                    result(err, null, null);
-                    return;
-                }
-            }
-    
-        );
-        result(null,200, boulderId)
-    } catch (error) {
-        console.log(error)
-        result(500)
-    }
-    
+Boulder.create = async (
+  name,
+  colour,
+  difficulty,
+  locationId,
+  creatorId,
+  result
+) => {
+  let boulderId;
+  try {
+    const data = await sql
+      .promise()
+      .query(
+        "INSERT INTO boulder (bezeichnung, farbe, schwierigkeit, ID_Location, ID_Ersteller, Letzte_Bearbeiter) VALUES (?,?,?,?,?,?); ",
+        [name, colour, difficulty, locationId, creatorId, creatorId]
+      );
+    boulderId = data[0].insertId;
+    result(null, 200, boulderId);
+  } catch (error) {
+    console.log(error);
+    result(500);
+  }
 };
 
 Boulder.get = (userId, result) => {
-    sql.query(`SELECT b.ID boulderId, b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.foto photo, b.ID_Location locationId, c.name creatorName, e.name lastChangeUserName, beass.erstellt lastChangeTimestamp, 
-                   CASE
-                       WHEN l.ID IS NOT NULL THEN "true"
-                       ELSE "false" 
-                   END isLikeAssigned
-    FROM boulder b
-    INNER JOIN user c ON b.ID_Ersteller = c.ID
-    LEFT JOIN bouldereditor_user_assigned beass ON b.ID = beass.ID_boulder
-    LEFT JOIN user e ON e.ID = beass.ID_User
-    LEFT JOIN boulderlike_user_assigned l ON l.ID_boulder = b.ID AND l.ID = ${userId}`,
-        (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(null, err);
-            return;
-        }
+  sql.query(
+    `SELECT b.ID boulderId, b.bezeichnung name, b.farbe colour, b.schwierigkeit difficulty, b.ID_Location locationId, b.Letzte_Bearbeiter lastChangeUserName, b.Letzte_Bearbeitung lastChangeTimestamp, 
+    (CASE
+        WHEN l.ID IS NOT NULL THEN "true"
+        ELSE "false" 
+    END) AS isLikeAssigned FROM boulder b
+    LEFT JOIN boulderlike_user_assigned l ON l.ID_boulder = b.ID AND l.ID_User = ${userId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
-        console.log("users: ", res);
-        result(null, res);
-    });
+      console.log("users: ", res);
+      result(null, res);
+    }
+  );
 };
 
-Boulder.updateById = async (id, name, colour, difficulty, photo, locationId, changeUserId, result) => {
-    await sql.promise().query(
-        "UPDATE boulder SET bezeichnung = ?, farbe = ?, schwierigkeit = ?, foto = ?, ID_Location = ? WHERE ID = ?",
-        [name, colour, difficulty, photo, locationId, id],
+Boulder.updateById = async (
+  id,
+  name,
+  colour,
+  difficulty,
+  locationId,
+  userId,
+  force,
+  lastChangeDate,
+  result
+) => {
+  if (!force) {
+    const oldData = await sql
+      .promise()
+      .query(
+        "SELECT b.Letzte_Bearbeitung as Letzte_Bearbeitung, u.Name as UserName FROM boulder as b JOIN user as u ON b.Letzte_Bearbeiter = u.ID WHERE b.ID = ?",
+        [id],
         (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(null, err);
-                return;
-            }
-
-            if (res.affectedRows == 0) {
-                // not found Boulder with the id
-                result({ kind: "not_found" }, null);
-                return;
-            }
-
-            console.log("updated boulder: ", { id: id});
-            result(null, { id: id });
+          if (err) {
+            console.log("error: ", err);
+            result(err, null, null);
+            return;
+          }
+          return res;
         }
+      );
+    const oldDataLastChange = oldData[0][0].Letzte_Bearbeitung;
+    const oldDataLastEditor = oldData[0][0].UserName;
+    console.log(oldDataLastChange.toISOString())
+    console.log(lastChangeDate)
+    if(oldDataLastChange.toISOString() != lastChangeDate) {
+      result(null, 409, {
+        id: id,
+        name: name,
+        colour: colour,
+        difficulty: difficulty,
+        locationId: locationId,
+        userId: userId,
+        lastChangeDate: oldDataLastChange,
+        lastChangeEditor: oldDataLastEditor
+      })
+      return;
+    }
+  }
 
+  const res = await sql
+    .promise()
+    .query(
+      "UPDATE boulder SET bezeichnung = ?, farbe = ?, schwierigkeit = ?, ID_Location = ?, Letzte_Bearbeiter = ?, Letzte_Bearbeitung = ? WHERE ID = ?",
+      [
+        name,
+        colour,
+        difficulty,
+        locationId,
+        userId,
+        new Date().toISOString().slice(0, 19).replace("T", " "),
+        id,
+      ]
     );
-    sql.promise().query(
-        "INSERT INTO bouldereditor_user_assigned (ID_boulder, ID_User) VALUES (?,?)",
-        [id, changeUserId],
-        (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(err, null);
-                return;
-            }
-        }
-
-    );
+  result(null, 200, res);
 };
 
 module.exports = Boulder;

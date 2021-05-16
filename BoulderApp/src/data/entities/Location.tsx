@@ -1,11 +1,9 @@
 export interface ILocation {
-    id:string,
+    id:number,
     country:string,
     region:string,
-    city:string
 }
 export interface ILocationFilterValues {
     countries:string[],
-    region:string[],
-    cities:string[]
+    region:string[]
 }

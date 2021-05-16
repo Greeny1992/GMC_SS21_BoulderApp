@@ -3,8 +3,8 @@ import {View,FlatList,SectionList} from "react-native";
 import { IBoulder } from "../../../data/entities/Boulder";
 import BoulderListItem from "./boulderItem";
 import BoulderSectionListHeader from "./boulderSectionListHeader";
-import {LOCATION_DATA} from "../../../data/fakeData/Location";
 import BoulderListStyle from "../../../styles/BoulderList/boulderList";
+import { location } from "../../../data/lookupValues/boulderDetailValues";
 interface BoulderMetaProps {
   style?: any;
   navigation: any;
@@ -28,18 +28,22 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
    */
   const getSectionLocations = () => {
     let retArray = [];
-    for(let locationItem of LOCATION_DATA) {
+
+    for(let locationItem of location()) {
       for(let boulderItem of items) {
-        if (boulderItem.location_id == locationItem.id)
+    
+        if (boulderItem.location_id === locationItem.id)
         {
+       
           retArray.push({
             title: locationItem.region,
-            data: [...items.filter(item => item.location_id == locationItem.id) ]
+            data: [...items.filter(item => item.location_id === locationItem.id) ]
           })
           break;
         }
       }
     }
+    
     return retArray;
   }
   
@@ -47,10 +51,10 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
     <View style={BoulderListStyle.sectionLi}>
       <SectionList
         sections={getSectionLocations()}
-        keyExtractor={(item, index) => item.id + index}
-        renderItem={({ item }) => <BoulderListItem item={item} onPress={()=>handleSelectBoulder(item.id)}/>}
+        renderItem={({ item }) => <BoulderListItem item={item} onPress={()=>handleSelectBoulder(item)}/>}
         renderSectionHeader={({ section: { title } }) => <BoulderSectionListHeader title={title}/>}
       />
+      <View style={{height: 40}}></View>
     </View>
   );
   

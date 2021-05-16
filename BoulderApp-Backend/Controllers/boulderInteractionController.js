@@ -25,13 +25,13 @@ exports.create = (req, res) => {
     }
 
     // Save Interaction in the database
-    BoulderInteraction.create(req.body.boulderId, req.body.userId, req.body.comment, req.body.status, (err, data) => {
+    BoulderInteraction.create(req.body.boulderId, req.body.userId,req.body.title, req.body.comment, req.body.status, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the Interaction."
             });
-        else res.send(data);
+        else res.sendStatus(200);
     });
 };
 
@@ -44,7 +44,6 @@ exports.update = (req, res) => {
         });
     }
 
-    console.log(req.body);
 
     BoulderInteraction.updateById(
         req.params.interactionId,
