@@ -45,7 +45,7 @@ const BoulderSearch: React.FC<BoulderSearchProps> = (
           round
           searchIcon={{size: 30}}
           onChangeText={text => searchBoulderList(text)}
-          onClear={() => searchBoulderList('')}
+          onClear={() => {searchBoulderList('');clearSearch()}}
           value={searchText}
           placeholder="Search for boulder"
         />
