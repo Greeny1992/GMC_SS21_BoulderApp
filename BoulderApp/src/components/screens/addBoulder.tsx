@@ -44,7 +44,7 @@ const AddBoulder: React.FC<AddBoulderProps> = (props: AddBoulderProps) => {
     // console.log("onSubmit",currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor )
     const s = await storeBoulder(data,userId,currentBoulder?.id, currentBoulder?.lastChangeTimestamp,currentBoulder?.lastEditor)
 
-      console.log("NAVIGATE")
+      // console.log("NAVIGATE")
       navigation.navigate('HomeScreen',
       {update:true}
     )

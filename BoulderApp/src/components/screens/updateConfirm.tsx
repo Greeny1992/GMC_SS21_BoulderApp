@@ -4,7 +4,7 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react
 import BText, { BTitle } from '../widgets/utils/text';
 import { useRoute } from '@react-navigation/native';
 import { getData } from '../../data/store/store';
-import { forceUpdateBoulder, localBoulderToSynch, synchLocalUpdates } from '../../data/service/BoulderService';
+import { forceUpdateBoulder, handleRemoveLocalUpdate, localBoulderToSynch, synchLocalUpdates } from '../../data/service/BoulderService';
 import { IEditBoulder } from '../../data/entities/Boulder';
 import ColorTheme from '../../styles/theme/store/ColorMainTheme';
 import LayoutStyle from '../../styles/utils/layout';
@@ -48,39 +48,21 @@ const SynchScreen: React.FC<SynchScreenProps> = (props: SynchScreenProps) => {
       }
     }, [user])
 
-    // useEffect(() => {
-    //   console.log("updateItems: ", updateItems)
-    // }, [updateItems])
-   
-
     const handleForceUpdate =  async(boulder: IEditBoulder)=>{
       // console.log("FORCE: ", boulder);
+   
       const result = await forceUpdateBoulder(boulder)
       setUpdateItems(undefined)
-      // console.log(result)
-      // result.then(
-      //   async (d)=>{
-      //    return await localBoulderToSynch()
-      //     .then(
-      //       (data: IEditBoulder[]) =>{
-      //           if(data && data.length>0){
-      //             console.log("DATA AFTER FORCE : ", data)
-      //             setUpdateItems(data)
-      //           }else{
-      //             navigation.navigate('HomeScreen')
-
-      //           }
-      //       }
-      //     )
-
-      //   }
-      // )
+    }
+    const handleDiscardChanges = async(boulder:IEditBoulder)=>{
+      const result = await handleRemoveLocalUpdate(boulder)
+      setUpdateItems(undefined)
     }
  
     const renderItem = (boulder: IEditBoulder) => {
       // console.log("renderItem: ", renderItem)
       return (
-        <Item boulder={boulder} key={boulder.boulderId} forceUpdate={handleForceUpdate}/>
+        <Item boulder={boulder} key={boulder.boulderId} forceUpdate={handleForceUpdate} discardChanges={handleDiscardChanges}/>
 
       )
 
@@ -100,10 +82,11 @@ const SynchScreen: React.FC<SynchScreenProps> = (props: SynchScreenProps) => {
 
 interface ItemProps {
   boulder:IEditBoulder,
-  forceUpdate:Function
+  forceUpdate:Function,
+  discardChanges:Function
 }
 const Item: React.FC<ItemProps> = ( props:ItemProps ) => {
-  const {boulder,forceUpdate} = props;
+  const {boulder,forceUpdate,discardChanges} = props;
   return(
     <View style={styles.item}>
       <View style={[LayoutStyle.containerRow]}>
@@ -112,7 +95,8 @@ const Item: React.FC<ItemProps> = ( props:ItemProps ) => {
           <BText style={styles.title}>Updated title: {boulder.name}</BText>
         </View>
         <View style={[styles.actions]}>
-          <BButton onPress={()=> forceUpdate(boulder)}><Text>Force Update</Text></BButton>
+          <BButton style={[styles.action_force]} onPress={()=> forceUpdate(boulder)}><Text>Force Update</Text></BButton>
+          <BButton style={[styles.action_discard]} onPress={()=> discardChanges(boulder)}><Text>Discard changes</Text></BButton>
         </View>
       </View>
     </View>
@@ -140,5 +124,11 @@ const styles = StyleSheet.create({
   },
   actions:{
     width: "30%"
+  },
+  action_force:{
+    backgroundColor: 'red'
+  },
+  action_discard:{
+    backgroundColor: 'yellow'
   }
 });

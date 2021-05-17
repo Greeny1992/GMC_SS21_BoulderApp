@@ -1,6 +1,6 @@
 import {BoulderApi} from '../../../api';
 import {clearData, getData, storeData} from '../store/store';
-import {BoulderFormData, IBoulder, IEditBoulder, INewBoulder} from '../entities/Boulder';
+import {Boulder, BoulderFormData, IBoulder, IEditBoulder, INewBoulder} from '../entities/Boulder';
 
 export const toggleLike = (boulder: IBoulder): IBoulder => {
   const tempBoulder = boulder;
@@ -10,9 +10,13 @@ export const toggleLike = (boulder: IBoulder): IBoulder => {
 
 export const getBoulderData = async (userId: number) => {
   let boulderData;
+
+  //#######################################################################
+  // SWITCH OFFLINE
   const connected = getData('connected');
+  // const connected = false;
   if (connected) {
-    // console.log('ONLINE');
+    console.log('ONLINE');
 
     const api = new BoulderApi();
     boulderData = await api.getBoulderList(userId).then(res => {
@@ -41,10 +45,10 @@ export const getBoulderData = async (userId: number) => {
     // console.log("boulderData", boulderData)
     storeData('BOULDER_DATA', boulderData);
   } else {
-    // console.log('OFFLINE');
+    console.log('OFFLINE');
     boulderData = await getData('BOULDER_DATA');
-    // console.log("DATA AMOUNT ", boulderData.length)
   }
+  // console.log("DATA AMOUNT ", boulderData.length)
 
   return boulderData;
 };
@@ -126,6 +130,10 @@ export const forceUpdateBoulder = async (boulder: IEditBoulder) :Promise<any>=> 
     }
   });
 };
+export const handleRemoveLocalUpdate = async (boulder: IEditBoulder) :Promise<any>=> {
+  return await removeLocalUpdate(boulder)
+};
+
 
 const removeLocalUpdate = async (boulder: IEditBoulder) :Promise<any> => {
   return await getData('BOULDER_DATA_TO_UPDATE')
@@ -196,6 +204,9 @@ export const storeBoulder = async (
   lastEditor?: string,
 ) => {
   // console.log("storeBoulder", formData)
+
+  //#######################################################################
+  // SWITCH OFFLINE
   const connected = getData('connected');
   // const connected = false;
   const api = new BoulderApi();
@@ -217,22 +228,22 @@ export const storeBoulder = async (
     //console.log(boulderData, boulderID);
     if (connected) {
       // api.updateBoulder(boulderData, boulderID);
+      console.log("EDIT-Online")
       return api.updateBoulder(boulderData).then(
         data=>{
           // console.log("DATA", data, data.status);
-          if(data?.status === 200){
+          if(data?.status === 409){
             addLocalUpdate(boulderData)
           }
         }
       );
+
     } else {
+      console.log("EDIT-Online")
       let BOULDER_DATA_TO_UPDATE = getData('BOULDER_DATA_TO_UPDATE').then(
         (data: any) => {
-          // console.log("data");
-          // console.log(data);
           const boulderToUpdateList = data;
-          // console.log("boulderToUpdateList")
-          // console.log(boulderToUpdateList)
+          
           updateLocalBoulder(boulderData);
           if (boulderToUpdateList) {
             let updateArray = [];
@@ -269,6 +280,7 @@ export const storeBoulder = async (
     }
     //NEW
   } else {
+    // console.log("NEW")
     const boulderData = {
       creatorId: Number(userID),
       name: formData.title,
@@ -277,23 +289,35 @@ export const storeBoulder = async (
       locationId: Number(formData.location_id),
     };
     if(connected){
+      console.log("NEW-online")
       return api.createBoulder(boulderData);
     } else{
-      addCreatedBoulderToLocalBoulder(boulderData);
+      console.log("NEW-offline")
+      addCreatedBoulderToLocalBoulder(boulderData, userID);
       return addLocalCreate(boulderData)
     }
   }
 };
-const addCreatedBoulderToLocalBoulder = (boulder: INewBoulder) => {
+const addCreatedBoulderToLocalBoulder = (boulder: INewBoulder, userID:string) => {
+  const newBoulder = new Boulder(
+    Math.floor(Math.random()*1000),
+    boulder.name,
+    boulder.colour,
+    boulder.difficulty,
+    boulder.locationId,
+    false,
+    new Date(),
+    userID
+  )
   getData('BOULDER_DATA')
     .then((data: IBoulder[]) => {
       // console.log("addCreatedBoulderToLocalBoulder", data, data.length)
       let newData; 
       if (data?.length) {
-          newData= [...data,boulder]
+          newData= [...data,newBoulder]
         }
         else{
-          newData= [boulder]
+          newData= [newBoulder]
 
         }
         // console.log("NEW LENGHT ",newData, newData.length)

@@ -19,15 +19,16 @@ interface BExtendedButtonProps {
     style?: any,
     onPress: any,
     title:string,
-    underlined?:boolean
+    underlined?:boolean,
+    btnStyleInput?:any
 }
 export const BExtendedButton: React.FC<BExtendedButtonProps> = (props: BExtendedButtonProps) => {
-    const {onPress,title, style,underlined}=props
+    const {onPress,title, style,underlined,btnStyleInput}=props
     const btnStyle = underlined ? styles.btnUnderlined : styles.btn;
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity style={[btnStyle, props.style]} onPress={onPress}>
-                <BText style={[styles.buttonText, {fontSize:FontSizes.normal}]}>
+                <BText style={[styles.buttonText, {fontSize:FontSizes.normal},btnStyleInput]}>
                     {title}
                 </BText>
             </TouchableOpacity>

@@ -28,7 +28,6 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
    */
   const getSectionLocations = () => {
     let retArray = [];
-
     for(let locationItem of location()) {
       for(let boulderItem of items) {
     
@@ -43,10 +42,8 @@ const BoulderList: React.FC<BoulderMetaProps> = (props: BoulderMetaProps) => {
         }
       }
     }
-    
     return retArray;
   }
-  
   return (
     <View style={BoulderListStyle.sectionLi}>
       <SectionList

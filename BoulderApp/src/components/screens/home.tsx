@@ -39,47 +39,47 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
  
     
     useEffect(() => {
-      
-        
-    }, [])
-
-    if(update){
-      console.log("update")
-      navigation.setParams({update:false})
-      getBoulderData(user.userId).then((val: any) => {
-        setFilteredDataSource(val);
-        setMasterDataSource(val)
-      }) 
-      const connected = getData('connected')
-      // console.log("connected", connected)
-      if(connected){
-        const needToSynchLocalData =  isThereDataToSynch()
-        needToSynchLocalData.then(
-          needToSynch =>{
-              // console.log("needToSynch", needToSynch)
-              if(needToSynch && needToSynch !== null){
-                navigation.navigate('SynchScreen')
+      //navigation.setParams({update:false})
+      setTimeout(()=> {
+        if(connected){
+          const needToSynchLocalData =  isThereDataToSynch()
+          needToSynchLocalData.then(
+            needToSynch =>{
+                // console.log("needToSynch", needToSynch)
+                if(needToSynch && needToSynch !== null){
+                  navigation.navigate('SynchScreen')
+                }
+              }
+          )
+          isThereDataToStore().then(
+            needToStoreLocalData =>{
+              if(needToStoreLocalData){
+                synchLocalCreates().then(
+                  ()=>{
+                    getBoulderData(user?.userId).then((val: any) => {
+                      setMasterDataSource(val)
+                      setFilteredDataSource(val);
+                    }) 
+                  }
+                )
               }
             }
-        )
-        isThereDataToStore().then(
-          needToStoreLocalData =>{
-            if(needToStoreLocalData){
-              synchLocalCreates().then(
-                ()=>{
-                  getBoulderData(user?.userId).then((val: any) => {
-                    // console.log("HOME ",val,val.length)
-                    setMasterDataSource(val)
-                    setFilteredDataSource(val);
-                  }) 
-                }
-              )
-            }
-            // console.log("needToStoreLocalData", needToStoreLocalData)
-          }
-        )
-      }
-    }
+          )
+        }
+        getBoulderData(user.userId).then((val: any) => {
+          setFilteredDataSource(val);
+          setMasterDataSource(val)
+        }
+      ) }, 200)
+      
+      
+        
+    }, [route])
+
+
+      const connected = getData('connected')
+   
+
     useEffect(() => {
     //  console.log("MASTER " , masterDataSource, masterDataSource.length)
     }, [masterDataSource])
@@ -151,7 +151,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         }
     };
 
-    console.log("AMOUNT BEFORE ",filteredDataSource.length )
+    // console.log("AMOUNT BEFORE ",filteredDataSource.length )
   return (
       <View >
         <View style={[LayoutStyle.containerRow, styles.userRow]}>
